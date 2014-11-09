@@ -15,4 +15,10 @@ ro.tvout.enable=false
 persist.sys.storage_preload=1
 
 
+
 persist.sys.pcclientmode=uart
+# TODO - and no default APN?
+persist.sys.dataprefer.simid=0
+
+#Support Multiuser
+fw.max_users=5
