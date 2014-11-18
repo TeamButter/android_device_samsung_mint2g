@@ -361,9 +361,11 @@ service sprd-ril-daemon2 /system/bin/rild_sp  -l /system/lib/libreference-ril.so
     socket rild-debug1 stream 660 radio system
     user root
     group radio cache inet misc audio sdcard_rw log
-
-
-
+    
+service charger /sbin/healthd -c
+    class charger
+    critical
+    seclabel u:r:healthd:s0
 
 # create virtual SD card at /storage/sdcard0, based on the /data/media directory
 # daemon will drop to user/group system/media_rw after initializing
