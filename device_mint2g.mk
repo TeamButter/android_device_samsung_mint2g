@@ -61,10 +61,6 @@ PRODUCT_COPY_FILES += \
 # Media
 PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/media/media_codecs.xml:system/etc/media_codecs.xml \
-     $(LOCAL_PATH)/media/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
-     $(LOCAL_PATH)/media/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
-     $(LOCAL_PATH)/media/media_codecs_ffmpeg.xml:system/etc/media_codecs_ffmpeg.xml \
-     $(LOCAL_PATH)/media/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
      $(LOCAL_PATH)/media/media_profiles.xml:system/etc/media_profiles.xml
 
 # Graphics
@@ -100,11 +96,15 @@ PRODUCT_PACKAGES += \
     libaudiopolicy \
     tinymix \
     libtinyalsa
+    
 
-#Camera
 PRODUCT_PACKAGES += \
 	Gallery2
 
+#Wi-fi thetering fix
+PRODUCT_COPY_FILES += \
+        device/samsung/ivoryss/wpa_supplicant:system/bin/wpa_supplicant \
+        device/samsung/ivoryss/hostapd:system/bin/hostapd
 
 
 # Hw params
@@ -138,6 +138,7 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
     frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
+    frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
@@ -187,8 +188,7 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp \
     ro.adb.secure=0 \
     ro.secure=0 
-    
-PRODUCT_TAGS += dalvik.gc.type-precise
+
     
     
 $(call inherit-product, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
