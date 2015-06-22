@@ -1,7 +1,0 @@
-#Ignore these files ffs
-.gitignore
-*.sh~
-*.mk~
-*.fstab~
-*.rc~
-
