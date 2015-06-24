@@ -1,5 +1,3 @@
-#psych ramdisk
-
 import init.sp8810.usb.rc
 
 
@@ -238,9 +236,9 @@ on boot
     chmod 660 /proc/bluetooth/sleep/proto
     chmod 660 /sys/class/rfkill/rfkill0/state
     chmod 660 /sys/class/rfkill/rfkill0/type
-    chown bluetooth net_bt_stack ro.bt.bdaddr_path
-    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/state
-    chown bluetooth net_bt_stack /sys/class/rfkill/rfkill0/type
+    chown bluetooth bluetooth ro.bt.bdaddr_path
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/state
+    chown bluetooth bluetooth /sys/class/rfkill/rfkill0/type
     chown bluetooth system /proc/bluetooth/sleep/proto
     setprop ro.bt.bdaddr_path "/efs/bluetooth/bt_addr"
 
@@ -492,11 +490,21 @@ on alarm
     start media
     exec /bin/poweroff_alarm
 	
+# Bluetooth PAN
+service dhcpcd_bnep0 /system/bin/dhcpcd -ABKL
+    class main
+    disabled
+    oneshot
+
+service iprenew_bnep0 /system/bin/dhcpcd -n
+    class main
+    disabled
+    oneshot
+
+	
 # For Datarouter
     chown system system /dev/dun
     chown system system /dev/ttyGS0
     chown system system /dev/ttyGS1
     chown system system /dev/ttyGS2
     chown system system /dev/ttyGS3
-
-
