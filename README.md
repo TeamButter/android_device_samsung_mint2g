@@ -10,12 +10,21 @@ Thanks - Unjustified Dev & Doc
 
 
 ###Specifications
+
 **Release Date** - 1 May 2013
+
 **Weight** - 100 grams
+
 **Screen Size** - 3"
+
 **Screen Resolution** - 240 x 320 (LDPI)
+
 **Battery Capacilty** - 1200mAh
+
 **Camera** - 2MP
-**CPU** - 1 Ghz Cortex - A%
+
+**CPU** - 1 Ghz Cortex - A5
+
 **Internal Memory** - 4GB total
+
 **RAM** - 512MB
