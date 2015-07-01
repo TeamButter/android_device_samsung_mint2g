@@ -80,7 +80,8 @@ BOARD_EGL_CFG := device/samsung/mint/egl/egl.cfg
 BOARD_EGL_NEEDS_LEGACY_FB := true
 
 # Camera
-# USE_CAMERA_STUB := true
+USE_CAMERA_STUB := true
+COMMON_GLOBAL_CFLAGS += -DMR0_CAMERA_BLOB
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -99,6 +100,7 @@ BOARD_WLAN_DEVICE_REV       := bcm4330
 WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/dhd/parameters/firmware_path"
 WIFI_DRIVER_FW_PATH_STA     := "/system/etc/wifi/bcmdhd_sta.bin"
 WIFI_DRIVER_FW_PATH_AP      := "/system/etc/wifi/bcmdhd_apsta.bin"
+WIFI_DRIVER_FW_PATH_P2P     := "/system/etc/wifi/bcmdhd_p2p.bin"
 WIFI_DRIVER_MODULE_PATH     := "/system/lib/modules/dhd.ko"
 WIFI_DRIVER_MODULE_NAME     := "dhd"
 WIFI_DRIVER_MODULE_ARG      := "firmware_path=/system/etc/wifi/bcmdhd_sta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
@@ -115,6 +117,9 @@ WITH_DEXPREOPT=true
 
 # RIL
 #BOARD_RIL_CLASS := ../../../device/samsung/mint/ril/
+BOARD_USES_LEGACY_RIL := true
+BOARD_FORCE_RILD_AS_ROOT := true
+BOARD_MOBILEDATA_INTERFACE_NAME := "pdp0"
 
 # Audio
 # BOARD_USES_TINYALSA_AUDIO := true //implement open source later
@@ -125,7 +130,7 @@ COMMON_GLOBAL_CFLAGS += -DMR0_AUDIO_BLOB
 # Charger
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
-#TWRP Specific configs
+# TWRP Specific
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 DEVICE_RESOLUTION := 320x480
 TW_NO_SCREEN_TIMEOUT := true
@@ -135,3 +140,8 @@ TW_INTERNAL_STORAGE_PATH := "/sdcard"
 TW_INTERNAL_STORAGE_MOUNT_POINT := "sdcard"
 TW_EXTERNAL_STORAGE_PATH := "/storage/extSdCard"
 TW_EXTERNAL_STORAGE_MOUNT_POINT := "/storage/extSdCard"
+TW_NO_USB_STORAGE := true
+TW_DEFAULT_EXTERNAL_STORAGE := true
+TW_HAS_DOWNLOAD_MODE := true
+TW_USE_MODEL_HARDWARE_ID_FOR_DEVICE_ID := true
+TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel/brightness"
