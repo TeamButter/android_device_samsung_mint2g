@@ -23,7 +23,7 @@ $(call inherit-product-if-exists, vendor/samsung/mint/mint-vendor.mk)
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
 ## overlays
-#DEVICE_PACKAGE_OVERLAYS += device/samsung/mint/overlay
+DEVICE_PACKAGE_OVERLAYS += device/samsung/mint/overlay
 
 LOCAL_PATH := device/samsung/mint
 
@@ -72,14 +72,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # be reachable from resources or other mechanisms.
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
-    wifi.supplicant_scan_interval=150 \
-    ro.telephony.ril_class=SamsungBCMRIL
+    wifi.supplicant_scan_interval=150 
 
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.usb.default \
     tinymix
+
+#Camera
+PRODUCT_PACKAGES += \
+Gallery2
 
 PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
@@ -149,6 +152,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.kernel.android.checkjni=0 \
     dalvik.vm.checkjni=false
+
+#TWRP
+PRODUCT_COPY_FILES += device/samsung/mint/recovery/twrp.fstab:recovery/root/etc/twrp.fstab
 
 ## LDPI assets
 PRODUCT_AAPT_CONFIG := normal ldpi mdpi nodpi

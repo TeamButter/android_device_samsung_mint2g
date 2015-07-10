@@ -6,4 +6,7 @@
 *.rc~
 *.cfg~
 *.kl~
-
+*.cfg~
+*.xml~
+*.c~
+*.prop~

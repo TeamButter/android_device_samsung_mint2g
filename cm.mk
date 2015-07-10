@@ -15,6 +15,7 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     TARGET_DEVICE=mint \
     BUILD_FINGERPRINT="samsung/mintxx/mint:4.1.2/JZO54K/S5282XXAMEA:user/release-keys" \
     PRIVATE_BUILD_DESC="mintxx-user 4.1.2 JZO54K S5282XXAMEA release-keys"
+    
 
 PRODUCT_NAME := cm_mint
 PRODUCT_DEVICE := mint
