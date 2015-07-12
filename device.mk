@@ -67,12 +67,24 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.opengles.version=131072 \
 
+#Camera
+PRODUCT_COPY_FILES += \
+frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml
+
+
+
 # These are the hardware-specific settings that are stored in system properties.
 # Note that the only such settings should be the ones that are too low-level to
 # be reachable from resources or other mechanisms.
 PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.interface=wlan0 \
     wifi.supplicant_scan_interval=150 
+
+#Wifi
+PRODUCT_PACKAGES += \
+dhcpcd.conf \
+hostapd \
+wpa_supplicant \
+wpa_supplicant.conf
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -151,10 +163,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
 # Default=true for development builds, set by android buildsystem.
 PRODUCT_PROPERTY_OVERRIDES += \
     ro.kernel.android.checkjni=0 \
-    dalvik.vm.checkjni=false
+    dalvik.vm.checkjni=false \
+    wifi.interface=wlan0 \
+    mobiledata.interfaces=rmnet0 \
+    ro.telephony.ril_class=SamsungBCMRIL \
+    ro.zygote.disable_gl_preload=true \
+    persist.radio.multisim.config=dsds \
+    ro.telephony.call_ring.multiple=0 \
+    ro.telephony.call_ring=0 
 
-#TWRP
-PRODUCT_COPY_FILES += device/samsung/mint/recovery/twrp.fstab:recovery/root/etc/twrp.fstab
 
 ## LDPI assets
 PRODUCT_AAPT_CONFIG := normal ldpi mdpi nodpi
