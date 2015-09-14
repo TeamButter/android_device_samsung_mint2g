@@ -23,7 +23,7 @@ $(call inherit-product-if-exists, vendor/samsung/mint/mint-vendor.mk)
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
 ## overlays
-DEVICE_PACKAGE_OVERLAYS += device/samsung/mint/overlay
+#DEVICE_PACKAGE_OVERLAYS += device/samsung/mint/overlay
 
 LOCAL_PATH := device/samsung/mint
 
