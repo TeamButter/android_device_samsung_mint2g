@@ -115,7 +115,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
 	persist.msms.phone_count=1 \
 	persist.sys.sprd.modemreset=1
 
-# Sensors
+#Lights HAL
 PRODUCT_PACKAGES += \
     lights.sc8810
 
