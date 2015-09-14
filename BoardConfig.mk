@@ -121,7 +121,7 @@ TARGET_PROVIDES_LIBRIL := true
 BOARD_USES_LEGACY_RIL := true
 BOARD_FORCE_RILD_AS_ROOT := true
 BOARD_MOBILEDATA_INTERFACE_NAME := "pdp0"
-BOARD_RIL_CLASS := ../../../device/samsung/mint/ril/
+#BOARD_RIL_CLASS := ../../../device/samsung/mint/ril/
 
 # Audio
 # BOARD_USES_TINYALSA_AUDIO := true //implement open source later
