@@ -119,6 +119,10 @@ PRODUCT_PROPERTY_OVERRIDES := \
 PRODUCT_PACKAGES += \
     lights.sc8810
 
+#Sensors HAL
+PRODUCT_PACKAGES += \
+    sensors.sc8810
+
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	persist.sys.usb.config=mtp
