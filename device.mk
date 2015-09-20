@@ -73,6 +73,8 @@ frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/an
 
 
 
+
+
 # These are the hardware-specific settings that are stored in system properties.
 # Note that the only such settings should be the ones that are too low-level to
 # be reachable from resources or other mechanisms.
@@ -84,6 +86,7 @@ PRODUCT_PACKAGES += \
 dhcpcd.conf \
 wpa_supplicant \
 wpa_supplicant.conf
+
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -112,16 +115,24 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES := \
 	keyguard.no_require_sim=true \
 	ro.com.android.dataroaming=false \
-	persist.msms.phone_count=1 \
+	persist.msms.phone_count=2 \
 	persist.sys.sprd.modemreset=1
 
-#Lights HAL
+# Lights
 PRODUCT_PACKAGES += \
     lights.sc8810
 
-#Sensors HAL
+# Sensors
 PRODUCT_PACKAGES += \
     sensors.sc8810
+
+# Camera
+PRODUCT_PACKAGES += \
+    camera.sc8810
+
+#ATCommand
+PRODUCT_PACKAGES += \
+    libatcommand.sc8810
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -170,7 +181,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
     mobiledata.interfaces=rmnet0 \
     ro.zygote.disable_gl_preload=true \
-    persist.radio.multisim.config=dsds \
+    persist.radio.multisim.config=none \
     ro.telephony.call_ring.multiple=0 \
     ro.telephony.call_ring=0 
 

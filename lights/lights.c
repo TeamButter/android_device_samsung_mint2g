@@ -126,8 +126,7 @@ static int set_light_buttons(struct light_device_t* dev,
         }
 
         pthread_mutex_lock(&g_lock);
-        //modify from 255 to 50
-        err = write_int(LIGHT_BUTTONS, on?50:0);
+        err = write_int(LIGHT_BUTTONS, on?255:0);
         pthread_mutex_unlock(&g_lock);
         return err;
 }
