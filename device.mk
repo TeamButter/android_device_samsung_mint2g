@@ -126,6 +126,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     sensors.sc8810
 
+# Camera
+PRODUCT_PACKAGES += \
+    camera.sc8810
+
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
