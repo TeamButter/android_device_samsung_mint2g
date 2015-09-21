@@ -132,9 +132,8 @@ void dump_bmp(const char* filename, void* addr, PBINFO pBInfo, PREGION pScissor)
     bmInfo.bmiHeader.biHeight = pScissor->bottom-pScissor->top;
     bmInfo.bmiHeader.biPlanes = 1;
 
-    switch (pBInfo->format)
-    {
-    case HAL_PIXEL_FORMAT_RGB_565:
+    
+    if(pBInfo->format ==  HAL_PIXEL_FORMAT_RGB_565) {
         bmInfo.bmfHeader.bfOffBits += 4*sizeof(U32);
         bmInfo.bmiHeader.biBitCount = 16;
         bmInfo.bmiHeader.biCompression = BI_BITFIELDS;
@@ -144,10 +143,9 @@ void dump_bmp(const char* filename, void* addr, PBINFO pBInfo, PREGION pScissor)
         quad.rgbReservedMask = 0;
         pixel_size=sizeof(U16);
         bmInfo.bmiHeader.biSizeImage = bmInfo.bmiHeader.biWidth * bmInfo.bmiHeader.biHeight * pixel_size;
-        break;
+    }
 
-    case HAL_PIXEL_FORMAT_RGBA_8888:
-    case HAL_PIXEL_FORMAT_RGBX_8888:
+    else if(pBInfo->format == HAL_PIXEL_FORMAT_RGBA_8888 || pBInfo->format == HAL_PIXEL_FORMAT_RGBX_8888) {
         bmInfo.bmfHeader.bfOffBits += 4*sizeof(U32);
         bmInfo.bmiHeader.biBitCount = 32;
         bmInfo.bmiHeader.biCompression = BI_BITFIELDS;
@@ -157,11 +155,9 @@ void dump_bmp(const char* filename, void* addr, PBINFO pBInfo, PREGION pScissor)
         quad.rgbReservedMask = 0xFF000000;
         pixel_size=sizeof(U32);
         bmInfo.bmiHeader.biSizeImage = bmInfo.bmiHeader.biWidth * bmInfo.bmiHeader.biHeight * pixel_size;
-        break;
+    }
 
-    case HAL_PIXEL_FORMAT_YCbCr_420_SP:
-    case HAL_PIXEL_FORMAT_YCrCb_420_SP:
-    case HAL_PIXEL_FORMAT_YCbCr_420_P:
+    else if(pBInfo->format == HAL_PIXEL_FORMAT_YCbCr_420_SP || pBInfo->format ==  HAL_PIXEL_FORMAT_YCrCb_420_SP || pBInfo->format == HAL_PIXEL_FORMAT_YCbCr_420_P) {
         bmInfo.bmfHeader.bfOffBits += 256*sizeof(U32);
         bmInfo.bmiHeader.biBitCount = 8;
         bmInfo.bmiHeader.biCompression = BI_RGB;
@@ -176,9 +172,9 @@ void dump_bmp(const char* filename, void* addr, PBINFO pBInfo, PREGION pScissor)
         }
         pixel_size=sizeof(U8);
         bmInfo.bmiHeader.biSizeImage = bmInfo.bmiHeader.biWidth * bmInfo.bmiHeader.biHeight * pixel_size;
-        break;
+       }
 
-    default:
+    else {
         assert(false);
     }
 
@@ -187,19 +183,13 @@ void dump_bmp(const char* filename, void* addr, PBINFO pBInfo, PREGION pScissor)
     fwrite(&bfType, sizeof(WORD), 1, fp);
     fwrite(&bmInfo, sizeof(BITMAPINFO), 1, fp);
 
-    switch (pBInfo->format)
-    {
-    case HAL_PIXEL_FORMAT_RGB_565:
-    case HAL_PIXEL_FORMAT_RGBA_8888:
-    case HAL_PIXEL_FORMAT_RGBX_8888:
+    
+    if(pBInfo->format == HAL_PIXEL_FORMAT_RGB_565 || pBInfo->format == HAL_PIXEL_FORMAT_RGBA_8888 || pBInfo->format == HAL_PIXEL_FORMAT_RGBX_8888)
       fwrite(&quad, 4*sizeof(U32), 1, fp);
-        break;
-    case HAL_PIXEL_FORMAT_YCbCr_420_SP:
-    case HAL_PIXEL_FORMAT_YCrCb_420_SP:
-    case HAL_PIXEL_FORMAT_YCbCr_420_P:
+    else if(pBInfo->format == HAL_PIXEL_FORMAT_YCbCr_420_SP || pBInfo->format ==  HAL_PIXEL_FORMAT_YCrCb_420_SP || pBInfo->format == HAL_PIXEL_FORMAT_YCbCr_420_P)
         fwrite(&quad, 256*sizeof(U32), 1, fp);
-        break;
-    }
+       
+    
 
     
     for(i=pScissor->bottom; i>pScissor->top; i--){

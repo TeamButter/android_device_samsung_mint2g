@@ -20,6 +20,8 @@
 #include <errno.h>
 #include <pthread.h>
 
+#include "gralloc_mali.h"
+
 #include <cutils/log.h>
 #include <cutils/atomic.h>
 #include <hardware/hardware.h>
@@ -48,7 +50,7 @@
 #include <sys/ioctl.h>
 #include <fcntl.h>
 //#include <linux/ion.h>
-#include "usr/include/linux/ion.h"
+#include "ion.h"
 #include "ion_sprd.h"
 #define ION_DEVICE "/dev/ion"
 
@@ -56,12 +58,30 @@
 #define GRALLOC_ALIGN( value, base ) (((value) + ((base) - 1)) & ~((base) - 1))
 
 
+#define     HAL_PIXEL_FORMAT_RGBA_8888     1
+#define     HAL_PIXEL_FORMAT_RGBX_8888     2
+#define     HAL_PIXEL_FORMAT_RGB_888       3
+#define     HAL_PIXEL_FORMAT_RGB_565       4
+#define     HAL_PIXEL_FORMAT_BGRA_8888     5
+#define     HAL_PIXEL_FORMAT_RGBA_5551     6
+#define     HAL_PIXEL_FORMAT_RGBA_4444     7
+#define     HAL_PIXEL_FORMAT_YCbCr_422_SP  0x10
+#define     HAL_PIXEL_FORMAT_YCbCr_420_SP  0x11
+#define     HAL_PIXEL_FORMAT_YCbCr_422_P   0x12
+#define     HAL_PIXEL_FORMAT_YCbCr_420_P   0x13
+#define     HAL_PIXEL_FORMAT_YCbCr_422_I   0x14
+#define     HAL_PIXEL_FORMAT_YCbCr_420_I   0x15
+#define     HAL_PIXEL_FORMAT_CbYCrY_422_I  0x16
+#define     HAL_PIXEL_FORMAT_CbYCrY_420_I  0x17
+
 #if GRALLOC_SIMULATE_FAILURES
 #include <cutils/properties.h>
 
 /* system property keys for controlling simulated UMP allocation failures */
 #define PROP_MALI_TEST_GRALLOC_FAIL_FIRST     "mali.test.gralloc.fail_first"
 #define PROP_MALI_TEST_GRALLOC_FAIL_INTERVAL  "mali.test.gralloc.fail_interval"
+
+
 
 static int __ump_alloc_should_fail()
 {
@@ -471,16 +491,13 @@ static int alloc_device_alloc(alloc_device_t* dev, int w, int h, int format, int
 	size_t stride;
 	if (format == HAL_PIXEL_FORMAT_YCbCr_420_SP || format == HAL_PIXEL_FORMAT_YCrCb_420_SP || format == HAL_PIXEL_FORMAT_YV12 )
 	{
-		switch (format)
-		{
-		case HAL_PIXEL_FORMAT_YCbCr_420_SP:
-		case HAL_PIXEL_FORMAT_YCrCb_420_SP:
-		case HAL_PIXEL_FORMAT_YV12:
+		
+		if(format == HAL_PIXEL_FORMAT_YCbCr_420_SP || format ==  HAL_PIXEL_FORMAT_YCrCb_420_SP || format == HAL_PIXEL_FORMAT_YV12) {
 			stride = GRALLOC_ALIGN(w, 16);
 			size = h * (stride + GRALLOC_ALIGN(stride/2,16));
 
-			break;
-		default:
+		}
+		else {
 			return -EINVAL;
 		}
 	}

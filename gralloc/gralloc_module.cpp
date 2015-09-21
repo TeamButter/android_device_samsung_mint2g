@@ -16,6 +16,8 @@
  * limitations under the License.
  */
 
+#include "gralloc_mali.h"
+
 #include <errno.h>
 #include <pthread.h>
 #include <sys/ioctl.h>
