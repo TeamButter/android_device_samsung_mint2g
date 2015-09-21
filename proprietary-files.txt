@@ -45,13 +45,6 @@ vendor/firmware/fw_bcmdhd_p2p.bin
 bin/ss_daemon
 
 
-# Display
-lib/hw/gralloc.sc8810.so
-
-
-# Mali-300
-lib/libUMP.so
-
 # Audio
 etc/Volume.db
 lib/hw/audio.primary.sc8810.so
