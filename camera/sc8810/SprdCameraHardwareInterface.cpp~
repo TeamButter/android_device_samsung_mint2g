@@ -1199,7 +1199,7 @@ status_t SprdCameraHardware::setParameters(const CameraParameters& params)
                 ALOGE("Onlyyuv422sp/yuv420sp/rgb565 preview is supported.\n");
                 return INVALID_OPERATION;
         }
-        mPreviewFormat = 2;
+        mPreviewFormat = 1;
         if(strcmp(params.getPictureFormat(), "yuv422sp")== 0)
         {
                 mPictureFormat = 0;

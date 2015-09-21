@@ -34,7 +34,6 @@
 #include "ion_sprd.h"
 #include "ion.h"
 
-#include "../../../include/hwcommon.h"
 
 #include <media/hardware/MetadataBufferType.h>
 #include <camera/Camera.h>
