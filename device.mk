@@ -132,7 +132,8 @@ PRODUCT_PACKAGES += \
 
 # Display
 PRODUCT_PACKAGES += \
-    hwcomposer.sc8810
+    hwcomposer.sc8810\
+    gralloc.sc8810
 
 
 # Set default USB interface
