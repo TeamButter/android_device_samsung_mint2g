@@ -9,7 +9,6 @@ ro.sf.lcd_density=120
 ro.lcd_min_brightness=20
 
 ro.product.hardware=SS
-ro.telephony.ril_class=SamsungSPRDRIL
 persist.sys.dataprefer.simid=0
 ro.secure=0
 ro.adb.secure=0
