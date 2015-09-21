@@ -9,7 +9,8 @@ for FILE in `egrep -v '(^#|^$)' proprietary-files.txt`; do
     mkdir -p $BASE/$DIR
   fi
   # My way of pulling blobs without the device
-  cp ~/android/star/dump/$FILE $BASE/$FILE
+  echo "Pulling\\033[33m $FILE\033[m"
+  cp $1/system/$FILE $BASE/$FILE
 done
 
 ./setup-makefiles.sh

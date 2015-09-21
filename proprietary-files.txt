@@ -1,8 +1,6 @@
 # Bin
 bin/at_distributor
 bin/bluetoothd
-bin/calibration_init
-bin/cpu
 bin/engappclient
 bin/engmodemclient
 bin/engpcclient
@@ -10,7 +8,6 @@ bin/engservice
 bin/engsetmacaddr
 bin/immvibed
 bin/macloader
-bin/modemd
 bin/nvm_daemon
 bin/slog
 bin/slogctl
@@ -34,16 +31,11 @@ lib/modules/VoiceSolution.ko
 # Bluetooth
 bin/bcm4330.hcd
 
-# Calibration
-bin/calibration_init
-
 # WIFI
 etc/wifi/bcmdhd_apsta.bin
 etc/wifi/bcmdhd_mfg.bin
 etc/wifi/bcmdhd_p2p.bin
 etc/wifi/bcmdhd_sta.bin
-etc/wifi/nvram_mfg.txt
-etc/wifi/nvram_net.txt
 etc/wifi/wpa_supplicant.conf
 vendor/firmware/fw_bcmdhd.bin
 vendor/firmware/fw_bcmdhd_apsta.bin
@@ -51,17 +43,13 @@ vendor/firmware/fw_bcmdhd_p2p.bin
 
 # Lights/Sensors
 bin/ss_daemon
-lib/hw/sensors.sc8810.so
+
 
 # Display
 lib/hw/gralloc.sc8810.so
-lib/hw/hwcomposer.sc8810.so
 
-# Mali-400
-lib/egl/libEGL_mali.so
-lib/egl/libGLESv2_mali.so
-lib/egl/libGLESv1_CM_mali.so
-lib/libMali.so
+
+# Mali-300
 lib/libUMP.so
 
 # Audio
@@ -131,7 +119,6 @@ lib/libengclient.so
 lib/libnvaccessor.so
 
 # Camera
-lib/hw/camera.sc8810.so
 lib/libsecnativefeature.so
 
 # DRM
