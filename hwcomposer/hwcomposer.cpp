@@ -20,6 +20,7 @@
 #include <fcntl.h>
 #include <errno.h>
 
+#include "include/hwcommon.h"
 
 #include <sys/ioctl.h>
 #include <sys/mman.h>
