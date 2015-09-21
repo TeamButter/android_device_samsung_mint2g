@@ -130,6 +130,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     camera.sc8810
 
+# Display
+PRODUCT_PACKAGES += \
+    hwcomposer.sc8810
+
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
