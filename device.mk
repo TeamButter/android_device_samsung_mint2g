@@ -157,6 +157,12 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
     packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
+    
+#WiFi
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/wifi/nvram_mfg.txt:system/etc/wifi/nvram_mfg.txt \
+    $(LOCAL_PATH)/wifi/nvram_net.txt:system/etc/wifi/nvram_net.txt
+
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
