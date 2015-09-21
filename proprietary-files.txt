@@ -104,8 +104,6 @@ lib/libstagefright_soft_mpeg4dec_sprd.so
 bin/ext_data.sh
 bin/ext_kill.sh
 bin/ext_symlink.sh
-etc/slog.conf.user
-etc/slog.conf
 lib/libatparser.so
 lib/libeng_wifi_ptest.so
 lib/libengclient.so
@@ -118,3 +116,6 @@ lib/libsecnativefeature.so
 lib/libwvdrm_L3.so
 lib/libwvm.so
 lib/libWVStreamControlAPI_L3.so
+
+#Wifi
+bin/hostapd
