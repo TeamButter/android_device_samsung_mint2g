@@ -16,6 +16,8 @@ on init
     mkdir /efs 0775 radio system
     symlink /efs /factory
     symlink /dev/block/mmcblk0p11 /dev/block/param
+    
+    export LD_SHIM_LIBS /system/lib/libsymbol_wrapper.so
 
 on fs
 

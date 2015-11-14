@@ -109,7 +109,11 @@ PRODUCT_PROPERTY_OVERRIDES := \
 # Board-Pecific
 PRODUCT_PACKAGES += \
     	lights.sc8810 \
-    	cpufreq-sc8810.ko \
+    	cpufreq-sc8810.ko
+    	
+# Compat
+PRODUCT_PACKAGES += \
+    	libsymbol_wrapper
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
