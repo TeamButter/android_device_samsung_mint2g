@@ -121,7 +121,7 @@ BOARD_HAVE_SAMSUNG_WIFI := true
 
 # RIL
 TARGET_PROVIDES_LIBRIL := true
-BOARD_RIL_CLASS := ../../../device/samsung/mint/ril/
+#BOARD_RIL_CLASS := ../../../device/samsung/mint/ril/
 BOARD_MOBILEDATA_INTERFACE_NAME := "rmnet0"
 
 # Audio
