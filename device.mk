@@ -23,7 +23,7 @@ $(call inherit-product-if-exists, vendor/samsung/mint/mint-vendor.mk)
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
 ## overlays
-DEVICE_PACKAGE_OVERLAYS += device/samsung/mint/overlay
+#DEVICE_PACKAGE_OVERLAYS += device/samsung/mint/overlay
 
 LOCAL_PATH := device/samsung/mint
 
@@ -36,6 +36,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/init.sp8810.rc:root/init.sp8810.rc \
     $(LOCAL_PATH)/rootdir/init.sp8810.usb.rc:root/init.sp8810.usb.rc \
     $(LOCAL_PATH)/rootdir/fstab.sp8810:root/fstab.sp8810 \
+    #$(LOCAL_PATH)/rootdir/init.rc:root/init.rc \
     $(LOCAL_PATH)/rootdir/lpm.rc:root/lpm.rc \
     $(LOCAL_PATH)/rootdir/ueventd.sp8810.rc:root/ueventd.sp8810.rc \
     $(LOCAL_PATH)/rootdir/bin/charge:root/bin/charge \
@@ -77,14 +78,14 @@ frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/an
 # Note that the only such settings should be the ones that are too low-level to
 # be reachable from resources or other mechanisms.
 PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.supplicant_scan_interval=150 
+    wifi.supplicant_scan_interval=150
 
 #Wifi
 PRODUCT_PACKAGES += \
-dhcpcd.conf \
-hostapd \
-wpa_supplicant \
-wpa_supplicant.conf
+	dhcpcd.conf \
+	hostapd \
+	wpa_supplicant \
+	wpa_supplicant.conf
 
 # Audio
 PRODUCT_PACKAGES += \
@@ -113,10 +114,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES := \
 	keyguard.no_require_sim=true \
 	ro.com.android.dataroaming=false \
-	persist.msms.phone_count=1 \
+	persist.msms.phone_count=2 \
 	persist.sys.sprd.modemreset=1
 
-# Sensors
+# Lights
 PRODUCT_PACKAGES += \
     lights.sc8810
 
@@ -158,7 +159,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.com.google.networklocation=1
 
 # Extended JNI checks
-# The extended JNI checks will cause the system to run more slowly, but they can spot a variety of nasty bugs 
+# The extended JNI checks will cause the system to run more slowly, but they can spot a variety of nasty bugs
 # before they have a chance to cause problems.
 # Default=true for development builds, set by android buildsystem.
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -171,12 +172,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.multisim.config=dsds \
     ro.telephony.call_ring.multiple=0 \
     ro.telephony.call_ring=0 
-
-
-## LDPI assets
-PRODUCT_AAPT_CONFIG := normal ldpi mdpi nodpi
-PRODUCT_AAPT_PREF_CONFIG := ldpi
-#$(call inherit-product, device/ldpi-common/ldpi.mk)
+    
+#$(call inherit-product, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 320
