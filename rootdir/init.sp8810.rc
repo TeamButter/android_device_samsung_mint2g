@@ -339,6 +339,14 @@ service calibrationinit /system/bin/calibration_init
     oneshot
 
 # rild service
+
+service ril-daemon /system/bin/rild_sp  -l /system/lib/libreference-ril.so -- -n 0
+    class main
+    socket rild stream 660 root radio
+    socket rild-debug stream 660 radio system
+    user root
+    group radio cache inet misc audio sdcard_rw log sdcard_r
+    
 service ril-daemon2 /system/bin/rild_sp  -l /system/lib/libreference-ril.so -- -n 1
     class main
     socket rild1 stream 660 root radio
@@ -347,12 +355,6 @@ service ril-daemon2 /system/bin/rild_sp  -l /system/lib/libreference-ril.so -- -
     group radio cache inet misc audio sdcard_rw log sdcard_r
 
 
-service ril-daemon /system/bin/rild_sp  -l /system/lib/libreference-ril.so -- -n 0
-    class main
-    socket rild stream 660 root radio
-    socket rild-debug stream 660 radio system
-    user root
-    group radio cache inet misc audio sdcard_rw log sdcard_r
 
 
 # create virtual SD card at /storage/sdcard0, based on the /data/media directory
