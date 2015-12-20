@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-#define LOG_TAG "AudioPolicyManager"
+#define LOG_TAG "AudioPolicyManagerSPRD"
 //#define LOG_NDEBUG 0
 #include <utils/Log.h>
-#include "AudioPolicyManager.h"
+#include "AudioPolicyManagerSPRD.h"
 #include <media/mediarecorder.h>
 
 
