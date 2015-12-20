@@ -18,10 +18,11 @@ on property:sys.usb.config=mtp
     write /sys/class/android_usb/android0/bDeviceClass EF
     write /sys/class/android_usb/android0/bDeviceSubClass 02
     write /sys/class/android_usb/android0/bDeviceProtocol 01
-    write /sys/class/android_usb/android0/functions mtp,acm
+    write /sys/class/android_usb/android0/functions mtp,acm,adb
     write /sys/class/android_usb/android0/f_acm/instances 1
     write /sys/class/android_usb/android0/enable 1
-    setprop sys.usb.state $sys.usb.config
+    start adbd
+    setprop sys.usb.state $sys.usb.config,adb
 
 on property:sys.usb.config=mtp,acm,adb
     write /sys/class/android_usb/android0/enable 0
