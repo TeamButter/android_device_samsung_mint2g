@@ -91,11 +91,13 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.usb.default \
+    audio_policy.sc8810 \
+    libaudiopolicy \
     tinymix
 
 #Camera
 PRODUCT_PACKAGES += \
-Gallery2
+	Gallery2
 
 PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/audio/audio_policy.conf:system/etc/audio_policy.conf \
