@@ -168,7 +168,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.checkjni=false \
     wifi.interface=wlan0 \
     mobiledata.interfaces=rmnet0 \
-    ro.telephony.ril_class=SamsungSPRDRIL \
     ro.zygote.disable_gl_preload=true \
     persist.radio.multisim.config=dsds \
     ro.telephony.call_ring.multiple=0 \
