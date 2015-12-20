@@ -173,7 +173,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.call_ring.multiple=0 \
     ro.telephony.call_ring=0 
     
-#$(call inherit-product, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
+$(call inherit-product, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 320
