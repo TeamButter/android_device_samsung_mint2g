@@ -83,7 +83,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 #Wifi
 PRODUCT_PACKAGES += \
 	dhcpcd.conf \
-	hostapd \
 	wpa_supplicant \
 	wpa_supplicant.conf
 
@@ -130,7 +129,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
     frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-    frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth.xml \
+    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
     frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
     frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
     frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
@@ -146,6 +145,10 @@ PRODUCT_PACKAGES += \
 # Misc packages
 PRODUCT_PACKAGES += \
     com.android.future.usb.accessory
+    
+# Samsung Service Mode
+PRODUCT_PACKAGES += \
+    SamsungServiceMode
 
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector
@@ -166,6 +169,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.multisim.config=dsds \
     ro.telephony.call_ring.multiple=0 \
     ro.telephony.call_ring=0 
+    
+# RIL
+PRODUCT_PROPERTY_OVERRIDES += \
+    rild.libpath=/system/lib/libbrcm_ril.so \
+    ro.ril.disable.power.collapse=0 \
+    ro.ril.gprsclass=10 \
+    ro.ril.hsxpa=1 \
+    ro.telephony.call_ring.delay=0 \
+    ro.telephony.default_network=0 \
+    ro.telephony.ril.v3=icccardstatus,datacall,signalstrength,facilitylock
+
     
 $(call inherit-product, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
 
