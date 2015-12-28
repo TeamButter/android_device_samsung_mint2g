@@ -321,11 +321,11 @@ service nvm_daemon /system/bin/nvm_daemon
     oneshot
 
 # Start samsung daemon.
-service ss_daemon /system/bin/ss_daemon
-    class main
-    user system
-    group system radio shell
-    oneshot
+#service ss_daemon /system/bin/ss_daemon
+#    class main
+#    user system
+#    group system radio shell
+#    oneshot
 
 # Telephony service
 service sprd_monitor /system/bin/sprd_monitor
@@ -454,7 +454,7 @@ service dhcpcd_p2p /system/bin/dhcpcd -aABKL
     disabled
     oneshot
 
-service dhcpcd_bnep0 /system/bin/dhcpcd -ABKL
+service dhcpcd_bt-pan /system/bin/dhcpcd -ABKL
     class main
     disabled
     oneshot
