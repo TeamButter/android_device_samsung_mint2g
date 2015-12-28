@@ -73,12 +73,12 @@ static int set_light_backlight(struct light_device_t *dev,
 			struct light_state_t const *state)
 {
 	int err = 0;
-	/*int brightness = rgb_to_brightness(state);
+	int brightness = rgb_to_brightness(state);
 
 	pthread_mutex_lock(&g_lock);
 	err = write_int(LCD_FILE, brightness);
 
-	pthread_mutex_unlock(&g_lock);*/
+	pthread_mutex_unlock(&g_lock);
 	return err;
 }
 
@@ -91,13 +91,13 @@ static int set_light_keyboard(struct light_device_t* dev,
 			struct light_state_t const* state)
 {
     int err = 0;
-    int on = is_lit(state);
+    /*int on = is_lit(state);
 
     ALOGV("####: sprd/lights.c: set_light_keyboard() brightness = %d. #####\n", on?255:0);
 
     pthread_mutex_lock(&g_lock);
     err = write_int(KEYBOARD_FILE, on?255:0);
-    pthread_mutex_unlock(&g_lock);
+    pthread_mutex_unlock(&g_lock);*/
     return err;
 }
 
