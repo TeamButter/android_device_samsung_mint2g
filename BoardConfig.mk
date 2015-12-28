@@ -118,7 +118,8 @@ WIFI_BAND                   := 802_11_ABG
 # Tethering
 BOARD_HAVE_SAMSUNG_WIFI := true
 
-
+# Healthd
+BOARD_HAL_STATIC_LIBRARIES := libhealthd.mint
 
 # RIL
 #BOARD_RIL_CLASS := ../../../device/samsung/mint/ril/
