@@ -16,7 +16,7 @@
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := healthd-capri.cpp
+LOCAL_SRC_FILES := healthd-mint.cpp
 LOCAL_MODULE := libhealthd.mint
 LOCAL_C_INCLUDES := system/core/healthd
 include $(BUILD_STATIC_LIBRARY)
