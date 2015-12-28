@@ -12,3 +12,5 @@
 *.prop~
 *.txt~
 *.cpp~
+*.h~
+file_contexts~
