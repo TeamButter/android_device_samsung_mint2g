@@ -77,7 +77,7 @@ frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/an
 # Note that the only such settings should be the ones that are too low-level to
 # be reachable from resources or other mechanisms.
 PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.supplicant_scan_interval=150
+    wifi.supplicant_scan_interval=180
 
 #Wifi
 PRODUCT_PACKAGES += \
@@ -110,7 +110,8 @@ PRODUCT_PROPERTY_OVERRIDES := \
 	keyguard.no_require_sim=true \
 	ro.com.android.dataroaming=false \
 	persist.msms.phone_count=2 \
-	persist.sys.sprd.modemreset=1
+	persist.msms.phone_default=0 \
+	persist.sys.sprd.modemreset=0
 
 # Lights
 PRODUCT_PACKAGES += \
