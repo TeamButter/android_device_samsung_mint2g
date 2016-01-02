@@ -91,7 +91,8 @@ PRODUCT_PACKAGES += \
     audio.usb.default \
     audio_policy.sc8810 \
     libaudiopolicy \
-    tinymix
+    tinymix \
+    libtinyalsa
 
 #Camera
 PRODUCT_PACKAGES += \
