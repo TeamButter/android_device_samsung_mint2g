@@ -20,7 +20,7 @@
 # definition file).
 #
 
-TARGET_OTA_ASSERT_DEVICE := mint
+TARGET_OTA_ASSERT_DEVICE := mint, mint2g, GT-S5282, GT-S5280
 
 # Architecture
 TARGET_ARCH := arm
@@ -33,7 +33,7 @@ ARCH_ARM_HAVE_TLS_REGISTER := true
 #TARGET_CORTEX_CACHE_LINE_32 := true
 
 # Board
-TARGET_BOOTLOADER_BOARD_NAME := mint
+TARGET_BOOTLOADER_BOARD_NAME := mint2g
 TARGET_NO_BOOTLOADER := true
 TARGET_NO_RADIOIMAGE := true
 
@@ -47,8 +47,8 @@ BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8 androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 #TARGET_PREBUILT_KERNEL := device/samsung/mint/kernel
-TARGET_KERNEL_SOURCE := kernel/samsung/mint
-TARGET_KERNEL_CONFIG := cyanogenmod_mint_defconfig
+TARGET_KERNEL_SOURCE := kernel/samsung/mint2g
+TARGET_KERNEL_CONFIG := cyanogenmod_mint2g_defconfig
 BOARD_KERNEL_IMAGE_NAME := Image
 TARGET_GCC_VERSION_EXP := 4.6
 #TARGET_PROVIDES_INITRC := true
@@ -68,11 +68,11 @@ DEVICE_RESOLUTION := 240x320
 BOARD_LDPI_RECOVERY := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := "<font_7x16.h>"
-BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/mint/recovery/recovery_keys.c
+BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/mint2g/recovery/recovery_keys.c
 #TARGET_RECOVERY_INITRC := device/samsung/mint/recovery/recovery.rc
 #BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/mint/recovery/graphics.c
 BOARD_HAS_NO_MISC_PARTITION := true
-TARGET_RECOVERY_FSTAB := device/samsung/mint/recovery.fstab
+TARGET_RECOVERY_FSTAB := device/samsung/mint2g/recovery.fstab
 BOARD_SUPPRESS_EMMC_WIPE := true
 TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 
@@ -82,7 +82,7 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/dwc_otg.0/gadget/lun0/
 
 # Graphics
 USE_OPENGL_RENDERER := true
-BOARD_EGL_CFG := device/samsung/mint/egl/egl.cfg
+BOARD_EGL_CFG := device/samsung/mint2g/egl/egl.cfg
 BOARD_USE_MHEAP_SCREENSHOT := true
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
 BOARD_EGL_NEEDS_FNW := true
@@ -95,8 +95,8 @@ COMMON_GLOBAL_CFLAGS += -DMR0_CAMERA_BLOB
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/mint/bluetooth
-BOARD_BLUEDROID_VENDOR_CONF := device/samsung/mint/bluetooth/libbt_vndcfg.txt
+BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/mint2g/bluetooth
+BOARD_BLUEDROID_VENDOR_CONF := device/samsung/mint2g/bluetooth/libbt_vndcfg.txt
 
 # Connectivity - Wi-Fi
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
@@ -119,15 +119,15 @@ WIFI_BAND                   := 802_11_ABG
 BOARD_HAVE_SAMSUNG_WIFI := true
 
 # Healthd
-BOARD_HAL_STATIC_LIBRARIES := libhealthd.mint
+BOARD_HAL_STATIC_LIBRARIES := libhealthd.mint2g
 
 # RIL
-#BOARD_RIL_CLASS := ../../../device/samsung/mint/ril/
+BOARD_RIL_CLASS := ../../../device/samsung/mint2g/ril/
 BOARD_MOBILEDATA_INTERFACE_NAME := "rmnet0"
 BOARD_RIL_NO_CELLINFOLIST := true
 
 # Audio
-#BOARD_USES_TINYALSA_AUDIO := true //implement open source later
+BOARD_USES_TINYALSA_AUDIO := true
 BOARD_USE_SAMSUNG_SEPARATEDSTREAM := true
 BOARD_USES_LIBMEDIA_WITH_AUDIOPARAMETER := true
 COMMON_GLOBAL_CFLAGS += -DMR0_AUDIO_BLOB
@@ -142,11 +142,11 @@ BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charg
 
 
 # CMHW
-BOARD_HARDWARE_CLASS := device/samsung/mint/cmhw/
+BOARD_HARDWARE_CLASS := device/samsung/mint2g/cmhw/
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \
-    device/samsung/mint/sepolicy
+    device/samsung/mint2g/sepolicy
 
 BOARD_SEPOLICY_UNION += \
     file_contexts
