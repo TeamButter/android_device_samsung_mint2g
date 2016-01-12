@@ -38,7 +38,7 @@ on init
 
 sysclktz 0
 
-loglevel 3
+loglevel 9
 
 # setup the global environment
     export PATH /sbin:/vendor/bin:/system/sbin:/system/bin:/system/xbin
@@ -168,12 +168,24 @@ loglevel 3
     mount pstore pstore /sys/fs/pstore
     chown system log /sys/fs/pstore/console-ramoops
     chmod 0440 /sys/fs/pstore/console-ramoops
+    
+on fs
+# ---------------------------- spreadtrum on fs section start
+    mkdir /productinfo 0774 system system
+# ---------------------------- spreadtrum on fs section end
+
 
 on post-fs
     # once everything is setup, no need to modify /
     mount rootfs rootfs / ro remount
     # mount shared so changes propagate into child namespaces
     mount rootfs rootfs / shared rec
+    
+# ---------------------------- spreadtrum on post-fs section start
+    chown system system /productinfo
+    chmod 0774 /productinfo
+    mount -o remount,rw /productinfo
+# ---------------------------- spreadtrum on post-fs section end
 
     # We chown/chmod /cache again so because mount is run as root + defaults
     chown system cache /cache
@@ -531,7 +543,13 @@ service netd /system/bin/netd
 
 service debuggerd /system/bin/debuggerd
     class main
-
+    
+service mobex-daemon /system/bin/npsmobex
+    class main
+    user system
+    group system radio inet sdcard_rw
+    
+    
 #service ril-daemon /system/bin/rild
 #    class main
 #    socket rild stream 660 root radio
@@ -571,27 +589,6 @@ service bootanim /system/bin/bootanimation
     disabled
     oneshot
     
-service dbus /system/bin/dbus-daemon --system --nofork
-    class main
-    socket dbus stream 660 bluetooth bluetooth
-    user bluetooth
-    group bluetooth net_bt_admin
-
-# Make sure we startup btld before hcid
-service btld /system/bin/logwrapper /system/bin/btld -lpm 0
-    user root
-    group bluetooth net_bt_admin
-    disabled
-    oneshot
-
-service bluetoothd /system/bin/logwrapper /system/bin/bluetoothd -n -d
-    class main
-    socket bluetooth stream 660 bluetooth bluetooth
-    socket dbus_bluetooth stream 660 bluetooth bluetooth
-    # init.rc does not yet support applying capabilities, so run as root and
-    # let bluetoothd drop uid to bluetooth with the right linux capabilities
-    group bluetooth net_bt_admin misc
-    disabled
 
 service installd /system/bin/installd
     class main

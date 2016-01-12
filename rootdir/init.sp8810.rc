@@ -1,35 +1,25 @@
 import init.sp8810.usb.rc
 
 on init
-
-     mkdir /mnt/shell/emulated 0700 shell shell
-     mkdir /storage 0550 system sdcard_r
-     
-     mkdir /storage/emulated 0555 root root
-
-    # External storage directories
-     mkdir /storage/sdcard1 0000 system system
-     mkdir /storage/usbdisk0 0000 system system
- 
-    export EXTERNAL_STORAGE /storage/emulated/legacy
-    export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
+# See storage config details at http://source.android.com/tech/storage/
+	mkdir /mnt/shell/emulated 0700 shell shell
+    mkdir /storage/emulated 0555 root root
+	export EXTERNAL_STORAGE /storage/emulated/legacy
+	export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
     export EMULATED_STORAGE_TARGET /storage/emulated
-    export SECONDARY_STORAGE /storage/sdcard1 
+	# Support legacy paths
+    symlink /storage/emulated/legacy /sdcard
+    symlink /storage/emulated/legacy /mnt/sdcard
+	symlink /storage/emulated/legacy /storage/sdcard0
+	symlink /mnt/shell/emulated/0 /storage/emulated/legacy
 
-     # For backwards compatibility
-     symlink /storage/emulated/legacy /sdcard
-     symlink /storage/emulated/legacy /mnt/sdcard
-     symlink /storage/emulated/legacy /storage/sdcard0
-     symlink /storage/sdcard1 /extSdCard
-     symlink /storage/sdcard1 /mnt/extSdCard
-     symlink /storage/sdcard1 /external_sd
-
-    # sd-ext
-    mkdir /sd-ext 0771 system system
-    export SD_EXT_DIRECTORY /sd-ext
+	mkdir /storage/sdcard1 0775 system system
+	export SECONDARY_STORAGE /storage/sdcard1
+	mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
+	mkdir /storage/sdcard1 0700 root root
 
    
-    mkdir /efs 0771 radio system
+    mkdir /efs 0775 radio system
     symlink /efs /factory
     symlink /dev/block/mmcblk0p11 /dev/block/param
 
@@ -48,7 +38,7 @@ on post-fs
     mount -o remount,rw /productinfo
 
     chown radio system /efs
-    chmod 0771 /efs
+    chmod 0775 /efs
 
 on post-fs-data
 
@@ -406,8 +396,14 @@ service ril-daemon2 /system/bin/rild_sp  -l /system/lib/libreference-ril.so -- -
 # create virtual SD card at /storage/sdcard0, based on the /data/media directory
 # daemon will drop to user/group system/media_rw after initializing
 # underlying files in /data/media will be created with user and group media_rw (1023)
-service sdcard /system/bin/sdcard /data/media /mnt/shell/emulated 1023 1023
-    class late_start
+#service sdcard /system/bin/sdcard /data/media /mnt/shell/emulated 1023 1023
+	service sdcard /system/bin/sdcard -u 1023 -g 1023 -l /data/media /mnt/shell/emulated
+		class late_start	
+
+# fusewrapped external sdcard daemon running as media_rw (1023)
+	service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
+		class late_start
+		disabled
 
     # For Broadcom FMRadio
     chmod 0777 /system/bin/btld
@@ -517,3 +513,4 @@ on alarm
     class_start core
     start media
     exec /bin/poweroff_alarm
+

@@ -1,4 +1,9 @@
+# apm/Android.mk
+#
+# Copyright 2012 Spreadtrum
+#
 
+# This is the sprd audio policy manager
 
 LOCAL_PATH := $(call my-dir)
 

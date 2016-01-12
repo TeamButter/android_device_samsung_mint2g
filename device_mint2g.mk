@@ -33,10 +33,10 @@ $(shell ln -sf -t $(LOCAL_PATH)/../../../out/target/product/mint/recovery/root/s
 
 # Init Files
 PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/rootdir/init.rc:root/init.rc \
     $(LOCAL_PATH)/rootdir/init.sp8810.rc:root/init.sp8810.rc \
     $(LOCAL_PATH)/rootdir/init.sp8810.usb.rc:root/init.sp8810.usb.rc \
     $(LOCAL_PATH)/rootdir/fstab.sp8810:root/fstab.sp8810 \
-    $(LOCAL_PATH)/rootdir/init.rc:root/init.rc \
     $(LOCAL_PATH)/rootdir/lpm.rc:root/lpm.rc \
     $(LOCAL_PATH)/rootdir/ueventd.sp8810.rc:root/ueventd.sp8810.rc \
     $(LOCAL_PATH)/rootdir/bin/charge:root/bin/charge \
@@ -73,6 +73,7 @@ frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/an
 
 
 
+
 # These are the hardware-specific settings that are stored in system properties.
 # Note that the only such settings should be the ones that are too low-level to
 # be reachable from resources or other mechanisms.
@@ -90,6 +91,7 @@ PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.usb.default \
     audio_policy.sc8810 \
+    audio.r_submix.default \
     libaudiopolicy \
     tinymix \
     libtinyalsa
@@ -109,13 +111,12 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PROPERTY_OVERRIDES := \
 	keyguard.no_require_sim=true \
 	ro.com.android.dataroaming=false \
-	persist.msms.phone_count=2 \
-	persist.msms.phone_default=0 \
 	persist.sys.sprd.modemreset=0
 
-# Lights
+# Board-Pecific
 PRODUCT_PACKAGES += \
-    lights.sc8810
+    lights.sc8810 \
+    sensors.sc8810
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -167,9 +168,21 @@ PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
     mobiledata.interfaces=rmnet0 \
     ro.zygote.disable_gl_preload=true \
+    persist.msms.phone_count=2 \
     persist.radio.multisim.config=dsds \
     ro.telephony.call_ring.multiple=0 \
     ro.telephony.call_ring=0 
     
+PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
+    persist.sys.usb.config=mtp \
+    ro.adb.secure=0 \
+    ro.secure=0 
+    
+PRODUCT_TAGS += dalvik.gc.type-precise
+    
     
 $(call inherit-product, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
+
+# Boot animation
+TARGET_SCREEN_HEIGHT := 320
+TARGET_SCREEN_WIDTH := 240
