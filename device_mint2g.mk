@@ -61,6 +61,10 @@ PRODUCT_COPY_FILES += \
 # Media
 PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/media/media_codecs.xml:system/etc/media_codecs.xml \
+     $(LOCAL_PATH)/media/media_codecs_google_video.xml:system/etc/media_codecs_google_video.xml \
+     $(LOCAL_PATH)/media/media_codecs_google_audio.xml:system/etc/media_codecs_google_audio.xml \
+     $(LOCAL_PATH)/media/media_codecs_ffmpeg.xml:system/etc/media_codecs_ffmpeg.xml \
+     $(LOCAL_PATH)/media/media_codecs_google_telephony.xml:system/etc/media_codecs_google_telephony.xml \
      $(LOCAL_PATH)/media/media_profiles.xml:system/etc/media_profiles.xml
 
 # Graphics
@@ -84,6 +88,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
 	dhcpcd.conf \
 	wpa_supplicant \
+	hostapd \
 	wpa_supplicant.conf
 
 # Audio
