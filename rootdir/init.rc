@@ -544,11 +544,6 @@ service netd /system/bin/netd
 service debuggerd /system/bin/debuggerd
     class main
     
-service mobex-daemon /system/bin/npsmobex
-    class main
-    user system
-    group system radio inet sdcard_rw
-    
     
 #service ril-daemon /system/bin/rild
 #    class main
