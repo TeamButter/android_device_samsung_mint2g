@@ -23,7 +23,7 @@ $(call inherit-product-if-exists, vendor/samsung/mint2g/mint2g-vendor.mk)
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
 ## overlays
-#DEVICE_PACKAGE_OVERLAYS += device/samsung/mint/overlay
+DEVICE_PACKAGE_OVERLAYS += device/samsung/mint/overlay
 
 LOCAL_PATH := device/samsung/mint2g
 
@@ -46,9 +46,9 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/bin/rawdatad:root/bin/rawdatad \
 
 
-# Recovery
-#PRODUCT_COPY_FILES += \
-#    $(LOCAL_PATH)/rootdir/init.recovery.sp8810.rc:root/init.recovery.sp8810.rc
+# Bluetooth
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
 
 # Idc
 PRODUCT_COPY_FILES += \
@@ -104,6 +104,7 @@ PRODUCT_PACKAGES += \
 #Camera
 PRODUCT_PACKAGES += \
 	Gallery2
+
 
 
 # Hw params
@@ -174,7 +175,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     mobiledata.interfaces=rmnet0 \
     ro.zygote.disable_gl_preload=true \
     persist.msms.phone_count=2 \
-    persist.radio.multisim.config=dsds \
+    persist.radio.multisim.config=none \
     ro.telephony.call_ring.multiple=0 \
     ro.telephony.call_ring=0 
     
