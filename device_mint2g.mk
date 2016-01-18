@@ -157,6 +157,10 @@ PRODUCT_PACKAGES += \
 # Samsung Service Mode
 PRODUCT_PACKAGES += \
     SamsungServiceMode
+    
+# Web
+PRODUCT_PACKAGES += \
+    libskia_legacy
 
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector
