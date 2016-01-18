@@ -47,8 +47,8 @@ BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8 androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 #TARGET_PREBUILT_KERNEL := device/samsung/mint/kernel
-TARGET_KERNEL_SOURCE := kernel/samsung/mint2g
-TARGET_KERNEL_CONFIG := cyanogenmod_mint2g_defconfig
+TARGET_KERNEL_SOURCE := kernel/samsung/mint2g_wip
+TARGET_KERNEL_CONFIG := mint-vlx-rev03_defconfig #cyanogenmod_mint2g_defconfig
 BOARD_KERNEL_IMAGE_NAME := Image
 TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
 TARGET_PROVIDES_INITRC := true
@@ -83,8 +83,8 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/dwc_otg.0/gadget/lun0/
 # Graphics
 USE_OPENGL_RENDERER := true
 BOARD_EGL_CFG := device/samsung/mint2g/egl/egl.cfg
-BOARD_USE_MHEAP_SCREENSHOT := true
-BOARD_EGL_WORKAROUND_BUG_10194508 := true
+#BOARD_USE_MHEAP_SCREENSHOT := true
+#BOARD_EGL_WORKAROUND_BUG_10194508 := true
 BOARD_EGL_NEEDS_FNW := true
 #TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := TRUE
 
@@ -106,7 +106,7 @@ BOARD_WPA_SUPPLICANT_PRIVATE_LIB := lib_driver_cmd_bcmdhd
 BOARD_HOSTAPD_DRIVER        := NL80211
 BOARD_HOSTAPD_PRIVATE_LIB   := lib_driver_cmd_bcmdhd
 BOARD_WLAN_DEVICE           := bcmdhd
-BOARD_WLAN_DEVICE_REV       := bcm4330
+BOARD_WLAN_DEVICE_REV       := bcm4330_b1
 WIFI_DRIVER_FW_PATH_PARAM   := "/sys/module/dhd/parameters/firmware_path"
 WIFI_DRIVER_FW_PATH_STA     := "/system/etc/wifi/bcmdhd_sta.bin"
 WIFI_DRIVER_FW_PATH_AP      := "/system/etc/wifi/bcmdhd_apsta.bin"
@@ -116,8 +116,6 @@ WIFI_DRIVER_MODULE_ARG      := "firmware_path=/system/etc/wifi/bcmdhd_sta.bin nv
 WIFI_DRIVER_MODULE_AP_ARG   := "firmware_path=/system/etc/wifi/bcmdhd_apsta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
 WIFI_BAND                   := 802_11_ABG
 
-# Tethering
-BOARD_HAVE_SAMSUNG_WIFI := true
 
 # Healthd
 BOARD_HAL_STATIC_LIBRARIES := libhealthd.mint2g
