@@ -46,7 +46,6 @@ COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8 androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
-#TARGET_PREBUILT_KERNEL := device/samsung/mint/kernel
 TARGET_KERNEL_SOURCE := kernel/samsung/mint2g_wip
 TARGET_KERNEL_CONFIG := mint-vlx-rev03_defconfig #cyanogenmod_mint2g_defconfig
 BOARD_KERNEL_IMAGE_NAME := Image
@@ -115,6 +114,9 @@ WIFI_DRIVER_MODULE_NAME     := "dhd"
 WIFI_DRIVER_MODULE_ARG      := "firmware_path=/system/etc/wifi/bcmdhd_sta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
 WIFI_DRIVER_MODULE_AP_ARG   := "firmware_path=/system/etc/wifi/bcmdhd_apsta.bin nvram_path=/system/etc/wifi/nvram_net.txt"
 WIFI_BAND                   := 802_11_ABG
+
+# Wi-Fi Tethering
+BOARD_HAVE_SAMSUNG_WIFI := true
 
 
 # Healthd
