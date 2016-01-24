@@ -23,7 +23,7 @@ $(call inherit-product-if-exists, vendor/samsung/mint2g/mint2g-vendor.mk)
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
 
 ## overlays
-DEVICE_PACKAGE_OVERLAYS += device/samsung/mint/overlay
+DEVICE_PACKAGE_OVERLAYS += device/samsung/mint2g/overlay
 
 LOCAL_PATH := device/samsung/mint2g
 
@@ -103,8 +103,8 @@ PRODUCT_PACKAGES += \
 
 #Wi-fi thetering fix
 PRODUCT_COPY_FILES += \
-        device/samsung/ivoryss/wpa_supplicant:system/bin/wpa_supplicant \
-        device/samsung/ivoryss/hostapd:system/bin/hostapd
+        device/samsung/mint2g/wpa_supplicant:system/bin/wpa_supplicant \
+        device/samsung/mint2g/hostapd:system/bin/hostapd
 
 
 # Hw params
@@ -159,6 +159,8 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     SamsungServiceMode
     
+
+    
 # Web
 PRODUCT_PACKAGES += \
     libskia_legacy
@@ -177,13 +179,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.kernel.android.checkjni=0 \
     dalvik.vm.checkjni=false \
     wifi.interface=wlan0 \
-    mobiledata.interfaces=rmnet0 \
     ro.zygote.disable_gl_preload=true \
     persist.msms.phone_count=2 \
     persist.radio.multisim.config=none \
     ro.telephony.call_ring.multiple=0 \
+    dalvik.vm.heapsize=64m \
     ro.telephony.call_ring=0 
+   
+#Mobile Data
+PRODUCT_PACKAGES += \
+    libnetlink \
+    libiprouteutil
     
+
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp \
     ro.adb.secure=0 \
