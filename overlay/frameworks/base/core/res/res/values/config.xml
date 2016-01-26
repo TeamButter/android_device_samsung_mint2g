@@ -94,8 +94,6 @@
          config to 7. -->
     <integer name="config_deviceHardwareKeys">7</integer>
 
-    <!-- Boolean to enable stk functionality on Samsung phones -->
-    <bool name="config_samsung_stk">true</bool>
 
    <!-- Package name(s) containing location provider support.
          These packages can contain services implementing location providers,
