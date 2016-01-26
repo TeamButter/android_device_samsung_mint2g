@@ -101,11 +101,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	Gallery2
 
-#Wi-fi thetering fix
-PRODUCT_COPY_FILES += \
-        device/samsung/mint2g/wpa_supplicant:system/bin/wpa_supplicant \
-        device/samsung/mint2g/hostapd:system/bin/hostapd
-
 
 # Hw params
 PRODUCT_COPY_FILES += \
