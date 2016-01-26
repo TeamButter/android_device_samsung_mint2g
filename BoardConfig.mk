@@ -150,6 +150,9 @@ BOARD_HAVE_PLS := NULL
 # HWComposer
 USE_SPRD_HWCOMPOSER := true
 
+# Include an expanded selection of fonts
+EXTENDED_FONT_FOOTPRINT := true
+
 # Boot animation
 TARGET_SCREEN_HEIGHT := 320
 TARGET_SCREEN_WIDTH := 240
