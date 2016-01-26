@@ -33,7 +33,6 @@ $(shell ln -sf -t $(LOCAL_PATH)/../../../out/target/product/mint/recovery/root/s
 
 # Init Files
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/init.rc:root/init.rc \
     $(LOCAL_PATH)/rootdir/init.sp8810.rc:root/init.sp8810.rc \
     $(LOCAL_PATH)/rootdir/init.sp8810.usb.rc:root/init.sp8810.usb.rc \
     $(LOCAL_PATH)/rootdir/fstab.sp8810:root/fstab.sp8810 \
