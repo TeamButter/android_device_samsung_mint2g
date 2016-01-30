@@ -176,7 +176,10 @@ BOARD_SEPOLICY_DIRS += \
     device/samsung/mint2g/sepolicy
 
 BOARD_SEPOLICY_UNION += \
-    file_contexts
+    file_contexts \
+    init.te \
+    netd.te \
+    surfaceflinger.te
 
 # Host specific
 PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
