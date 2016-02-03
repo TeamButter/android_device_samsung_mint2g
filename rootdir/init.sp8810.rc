@@ -326,14 +326,14 @@ service engsetmacaddr /system/bin/engsetmacaddr
 
 service phoneserver /system/bin/phoneserver
     class core
-    user system
+    user root
     group system radio shell
     disabled
     oneshot
     
 service phoneserver_2sim /system/bin/phoneserver_2sim
     class core
-    user system
+    user root
     group system radio shell
     disabled
     oneshot
@@ -372,6 +372,36 @@ service ril-daemon2 /system/bin/rild_sp  -l /system/lib/libreference-ril.so -- -
 	service fuse_sdcard1 /system/bin/sdcard -u 1023 -g 1023 -d /mnt/media_rw/sdcard1 /storage/sdcard1
 		class late_start
 		disabled
+		
+service hfag /system/bin/sdptool add --channel=10 HFAG
+    user bluetooth
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
+
+service hsag /system/bin/sdptool add --channel=11 HSAG
+    user bluetooth
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
+
+service opush /system/bin/sdptool add --channel=12 OPUSH
+    user bluetooth
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
+
+service pbap /system/bin/sdptool add --channel=19 PBAP
+    user bluetooth
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
+    
+service btld  /system/bin/btld -lpm 0 -hb 3000000
+    user root
+    group bluetooth net_bt_admin
+    disabled
+    oneshot
 
 # For Broadcom FMRadio
     chmod 0777 /system/bin/btld
