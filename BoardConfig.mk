@@ -46,10 +46,9 @@ COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8 androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
-TARGET_KERNEL_SOURCE := kernel/samsung/mint2g_wip
-TARGET_KERNEL_CONFIG := mint-vlx-rev03_defconfig #cyanogenmod_mint2g_defconfig
+TARGET_KERNEL_SOURCE := kernel/samsung/mint2g
+TARGET_KERNEL_CONFIG := cyanogenmod_mint_defconfig
 BOARD_KERNEL_IMAGE_NAME := Image
-TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
 TARGET_PROVIDES_INITRC := true
 
 # Partitions
