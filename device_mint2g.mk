@@ -16,6 +16,9 @@
 
 $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 
+# Include sprd-common related aspects
+$(call inherit-product, device/samsung/sprd-common/device.mk)
+
 ## (2) Also get non-open-source specific aspects if available
 $(call inherit-product-if-exists, vendor/samsung/mint2g/mint2g-vendor.mk)
 
@@ -58,20 +61,10 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/keylayout/sprd-keypad.kl:system/usr/keylayout/sprd-keypad.kl
 
-# Media
-PRODUCT_COPY_FILES += \
-     $(LOCAL_PATH)/media/media_codecs.xml:system/etc/media_codecs.xml \
-     $(LOCAL_PATH)/media/media_profiles.xml:system/etc/media_profiles.xml
 
 # Graphics
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=131072 \
-
-#Camera
-PRODUCT_COPY_FILES += \
-frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml
-
-
+    ro.opengles.version=131072
 
 
 # These are the hardware-specific settings that are stored in system properties.
@@ -79,29 +72,6 @@ frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/an
 # be reachable from resources or other mechanisms.
 PRODUCT_PROPERTY_OVERRIDES += \
     wifi.supplicant_scan_interval=180
-
-#Wifi
-PRODUCT_PACKAGES += \
-	dhcpcd.conf \
-	wpa_supplicant \
-	hostapd \
-	wpa_supplicant.conf
-
-# Audio
-PRODUCT_PACKAGES += \
-    audio.a2dp.default \
-    audio.usb.default \
-    audio.r_submix.default \
-    tinymix
-    
-
-PRODUCT_PACKAGES += \
-	Gallery2
-
-#Wi-fi thetering fix
-PRODUCT_COPY_FILES += \
-        device/samsung/mint2g/wpa_supplicant:system/bin/wpa_supplicant \
-        device/samsung/mint2g/hostapd:system/bin/hostapd
 
 
 # Hw params
@@ -115,63 +85,6 @@ PRODUCT_PROPERTY_OVERRIDES := \
 	keyguard.no_require_sim=true \
 	ro.com.android.dataroaming=false \
 	persist.sys.sprd.modemreset=0
-
-# Board-Pecific
-PRODUCT_PACKAGES += \
-    lights.sc8810 \
-    sensors.sc8810
-
-# Set default USB interface
-PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-	persist.sys.usb.config=mtp
-
-# Charger
-PRODUCT_PACKAGES += \
-    charger \
-    charger_res_images
-
-# Permissions
-PRODUCT_COPY_FILES += \
-    frameworks/native/data/etc/android.hardware.telephony.gsm.xml:system/etc/permissions/android.hardware.telephony.gsm.xml \
-    frameworks/native/data/etc/handheld_core_hardware.xml:system/etc/permissions/handheld_core_hardware.xml \
-    frameworks/native/data/etc/android.hardware.bluetooth_le.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
-    frameworks/native/data/etc/android.hardware.bluetooth.xml:system/etc/permissions/android.hardware.bluetooth_le.xml \
-    frameworks/native/data/etc/android.hardware.sensor.accelerometer.xml:system/etc/permissions/android.hardware.sensor.accelerometer.xml \
-    frameworks/native/data/etc/android.hardware.touchscreen.multitouch.jazzhand.xml:system/etc/permissions/android.hardware.touchscreen.multitouch.jazzhand.xml \
-    frameworks/native/data/etc/android.hardware.usb.accessory.xml:system/etc/permissions/android.hardware.usb.accessory.xml \
-    frameworks/native/data/etc/android.hardware.usb.host.xml:system/etc/permissions/android.hardware.usb.host.xml \
-    frameworks/native/data/etc/android.hardware.wifi.xml:system/etc/permissions/android.hardware.wifi.xml \
-    frameworks/native/data/etc/android.software.sip.voip.xml:system/etc/permissions/android.software.sip.voip.xml \
-    packages/wallpapers/LivePicker/android.software.live_wallpaper.xml:system/etc/permissions/android.software.live_wallpaper.xml
-
-# Filesystem management tools
-PRODUCT_PACKAGES += \
-    setup_fs
-
-# Misc packages
-PRODUCT_PACKAGES += \
-    com.android.future.usb.accessory
-    
-# Samsung Service Mode
-PRODUCT_PACKAGES += \
-    SamsungServiceMode
-    
-# OMX
-PRODUCT_PACKAGES += \
-	libomx_aacdec_sprd.so \
-	libomx_apedec_sprd.so \
-	libomx_avcdec_hw_sprd.so \
-	libomx_avcdec_sw_sprd.so \
-	libomx_avcenc_hw_sprd.so \
-	libomx_m4vh263dec_hw_sprd.so \
-	libomx_m4vh263dec_sw_sprd.so \
-	libomx_m4vh263enc_hw_sprd.so \
-	libomx_mp3dec_sprd.so \
-	libomx_vpxdec_hw_sprd.so
-    
-# Web
-PRODUCT_PACKAGES += \
-    libskia_legacy
 
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector
@@ -191,20 +104,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.msms.phone_count=2 \
     persist.radio.multisim.config=dsds \
     ro.telephony.call_ring.multiple=0 \
-    dalvik.vm.heapsize=64m \
+    dalvik.vm.heapsize=92m \
+    dalvik.vm.heapgrowthlimit=92m \
     ro.telephony.call_ring=0 
-   
-#Mobile Data
-PRODUCT_PACKAGES += \
-    libnetlink \
-    libiprouteutil
     
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=mtp \
     ro.adb.secure=0 \
-    ro.secure=0 
-
+    ro.secure=0
     
     
 $(call inherit-product, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)

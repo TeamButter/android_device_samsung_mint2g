@@ -20,6 +20,8 @@
 # definition file).
 #
 
+-include device/samsung/sprd-common/BoardConfigCommon.mk
+
 TARGET_OTA_ASSERT_DEVICE := mint,mint2g,GT-S5282,GT-S5280
 
 # Architecture
@@ -30,16 +32,14 @@ TARGET_CPU_VARIANT := cortex-a5
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 ARCH_ARM_HAVE_TLS_REGISTER := true
+TARGET_CPU_SMP := true
 #TARGET_CORTEX_CACHE_LINE_32 := true
 
 # Board
 TARGET_BOOTLOADER_BOARD_NAME := mint2g
-TARGET_NO_BOOTLOADER := true
-TARGET_NO_RADIOIMAGE := true
 
 # Platform
 TARGET_BOARD_PLATFORM := sc8810
-COMMON_GLOBAL_CFLAGS += -DSPRD_HARDWARE
 COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 
 # Kernel
@@ -49,12 +49,11 @@ BOARD_KERNEL_PAGESIZE := 2048
 TARGET_KERNEL_SOURCE := kernel/samsung/mint2g
 TARGET_KERNEL_CONFIG := cyanogenmod_mint_defconfig
 BOARD_KERNEL_IMAGE_NAME := Image
-#TARGET_KERNEL_CUSTOM_TOOLCHAIN := arm-eabi-4.4.3
 TARGET_PROVIDES_INITRC := true
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 10485760
-BOARD_RECOVERYIMAGE_PARTITION_SIZE := 20485760
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 10485760
 BOARD_CACHEIMAGE_PARTITION_SIZE := 536870912
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 939524096
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 2172649472
@@ -75,31 +74,18 @@ TARGET_RECOVERY_FSTAB := device/samsung/mint2g/recovery.fstab
 BOARD_SUPPRESS_EMMC_WIPE := true
 TARGET_RECOVERY_PIXEL_FORMAT := "BGRA_8888"
 
-# UMS
-BOARD_UMS_LUNFILE := "/sys/class/android_usb/android0/f_mass_storage/lun/file"
-TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/dwc_otg.0/gadget/lun0/file"
 
 # Graphics
-USE_OPENGL_RENDERER := true
-BOARD_EGL_CFG := device/samsung/mint2g/egl/egl.cfg
 BOARD_USE_MHEAP_SCREENSHOT := true
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
-BOARD_EGL_NEEDS_FNW := true
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := TRUE
 HWUI_COMPILE_FOR_PERF := true
 
 # Camera
-USE_CAMERA_STUB := true
 COMMON_GLOBAL_CFLAGS += -DMR0_CAMERA_BLOB
 
 # Bluetooth
-BOARD_HAVE_BLUETOOTH := true
-BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/mint2g/bluetooth
-BOARD_BLUEDROID_VENDOR_CONF := device/samsung/mint2g/bluetooth/libbt_vndcfg.txt
-
-# FM Radio
-BOARD_HAVE_FM_BCM := true
 
 
 # Connectivity - Wi-Fi
@@ -122,18 +108,8 @@ WIFI_BAND                        := 802_11_ABG
 BOARD_HAVE_SAMSUNG_WIFI          := true
 
 
-
-# Healthd
-BOARD_HAL_STATIC_LIBRARIES := libhealthd.mint2g
-
-# RIL
-#BOARD_RIL_CLASS := ../../../device/samsung/mint2g/ril/
-BOARD_MOBILEDATA_INTERFACE_NAME := "rmnet0"
-BOARD_RIL_NO_CELLINFOLIST := true
-
 # Audio
 COMMON_GLOBAL_CFLAGS += -DMR0_AUDIO_BLOB
-BOARD_USES_TINYALSA_AUDIO := true
 
 # Sensors
 USE_SPRD_SENSOR_LIB := true
@@ -142,27 +118,9 @@ BOARD_ACC_INSTALL := 6
 BOARD_HAVE_ORI := NULL
 BOARD_HAVE_PLS := NULL
 
-# HWComposer
-USE_SPRD_HWCOMPOSER := true
-
 # Boot animation
 TARGET_SCREEN_HEIGHT := 320
 TARGET_SCREEN_WIDTH := 240
-
-# Charger
-BOARD_CHARGER_ENABLE_SUSPEND := true
-BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
-
-
-# CMHW
-BOARD_HARDWARE_CLASS := device/samsung/mint2g/cmhw/
-
-# SELinux
-BOARD_SEPOLICY_DIRS += \
-    device/samsung/mint2g/sepolicy
-
-BOARD_SEPOLICY_UNION += \
-    file_contexts
 
 # Host specific
 PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
