@@ -90,9 +90,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
     audio.usb.default \
-    audio_policy.sc8810 \
     audio.r_submix.default \
-    libaudiopolicy \
     tinymix \
     libtinyalsa
     
