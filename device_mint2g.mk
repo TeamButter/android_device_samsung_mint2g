@@ -175,7 +175,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.msms.phone_count=2 \
     persist.radio.multisim.config=none \
     ro.telephony.call_ring.multiple=0 \
-    dalvik.vm.heapsize=64m \
+    dalvik.vm.heapgrowthlimit=46m \
+    dalvik.vm.heapsize=92m \
     ro.telephony.call_ring=0 
    
 #Mobile Data
