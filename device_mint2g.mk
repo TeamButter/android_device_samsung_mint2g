@@ -42,12 +42,27 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/modem_control:root/modem_control \
     $(LOCAL_PATH)/rootdir/bin/poweroff_alarm:root/bin/poweroff_alarm \
     $(LOCAL_PATH)/rootdir/bin/vcharged:root/bin/vcharged \
-    $(LOCAL_PATH)/rootdir/bin/rawdatad:root/bin/rawdatad \
+    $(LOCAL_PATH)/rootdir/bin/rawdatad:root/bin/rawdatad
 
 
 # Bluetooth
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
+    
+# Kernel
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/modules/mali.ko:system/lib/modules/mali.ko \
+    $(LOCAL_PATH)/modules/ump.ko:system/lib/modules/ump.ko \
+    $(LOCAL_PATH)/modules/ansi_cprng.ko:system/lib/modules/ansi_cprng.ko \
+    $(LOCAL_PATH)/modules/dhd.ko:system/lib/modules/dhd.ko \
+    $(LOCAL_PATH)/modules/mmc_test.ko:system/lib/modules/mmc_test.ko \
+    $(LOCAL_PATH)/modules/oprofile.ko:system/lib/modules/oprofile.ko \
+    $(LOCAL_PATH)/modules/vlx-vipc.ko:system/lib/modules/vlx-vipc.ko \
+    $(LOCAL_PATH)/modules/vlx-vmq.ko:system/lib/modules/vlx-vmq.ko \
+    $(LOCAL_PATH)/modules/vmtd-be.ko:system/lib/modules/vmtd-be.ko \
+    $(LOCAL_PATH)/modules/vmtd-fe.ko:system/lib/modules/vmtd-fe.ko \
+    $(LOCAL_PATH)/kernel:kernel
+    
 
 # Idc
 PRODUCT_COPY_FILES += \
