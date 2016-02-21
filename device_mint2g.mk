@@ -49,10 +49,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/bin/rawdatad:root/bin/rawdatad \
 
 
-# Bluetooth
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
-
 # Idc
 PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/idc/sec_touchscreen.idc:system/usr/idc/sec_touchscreen.idc
