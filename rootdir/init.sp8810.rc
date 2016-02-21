@@ -32,6 +32,8 @@ on fs
 on post-fs
     insmod /system/lib/modules/ump.ko
     insmod /system/lib/modules/mali.ko
+    
+    insmod /system/lib/modules/cpufreq-sc8810.ko
 
     chown system system /productinfo
     chmod 0774 /productinfo
