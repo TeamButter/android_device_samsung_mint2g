@@ -178,11 +178,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     dalvik.vm.heapgrowthlimit=46m \
     dalvik.vm.heapsize=92m \
     ro.telephony.call_ring=0 
-   
-#Mobile Data
-PRODUCT_PACKAGES += \
-    libnetlink \
-    libiprouteutil
+
     
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
