@@ -52,7 +52,7 @@ BOARD_KERNEL_PAGESIZE := 2048
 #TARGET_KERNEL_SOURCE := kernel/samsung/mint2g
 #TARGET_KERNEL_CONFIG := cyanogenmod_mint_defconfig
 #BOARD_KERNEL_IMAGE_NAME := Image
-TARGET_PREBUILT_KERNEL := device/samsung/mint2g/kernel
+USE_PREBUILT_KERNEL := true
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 10485760
