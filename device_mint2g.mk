@@ -36,7 +36,6 @@ $(shell ln -sf -t $(LOCAL_PATH)/../../../out/target/product/mint/recovery/root/s
 
 # Init Files
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/init.rc:root/init.rc \
     $(LOCAL_PATH)/rootdir/init.sp8810.rc:root/init.sp8810.rc \
     $(LOCAL_PATH)/rootdir/init.sp8810.usb.rc:root/init.sp8810.usb.rc \
     $(LOCAL_PATH)/rootdir/fstab.sp8810:root/fstab.sp8810 \
@@ -51,11 +50,11 @@ PRODUCT_COPY_FILES += \
 
 # Idc
 PRODUCT_COPY_FILES += \
-     $(LOCAL_PATH)/idc/sec_touchscreen.idc:system/usr/idc/sec_touchscreen.idc
+     $(LOCAL_PATH)/sec_touchscreen.idc:system/usr/idc/sec_touchscreen.idc
 
 # Keylayout
 PRODUCT_COPY_FILES += \
-     $(LOCAL_PATH)/keylayout/sprd-keypad.kl:system/usr/keylayout/sprd-keypad.kl
+     $(LOCAL_PATH)/sprd-keypad.kl:system/usr/keylayout/sprd-keypad.kl
 
 
 # Graphics
@@ -101,7 +100,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.radio.multisim.config=dsds \
     ro.telephony.call_ring.multiple=0 \
     dalvik.vm.heapsize=92m \
-    dalvik.vm.heapgrowthlimit=92m \
+    dalvik.vm.heapgrowthlimit=46m \
     ro.telephony.call_ring=0 
     
 
