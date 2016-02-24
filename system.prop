@@ -3,16 +3,13 @@
 #
 
 ro.sf.lcd_density=120
-ro.opengles.version=131072
 ro.product.hardware=SS
 
 ro.lcd_min_brightness=20
 
 
-ro.tvout.enable=false
-
 persist.sys.storage_preload=1
 
-#Dual SIM
+# RIL
 ril.sim2.present=1
 
