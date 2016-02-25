@@ -30,7 +30,6 @@ TARGET_CPU_VARIANT := cortex-a9
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 ARCH_ARM_HAVE_TLS_REGISTER := true
-#TARGET_CORTEX_CACHE_LINE_32 := true
 
 # Board
 TARGET_BOOTLOADER_BOARD_NAME := mint2g
@@ -73,8 +72,6 @@ BOARD_LDPI_RECOVERY := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := "<font_7x16.h>"
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/mint2g/recovery/recovery_keys.c
-#TARGET_RECOVERY_INITRC := device/samsung/mint/recovery/recovery.rc
-#BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/mint/recovery/graphics.c
 BOARD_HAS_NO_MISC_PARTITION := true
 TARGET_RECOVERY_FSTAB := device/samsung/mint2g/recovery.fstab
 BOARD_SUPPRESS_EMMC_WIPE := true
@@ -128,27 +125,12 @@ WIFI_BAND                        := 802_11_ABG
 BOARD_HAVE_SAMSUNG_WIFI          := true
 
 
-
 # Healthd
 BOARD_HAL_STATIC_LIBRARIES := libhealthd.mint2g
-
-# RIL
-#BOARD_RIL_CLASS := ../../../device/samsung/mint2g/ril/
-BOARD_MOBILEDATA_INTERFACE_NAME := "rmnet0"
-BOARD_RIL_NO_CELLINFOLIST := true
 
 # Audio
 BOARD_USES_TINYALSA_AUDIO := true
 
-# Sensors
-USE_SPRD_SENSOR_LIB := true
-BOARD_HAVE_ACC := Lis3dh
-BOARD_ACC_INSTALL := 6
-BOARD_HAVE_ORI := NULL
-BOARD_HAVE_PLS := NULL
-
-# HWComposer
-USE_SPRD_HWCOMPOSER := true
 
 # Compat
 TARGET_USES_LOGD := false
