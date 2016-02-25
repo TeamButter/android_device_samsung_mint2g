@@ -150,14 +150,8 @@ BOARD_HAVE_PLS := NULL
 # HWComposer
 USE_SPRD_HWCOMPOSER := true
 
-# Include an expanded selection of fonts
-EXTENDED_FONT_FOOTPRINT := true
-
 # Compat
 TARGET_USES_LOGD := false
-
-# jemalloc causes a lot of random crash on free()
-MALLOC_IMPL := dlmalloc
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 320
