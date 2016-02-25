@@ -13,3 +13,4 @@ ro.tvout.enable=false
 
 persist.sys.storage_preload=1
 
+ro.kernel.qemu=0
