@@ -19,9 +19,6 @@ $(call inherit-product, $(SRC_TARGET_DIR)/product/languages_full.mk)
 ## (2) Also get non-open-source specific aspects if available
 $(call inherit-product-if-exists, vendor/samsung/mint2g/mint2g-vendor.mk)
 
-# Use the Dalvik VM specific for devices with 512 MB of RAM
-$(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
-
 ## overlays
 DEVICE_PACKAGE_OVERLAYS += device/samsung/mint2g/overlay
 
@@ -185,11 +182,17 @@ PRODUCT_PROPERTY_OVERRIDES += \
     persist.msms.phone_count=2 \
     persist.radio.multisim.config=none \
     ro.telephony.call_ring.multiple=0 \
-    dalvik.vm.heapgrowthlimit=46m \
-    dalvik.vm.heapsize=92m \
     ro.telephony.call_ring=0 
 
-    
+# ART device props
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.dex2oat-Xms=8m \
+    dalvik.vm.dex2oat-Xmx=96m \
+    dalvik.vm.image-dex2oat-Xms=48m \
+    dalvik.vm.image-dex2oat-Xmx=48m \
+    dalvik.vm.dex2oat-flags=--no-watch-dog \
+    dalvik.vm.dex2oat-filter=interpret-only \
+    dalvik.vm.image-dex2oat-filter=speed
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=adb,mtp \

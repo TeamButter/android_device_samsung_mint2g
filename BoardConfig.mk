@@ -161,8 +161,10 @@ TARGET_SCREEN_WIDTH := 240
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 
-# Dex-preopt
+# ART host flags
 WITH_DEXPREOPT := true
+PRODUCT_DEX_PREOPT_DEFAULT_FLAGS := \
+    --compiler-filter=interpret-only
 
 # CMHW
 BOARD_HARDWARE_CLASS := device/samsung/mint2g/cmhw/
