@@ -133,7 +133,7 @@ BOARD_HAL_STATIC_LIBRARIES := libhealthd.mint2g
 
 # Audio
 BOARD_USES_TINYALSA_AUDIO := true
-
+LOCAL_CFLAGS += -DMR0_AUDIO_BLOB
 
 # Compat
 TARGET_USES_LOGD := false
