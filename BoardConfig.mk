@@ -66,8 +66,6 @@ BOARD_LDPI_RECOVERY := true
 BOARD_HAS_NO_SELECT_BUTTON := true
 BOARD_USE_CUSTOM_RECOVERY_FONT := "<font_7x16.h>"
 BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/samsung/sprd-common/recovery/recovery_keys.c
-#TARGET_RECOVERY_INITRC := device/samsung/mint/recovery/recovery.rc
-#BOARD_CUSTOM_GRAPHICS := ../../../device/samsung/mint/recovery/graphics.c
 BOARD_HAS_NO_MISC_PARTITION := true
 TARGET_RECOVERY_FSTAB := device/samsung/mint2g/recovery.fstab
 BOARD_SUPPRESS_EMMC_WIPE := true
@@ -82,6 +80,7 @@ HWUI_COMPILE_FOR_PERF := true
 
 # Camera
 COMMON_GLOBAL_CFLAGS += -DMR0_CAMERA_BLOB
+NEEDS_MEMORYHEAPION := true
 
 # Bluetooth
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/mint2g/bluetooth
@@ -110,12 +109,6 @@ BOARD_HAVE_SAMSUNG_WIFI          := true
 # Audio
 COMMON_GLOBAL_CFLAGS += -DMR0_AUDIO_BLOB
 
-# Sensors
-USE_SPRD_SENSOR_LIB := true
-BOARD_HAVE_ACC := Lis3dh
-BOARD_ACC_INSTALL := 6
-BOARD_HAVE_ORI := NULL
-BOARD_HAVE_PLS := NULL
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 320
