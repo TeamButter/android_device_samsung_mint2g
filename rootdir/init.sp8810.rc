@@ -1,30 +1,29 @@
 import init.sp8810.usb.rc
 
 on init
-
-	stop ril-daemon
-	
-	# See storage config details at http://source.android.com/tech/storage/
-    		mkdir /mnt/shell/emulated 0700 shell shell
-   		mkdir /storage/emulated 0555 root root
-    		export EXTERNAL_STORAGE /storage/emulated/legacy
-    		export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
-    		export EMULATED_STORAGE_TARGET /storage/emulated
+# See storage config details at http://source.android.com/tech/storage/
+	mkdir /mnt/shell/emulated 0700 shell shell
+    mkdir /storage/emulated 0555 root root
+	export EXTERNAL_STORAGE /storage/emulated/legacy
+	export EMULATED_STORAGE_SOURCE /mnt/shell/emulated
+    export EMULATED_STORAGE_TARGET /storage/emulated
 	# Support legacy paths
-    		symlink /storage/emulated/legacy /sdcard
-   		symlink /storage/emulated/legacy /mnt/sdcard
-		symlink /storage/emulated/legacy /storage/sdcard0
-		symlink /mnt/shell/emulated/0 /storage/emulated/legacy
+    symlink /storage/emulated/legacy /sdcard
+    symlink /storage/emulated/legacy /mnt/sdcard
+	symlink /storage/emulated/legacy /storage/sdcard0
+	symlink /mnt/shell/emulated/0 /storage/emulated/legacy
 
-		mkdir /storage/sdcard1 0775 system system
-		export SECONDARY_STORAGE /storage/sdcard1
-		mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
-		mkdir /storage/sdcard1 0700 root root
+	mkdir /storage/sdcard1 0775 system system
+	export SECONDARY_STORAGE /storage/sdcard1
+	mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
+	mkdir /storage/sdcard1 0700 root root
 
    
     mkdir /efs 0775 radio system
     symlink /efs /factory
     symlink /dev/block/mmcblk0p11 /dev/block/param
+    
+    export LD_SHIM_LIBS "libmemoryheapion.so"
 
 on fs
 
@@ -248,15 +247,6 @@ on boot
     chown system root /proc/nk/guest-02/guestOS_2_bank
     chown system system /sys/class/power_supply/*
     chown system system /proc/sys/kernel/printk
-    
-    
-    
-# For Datarouter
-    chown system system /dev/dun
-    chown system system /dev/ttyGS0
-    chown system system /dev/ttyGS1
-    chown system system /dev/ttyGS2
-    chown system system /dev/ttyGS3
 
 # SEC_PRODUCT_FEATURE_COMMON_USE_MULTISIM
 #   simslot 1
@@ -381,7 +371,7 @@ service calibrationinit /system/bin/calibration_init
 
 
 #rild service
-service sprd-ril-daemon /system/bin/rild_sp  -l /system/lib/libreference-ril.so -- -n 0
+service ril-daemon /system/bin/rild_sp  -l /system/lib/libreference-ril.so -- -n 0
     class main
     socket rild stream 660 root radio
     socket rild-debug stream 660 radio system
@@ -390,7 +380,7 @@ service sprd-ril-daemon /system/bin/rild_sp  -l /system/lib/libreference-ril.so 
 
 
 
-service sprd-ril-daemon2 /system/bin/rild_sp  -l /system/lib/libreference-ril.so -- -n 1
+service ril-daemon2 /system/bin/rild_sp  -l /system/lib/libreference-ril.so -- -n 1
     class main
     socket rild1 stream 660 root radio
     socket rild-debug1 stream 660 radio system
@@ -412,6 +402,9 @@ service sprd-ril-daemon2 /system/bin/rild_sp  -l /system/lib/libreference-ril.so
 		class late_start
 		disabled
 
+# For Broadcom FMRadio
+    chmod 0777 /system/bin/btld
+    setprop service.brcm.bt.pbap_mode btld
 
 
 service wpa_supplicant /system/bin/logwrapper /system/bin/wpa_supplicant \
@@ -522,10 +515,19 @@ service at_distributor /system/bin/at_distributor
     user root
     group radio log
 
+    
+# For Datarouter
+    chown system system /dev/dun
+    chown system system /dev/ttyGS0
+    chown system system /dev/ttyGS1
+    chown system system /dev/ttyGS2
+    chown system system /dev/ttyGS3
+
 
 on alarm
     class_start core
     start media
     exec /bin/poweroff_alarm
+
 
 
