@@ -10,6 +10,4 @@ ro.lcd_min_brightness=20
 
 persist.sys.storage_preload=1
 
-# RIL
-ril.sim2.present=1
 
