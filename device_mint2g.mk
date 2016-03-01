@@ -101,6 +101,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.call_ring.multiple=0 \
     dalvik.vm.heapsize=92m \
     dalvik.vm.heapgrowthlimit=46m \
+    ro.telephony.ril_class=SamsungMint2GRIL \
+    ro.ril.telephony.mqanelements=5 \
     ro.telephony.call_ring=0 
     
 
