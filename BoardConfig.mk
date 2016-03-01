@@ -112,7 +112,7 @@ BOARD_HAVE_SAMSUNG_WIFI          := true
 COMMON_GLOBAL_CFLAGS += -DMR0_AUDIO_BLOB
 
 # RIL
-BOARD_RIL_CLASS += device/samsung/mint2g/ril/
+BOARD_RIL_CLASS += ../../../device/samsung/mint2g/ril/
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 320
