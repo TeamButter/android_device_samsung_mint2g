@@ -88,6 +88,7 @@ BOARD_UMS_LUNFILE := "/sys/class/android_usb/android0/f_mass_storage/lun/file"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/dwc_otg.0/gadget/lun0/file"
 
 # Graphics
+MALLOC_IMPL := dlmalloc
 USE_OPENGL_RENDERER := true
 BOARD_EGL_CFG := device/samsung/mint2g/egl/egl.cfg
 BOARD_USE_MHEAP_SCREENSHOT := true
