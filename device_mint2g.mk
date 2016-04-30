@@ -49,12 +49,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
     
-# Kernel
-ifeq ($(USE_PREBUILT_KERNEL),true)
-	$(call inherit-product, kernel/prebuilt/$(TARGET_BOOTLOADER_BOARD_NAME)/kernel.mk)
-endif
-    
-
 # Idc
 PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/idc/sec_touchscreen.idc:system/usr/idc/sec_touchscreen.idc
@@ -75,8 +69,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
 #Camera
 PRODUCT_COPY_FILES += \
 frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml
-
-
 
 
 # These are the hardware-specific settings that are stored in system properties.
@@ -119,8 +111,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
 
 # Board-Pecific
 PRODUCT_PACKAGES += \
-    lights.sc8810 \
-    sensors.sc8810
+    	lights.sc8810 \
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -183,29 +174,30 @@ PRODUCT_PROPERTY_OVERRIDES += \
     wifi.interface=wlan0 \
     ro.zygote.disable_gl_preload=true \
     persist.msms.phone_count=2 \
-    persist.radio.multisim.config=none \
+    persist.radio.multisim.config=dsds \
     ro.telephony.call_ring.multiple=0 \
     dalvik.vm.heapgrowthlimit=46m \
     dalvik.vm.heapsize=92m \
+    ro.telephony.ril_class=SamsungMint2GRIL
     ro.telephony.call_ring=0 
 
-# ART device props
-PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.dex2oat-Xms=8m \
-    dalvik.vm.dex2oat-Xmx=96m \
-    dalvik.vm.image-dex2oat-Xms=48m \
-    dalvik.vm.image-dex2oat-Xmx=48m \
-    dalvik.vm.dex2oat-flags=--no-watch-dog \
-    dalvik.vm.dex2oat-filter=interpret-only \
-    dalvik.vm.image-dex2oat-filter=speed
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=adb,mtp \
     ro.adb.secure=0 \
     ro.secure=0 \
     ro.debuggable=1
-
     
+# ART
+PRODUCT_PROPERTY_OVERRIDES += \
+    dalvik.vm.dex2oat-filter=interpret-only \
+    dalvik.vm.dex2oat-flags=--no-watch-dog \
+    dalvik.vm.image-dex2oat-filter=speed
+    
+# Force use old camera api
+PRODUCT_PROPERTY_OVERRIDES += \
+    camera2.portability.force_api=1
+   
     
 $(call inherit-product, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
 
