@@ -54,7 +54,7 @@ BOARD_KERNEL_PAGESIZE := 2048
 #TARGET_KERNEL_SOURCE := kernel/samsung/mint2g
 #TARGET_KERNEL_CONFIG := cyanogenmod_mint_defconfig
 #BOARD_KERNEL_IMAGE_NAME := Image
-USE_PREBUILT_KERNEL := true
+TARGET_PREBUILT_KERNEL := device/samsung/mint2g/kernel
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 10485760
@@ -65,11 +65,6 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 2172649472
 BOARD_FLASH_BLOCK_SIZE := 131072
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
-
-# Bionic
-TARGET_ENABLE_NON_PIE_SUPPORT := true
-BOARD_USES_LEGACY_MMAP := true
-TARGET_NEEDS_BIONIC_MD5 := true
 
 # Recovery
 DEVICE_RESOLUTION := 240x320
@@ -89,7 +84,6 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/dwc_otg.0/gadget/lun0/
 # Graphics
 MALLOC_IMPL := dlmalloc
 USE_OPENGL_RENDERER := true
-BOARD_EGL_CFG := device/samsung/mint2g/egl/egl.cfg
 BOARD_USE_MHEAP_SCREENSHOT := true
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
 BOARD_EGL_NEEDS_FNW := true
@@ -140,6 +134,10 @@ BOARD_HAL_STATIC_LIBRARIES := libhealthd.mint2g
 # Audio
 BOARD_USES_TINYALSA_AUDIO := true
 LOCAL_CFLAGS += -DMR0_AUDIO_BLOB -DICS_AUDIO_BLOB
+USE_LEGACY_AUDIO_POLICY := 1
+
+# RIL
+BOARD_RIL_CLASS := ../../../device/samsung/mint2g/ril
 
 # Compat
 TARGET_USES_LOGD := false
@@ -154,8 +152,6 @@ BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charg
 
 # ART host flags
 WITH_DEXPREOPT := true
-PRODUCT_DEX_PREOPT_DEFAULT_FLAGS := \
-    --compiler-filter=interpret-only
 
 # CMHW
 BOARD_HARDWARE_CLASS := device/samsung/mint2g/cmhw/
