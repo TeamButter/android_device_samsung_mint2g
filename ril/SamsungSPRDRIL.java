@@ -332,7 +332,6 @@ public class SamsungSPRDRIL extends RIL implements CommandsInterface {
         // Here and below fake RIL_UNSOL_RESPONSE_SIM_STATUS_CHANGED, see b/7255789.
         // This is needed otherwise we don't automatically transition to the main lock
         // screen when the pin or puk is entered incorrectly.
-        // Note for the I9082: we're faking more than the standard RIL
         switch (rr.mRequest) {
             case RIL_REQUEST_ENTER_SIM_PUK:
             case RIL_REQUEST_ENTER_SIM_PUK2:
@@ -367,88 +366,6 @@ public class SamsungSPRDRIL extends RIL implements CommandsInterface {
         return rr;
     }
 
-    @Override
-    protected Object
-    responseCallList(Parcel p) {
-        int num;
-        int voiceSettings;
-        ArrayList<DriverCall> response;
-        DriverCall dc;
-
-        num = p.readInt();
-        response = new ArrayList<DriverCall>(num);
-
-        if (RILJ_LOGV) {
-            riljLog("responseCallList: num=" + num +
-                    " mEmergencyCallbackModeRegistrant=" + mEmergencyCallbackModeRegistrant +
-                    " mTestingEmergencyCall=" + mTestingEmergencyCall.get());
-        }
-        for (int i = 0 ; i < num ; i++) {
-            dc = new DriverCall();
-
-            dc.state = DriverCall.stateFromCLCC(p.readInt());
-            // & 0xff to truncate to 1 byte added for us, not in RIL.java
-            dc.index = p.readInt() & 0xff;
-            dc.TOA = p.readInt();
-            dc.isMpty = (0 != p.readInt());
-            dc.isMT = (0 != p.readInt());
-            dc.als = p.readInt();
-            voiceSettings = p.readInt();
-            dc.isVoice = (0 != voiceSettings);
-            boolean isVideo = (0 != p.readInt());
-            int call_type = p.readInt();            // Samsung CallDetails
-            int call_domain = p.readInt();          // Samsung CallDetails
-            String csv = p.readString();            // Samsung CallDetails
-            dc.isVoicePrivacy = (0 != p.readInt());
-            dc.number = p.readString();
-            int np = p.readInt();
-            dc.numberPresentation = DriverCall.presentationFromCLIP(np);
-            dc.name = p.readString();
-            dc.namePresentation = p.readInt();
-            int uusInfoPresent = p.readInt();
-            if (uusInfoPresent == 1) {
-                dc.uusInfo = new UUSInfo();
-                dc.uusInfo.setType(p.readInt());
-                dc.uusInfo.setDcs(p.readInt());
-                byte[] userData = p.createByteArray();
-                dc.uusInfo.setUserData(userData);
-                riljLogv(String.format("Incoming UUS : type=%d, dcs=%d, length=%d",
-                                dc.uusInfo.getType(), dc.uusInfo.getDcs(),
-                                dc.uusInfo.getUserData().length));
-                riljLogv("Incoming UUS : data (string)="
-                        + new String(dc.uusInfo.getUserData()));
-                riljLogv("Incoming UUS : data (hex): "
-                        + IccUtils.bytesToHexString(dc.uusInfo.getUserData()));
-            } else {
-                riljLogv("Incoming UUS : NOT present!");
-            }
-
-            // Make sure there's a leading + on addresses with a TOA of 145
-            dc.number = PhoneNumberUtils.stringFromStringAndTOA(dc.number, dc.TOA);
-
-            response.add(dc);
-
-            if (dc.isVoicePrivacy) {
-                mVoicePrivacyOnRegistrants.notifyRegistrants();
-                riljLog("InCall VoicePrivacy is enabled");
-            } else {
-                mVoicePrivacyOffRegistrants.notifyRegistrants();
-                riljLog("InCall VoicePrivacy is disabled");
-            }
-        }
-
-        Collections.sort(response);
-
-        if ((num == 0) && mTestingEmergencyCall.getAndSet(false)) {
-            if (mEmergencyCallbackModeRegistrant != null) {
-                riljLog("responseCallList: call ended, testing emergency call," +
-                            " notify ECM Registrants");
-                mEmergencyCallbackModeRegistrant.notifyRegistrant();
-            }
-        }
-
-        return response;
-    }
 
     private void invokeOemRilRequestSprd(byte key, byte value, Message response) {
         invokeOemRilRequestRaw(new byte[] { 'S', 'P', 'R', 'D', key, value }, response);
