@@ -29,7 +29,9 @@ TARGET_ARCH_VARIANT_CPU := cortex-a9
 TARGET_CPU_VARIANT := cortex-a9
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
+TARGET_CPU_SMP := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
+ARCH_ARM_HAVE_NEON := true
 TARGET_GLOBAL_CFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 
@@ -44,17 +46,18 @@ COMMON_GLOBAL_CFLAGS += -DSPRD_HARDWARE
 COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL -DREFBASE_JB_MR1_COMPAT_SYMBOLS
 TARGET_RELEASE_CPPFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 
-# Don't generate block mode update zips
-BLOCK_BASED_OTA := false
 
 # Kernel
 BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8 androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
-#TARGET_KERNEL_SOURCE := kernel/samsung/mint2g
-#TARGET_KERNEL_CONFIG := cyanogenmod_mint_defconfig
-#BOARD_KERNEL_IMAGE_NAME := Image
-TARGET_PREBUILT_KERNEL := device/samsung/mint2g/kernel
+TARGET_KERNEL_SOURCE := kernel/samsung/mint2g
+TARGET_KERNEL_CONFIG := cyanogenmod_mint_defconfig
+BOARD_KERNEL_IMAGE_NAME := Image
+# FIXME: Replace with path to some other toolchain apart from gcc 4.8
+KERNEL_TOOLCHAIN := ../../../../android/toolchains/build/5.2/bin
+KERNEL_TOOLCHAIN_PREFIX := arm-eabi-
+
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 10485760
@@ -91,6 +94,7 @@ TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := TRUE
 
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
+USE_MINIKIN := true
 
 # Camera
 USE_CAMERA_STUB := true
@@ -163,8 +167,10 @@ BOARD_SEPOLICY_DIRS += \
 BOARD_SEPOLICY_UNION += \
     file_contexts \
     init.te \
+    surfaceflinger.te \
     netd.te \
-    surfaceflinger.te
+    slog.te \
+    pty_symlink.te
 
 # Host specific
 PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
