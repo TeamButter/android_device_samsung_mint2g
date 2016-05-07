@@ -143,7 +143,10 @@
     <integer name="config_screenBrightnessDim">20</integer>
     
     <!--  Maximum number of supported users -->
-    <integer name="config_multiuserMaximumUsers">2</integer>
+    <integer name="config_multiuserMaximumUsers">3</integer>
+    
+    <!-- Whether UI for multi user should be shown -->
+    <bool name="config_enableMultiUserUI">true</bool>
     
     <!-- Device configuration setting the /proc/sys/vm/extra_free_kbytes tunable in the kernel
          (if it exists).  A high value will increase the amount of memory that the kernel
