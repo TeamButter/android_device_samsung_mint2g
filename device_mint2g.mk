@@ -36,7 +36,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/init.sp8810.rc:root/init.sp8810.rc \
     $(LOCAL_PATH)/rootdir/init.sp8810.usb.rc:root/init.sp8810.usb.rc \
     $(LOCAL_PATH)/rootdir/fstab.sp8810:root/fstab.sp8810 \
-    $(LOCAL_PATH)/rootdir/lpm.rc:root/lpm.rc \
+    $(LOCAL_PATH)/rootdir/fstab.swap:root/fstab.swap \
+    $(LOCAL_PATH)/rootdir/init.swap.rc:root/init.swap.rc \
     $(LOCAL_PATH)/rootdir/ueventd.sp8810.rc:root/ueventd.sp8810.rc \
     $(LOCAL_PATH)/rootdir/bin/charge:root/bin/charge \
     $(LOCAL_PATH)/rootdir/modem_control:root/modem_control \
@@ -93,10 +94,6 @@ PRODUCT_PACKAGES += \
     libtinyalsa
     
 
-PRODUCT_PACKAGES += \
-	Gallery2
-
-
 # Hw params
 PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/hw_params/audio_para:system/etc/audio_para \
@@ -112,6 +109,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
 # Board-Pecific
 PRODUCT_PACKAGES += \
     	lights.sc8810 \
+    	cpufreq-sc8810.ko \
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -187,17 +185,23 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.adb.secure=0 \
     ro.secure=0 \
     ro.debuggable=1
+
     
-# ART
+# ART device props
 PRODUCT_PROPERTY_OVERRIDES += \
-    dalvik.vm.dex2oat-filter=interpret-only \
-    dalvik.vm.dex2oat-flags=--no-watch-dog \
-    dalvik.vm.image-dex2oat-filter=speed
+	dalvik.vm.dex2oat-Xms=8m \
+	dalvik.vm.dex2oat-Xmx=96m \
+	dalvik.vm.dex2oat-flags=--no-watch-dog \
+	dalvik.vm.dex2oat-filter=interpret-only \
+	dalvik.vm.image-dex2oat-Xms=48m \
+	dalvik.vm.image-dex2oat-Xmx=48m \
+	dalvik.vm.image-dex2oat-filter=speed
     
 # Force use old camera api
 PRODUCT_PROPERTY_OVERRIDES += \
     camera2.portability.force_api=1
-   
+    
+PRODUCT_TAGS += dalvik.gc.type-precise 
     
 $(call inherit-product, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
 
