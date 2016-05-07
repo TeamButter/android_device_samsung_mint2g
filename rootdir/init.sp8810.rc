@@ -1,4 +1,5 @@
 import init.sp8810.usb.rc
+import /init.swap.rc
 
 on init
 	stop ril-daemon
@@ -32,6 +33,7 @@ on fs
     setprop ro.crypto.fuse_sdcard true
 
 on post-fs
+    insmod /system/lib/modules/cpufreq-sc8810.ko
     insmod /system/lib/modules/ump.ko
     insmod /system/lib/modules/mali.ko
 
