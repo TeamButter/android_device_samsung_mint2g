@@ -21,6 +21,7 @@ $(call inherit-product-if-exists, vendor/samsung/mint2g/mint2g-vendor.mk)
 
 # Use the Dalvik VM specific for devices with 512 MB of RAM
 $(call inherit-product, frameworks/native/build/phone-hdpi-512-dalvik-heap.mk)
+$(call inherit-product, vendor/samsung/workaround/workaround.mk)
 
 ## overlays
 DEVICE_PACKAGE_OVERLAYS += device/samsung/mint2g/overlay
@@ -144,7 +145,8 @@ PRODUCT_PACKAGES += \
     
 # Samsung Service Mode
 PRODUCT_PACKAGES += \
-    SamsungServiceMode
+    SamsungServiceMode \
+    Gallery2
     
 # Use prebuilt webviewchromium
 PRODUCT_PACKAGES += \
