@@ -164,13 +164,5 @@ BOARD_HARDWARE_CLASS := device/samsung/mint2g/cmhw/
 BOARD_SEPOLICY_DIRS += \
     device/samsung/mint2g/sepolicy
 
-BOARD_SEPOLICY_UNION += \
-    file_contexts \
-    init.te \
-    surfaceflinger.te \
-    netd.te \
-    slog.te \
-    pty_symlink.te
-
 # Host specific
 PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
