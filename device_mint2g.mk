@@ -70,7 +70,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 #Camera
 PRODUCT_COPY_FILES += \
-frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml
+    frameworks/native/data/etc/android.hardware.camera.xml:system/etc/permissions/android.hardware.camera.xml
 
 
 # These are the hardware-specific settings that are stored in system properties.
@@ -109,8 +109,12 @@ PRODUCT_PROPERTY_OVERRIDES := \
 
 # Board-Pecific
 PRODUCT_PACKAGES += \
-    	lights.sc8810 \
-    	cpufreq-sc8810.ko \
+	lights.sc8810 \
+	cpufreq-sc8810.ko
+    	
+# Compat
+PRODUCT_PACKAGES += \
+	libstlport \
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
@@ -203,8 +207,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     camera2.portability.force_api=1
     
-PRODUCT_TAGS += dalvik.gc.type-precise 
-    
+   
 $(call inherit-product, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
 
 # Boot animation
