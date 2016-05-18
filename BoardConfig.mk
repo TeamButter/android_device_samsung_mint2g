@@ -141,7 +141,8 @@ LOCAL_CFLAGS += -DMR0_AUDIO_BLOB -DICS_AUDIO_BLOB
 USE_LEGACY_AUDIO_POLICY := 1
 
 # RIL
-BOARD_RIL_CLASS := ../../../device/samsung/mint2g/ril
+#Remove All RIL items for now !
+#BOARD_RIL_CLASS := ../../../device/samsung/mint2g/ril 
 
 # Compat
 TARGET_USES_LOGD := false
@@ -173,4 +174,17 @@ BOARD_SEPOLICY_UNION += \
     pty_symlink.te
 
 # Host specific
-PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
+#PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
+
+#twrp
+#TWRP things are need for SLimKat
+DEVICE_RESOLUTION := 240x240
+RECOVERY_GRAPHICS_USE_LINELENGTH := true
+RECOVERY_SDCARD_ON_DATA := true
+BOARD_HAS_NO_REAL_SDCARD := true
+TW_EXTERNAL_STORAGE_PATH := "/external_sd"
+TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
+TW_FLASH_FROM_STORAGE := true
+TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel/brightness"
+TW_MAX_BRIGHTNESS := 255
+TWRP_EVENT_LOGGING := false
