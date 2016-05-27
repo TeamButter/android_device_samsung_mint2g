@@ -36,14 +36,13 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/init.sp8810.rc:root/init.sp8810.rc \
     $(LOCAL_PATH)/rootdir/init.sp8810.usb.rc:root/init.sp8810.usb.rc \
     $(LOCAL_PATH)/rootdir/fstab.sp8810:root/fstab.sp8810 \
-    $(LOCAL_PATH)/rootdir/fstab.swap:root/fstab.swap \
-    $(LOCAL_PATH)/rootdir/init.swap.rc:root/init.swap.rc \
+    $(LOCAL_PATH)/rootdir/lpm.rc:root/lpm.rc \
     $(LOCAL_PATH)/rootdir/ueventd.sp8810.rc:root/ueventd.sp8810.rc \
     $(LOCAL_PATH)/rootdir/bin/charge:root/bin/charge \
     $(LOCAL_PATH)/rootdir/modem_control:root/modem_control \
     $(LOCAL_PATH)/rootdir/bin/poweroff_alarm:root/bin/poweroff_alarm \
     $(LOCAL_PATH)/rootdir/bin/vcharged:root/bin/vcharged \
-    $(LOCAL_PATH)/rootdir/bin/rawdatad:root/bin/rawdatad
+    $(LOCAL_PATH)/rootdir/bin/rawdatad:root/bin/rawdatad 
 
 
 # Bluetooth

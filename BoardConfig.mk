@@ -24,16 +24,14 @@ TARGET_OTA_ASSERT_DEVICE := mint,mint2g,GT-S5282,GT-S5280
 
 # Architecture
 TARGET_ARCH := arm
-TARGET_ARCH_VARIANT := armv7-a-neon
-TARGET_ARCH_VARIANT_CPU := cortex-a9
-TARGET_CPU_VARIANT := cortex-a9
+TARGET_ARCH_VARIANT := armv7-a
+TARGET_ARCH_VARIANT_CPU := cortex-a5
+TARGET_CPU_VARIANT := cortex-a5
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
-TARGET_CPU_SMP := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
-ARCH_ARM_HAVE_NEON := true
-TARGET_GLOBAL_CFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
+TARGET_CPU_SMP := true
+#TARGET_CORTEX_CACHE_LINE_32 := true
 
 # Board
 TARGET_BOOTLOADER_BOARD_NAME := mint2g
@@ -43,9 +41,7 @@ TARGET_NO_RADIOIMAGE := true
 # Platform
 TARGET_BOARD_PLATFORM := sc8810
 COMMON_GLOBAL_CFLAGS += -DSPRD_HARDWARE
-COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS -DADD_LEGACY_ACQUIRE_BUFFER_SYMBOL -DREFBASE_JB_MR1_COMPAT_SYMBOLS
 TARGET_RELEASE_CPPFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
-
 
 # Kernel
 BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8 androidboot.selinux=permissive
@@ -54,9 +50,6 @@ BOARD_KERNEL_PAGESIZE := 2048
 TARGET_KERNEL_SOURCE := kernel/samsung/mint2g
 TARGET_KERNEL_CONFIG := cyanogenmod_mint_defconfig
 BOARD_KERNEL_IMAGE_NAME := Image
-# FIXME: Replace with path to some other toolchain apart from gcc 4.8
-#KERNEL_TOOLCHAIN := /home/boo/android/toolchains/build/5.2/bin
-KERNEL_TOOLCHAIN_PREFIX := arm-eabi-
 
 
 # Partitions
@@ -91,14 +84,15 @@ BOARD_USE_MHEAP_SCREENSHOT := true
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
 BOARD_EGL_NEEDS_FNW := true
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := TRUE
-
-# Include an expanded selection of fonts
-EXTENDED_FONT_FOOTPRINT := true
-USE_MINIKIN := true
+#New for test
+HWUI_COMPILE_FOR_PERF := true
 
 # Camera
 USE_CAMERA_STUB := true
 COMMON_GLOBAL_CFLAGS += -DMR0_CAMERA_BLOB
+#NEEDS_MEMORYHEAPION := true  #will check later
+CAMERA_SUPPORT_SIZE := 2M
+TARGET_BOARD_NO_FRONT_SENSOR := true
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -137,12 +131,15 @@ BOARD_HAL_STATIC_LIBRARIES := libhealthd.mint2g
 
 # Audio
 BOARD_USES_TINYALSA_AUDIO := true
-LOCAL_CFLAGS += -DMR0_AUDIO_BLOB -DICS_AUDIO_BLOB
-USE_LEGACY_AUDIO_POLICY := 1
+COMMON_GLOBAL_CFLAGS += -DMR0_AUDIO_BLOB
+#LOCAL_CFLAGS += -DMR0_AUDIO_BLOB -DICS_AUDIO_BLOB
+#USE_LEGACY_AUDIO_POLICY := 1
 
 # RIL
 #Remove All RIL items for now !
 #BOARD_RIL_CLASS := ../../../device/samsung/mint2g/ril 
+#Will check this later !
+#BOARD_MOBILEDATA_INTERFACE_NAME := "rmnet0"
 
 # Compat
 TARGET_USES_LOGD := false
@@ -156,28 +153,30 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 
 # ART host flags
-WITH_DEXPREOPT := true
+#WITH_DEXPREOPT := true
 
 # CMHW
 BOARD_HARDWARE_CLASS := device/samsung/mint2g/cmhw/
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \
-    device/samsung/mint2g/sepolicy
+    device/samsung/sprd-common/sepolicy
 
 BOARD_SEPOLICY_UNION += \
-    file_contexts \
-    init.te \
-    surfaceflinger.te \
-    netd.te \
-    slog.te \
-    pty_symlink.te
+    file_contexts
 
 # Host specific
 #PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
 
+# HWComposer
+USE_SPRD_HWCOMPOSER := true
+
+# Media
+BOARD_USE_SAMSUNG_COLORFORMAT := true
+
 #twrp
 #TWRP things are need for SLimKat
+#DEVICE_RESOLUTION := 240x320 #Need custom theme at bootable/recovery/gui/devices/
 DEVICE_RESOLUTION := 240x240
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 RECOVERY_SDCARD_ON_DATA := true

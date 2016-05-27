@@ -10,7 +10,6 @@ ro.lcd_min_brightness=20
 
 persist.sys.storage_preload=1
 
-ro.kernel.qemu=0
 debug.hwui.render_dirty_regions=false
 persist.sys.force_highendgfx=true
 
