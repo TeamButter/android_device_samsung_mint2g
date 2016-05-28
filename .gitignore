@@ -21,3 +21,4 @@ file_contexts~
 cpufreq/
 *.te~
 *.swap~
+*.md~
