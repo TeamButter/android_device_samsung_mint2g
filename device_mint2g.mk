@@ -150,13 +150,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     SamsungServiceMode \
     Gallery2
-    
-# Use prebuilt webviewchromium
-PRODUCT_PACKAGES += \
-    webview \
-    libwebviewchromium_loader.so \
-    libwebviewchromium_plat_support.so
-    
+
 # Web
 PRODUCT_PACKAGES += \
     libskia_legacy
