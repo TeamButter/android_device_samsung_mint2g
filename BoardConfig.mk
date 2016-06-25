@@ -155,9 +155,6 @@ TARGET_SCREEN_WIDTH := 240
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 
-# ART host flags
-WITH_DEXPREOPT := true
-
 # CMHW
 BOARD_HARDWARE_CLASS := device/samsung/mint2g/cmhw/
 
@@ -167,3 +164,4 @@ BOARD_SEPOLICY_DIRS += \
 
 # Host specific
 PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
+#ANDROID_COMPILE_WITH_JACK := false
