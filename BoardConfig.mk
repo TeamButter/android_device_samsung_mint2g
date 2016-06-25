@@ -102,7 +102,7 @@ USE_CAMERA_STUB := true
 COMMON_GLOBAL_CFLAGS += -DMR0_CAMERA_BLOB
 
 # RIL
-BOARD_RIL_CLASS := ../../../device/samsung/vivalto3gvn/ril
+BOARD_RIL_CLASS := ../../../device/samsung/mint2g/ril
 COMMON_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
 
 # Bluetooth
@@ -145,8 +145,6 @@ BOARD_USES_TINYALSA_AUDIO := true
 LOCAL_CFLAGS += -DMR0_AUDIO_BLOB -DICS_AUDIO_BLOB
 USE_LEGACY_AUDIO_POLICY := 1
 
-# RIL
-BOARD_RIL_CLASS := ../../../device/samsung/mint2g/ril
 
 # Compat
 TARGET_USES_LOGD := false
