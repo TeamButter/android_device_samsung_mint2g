@@ -149,12 +149,16 @@ PRODUCT_PACKAGES += \
     
 # Samsung Service Mode
 PRODUCT_PACKAGES += \
-    SamsungServiceMode \
-    Gallery2
+    SamsungServiceMode
 
 # Web
 PRODUCT_PACKAGES += \
     libskia_legacy
+    
+# Camera
+PRODUCT_PACKAGES += \
+    Snap \
+    Gallery2
 
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector
