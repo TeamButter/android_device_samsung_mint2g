@@ -113,7 +113,8 @@ PRODUCT_PACKAGES += \
     	
 # Compat
 PRODUCT_PACKAGES += \
-    	libsymbol_wrapper
+    	libsymbol_wrapper \
+    	libstlport
 
 # Set default USB interface
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
