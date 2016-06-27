@@ -72,6 +72,12 @@ public class SamsungMint2GRIL extends SamsungSPRDRIL implements CommandsInterfac
     
     @Override
     public void
+    getHardwareConfig (Message result) {
+        // Hi, I am getHardwareConfig and I am not meant to be invoked
+    }
+    
+    @Override
+    public void
     sendUSSD (String ussdString, Message response) {
         RILRequest rr
                 = RILRequest.obtain(RIL_REQUEST_SEND_USSD, response);
