@@ -17,7 +17,7 @@ on init
     symlink /efs /factory
     symlink /dev/block/mmcblk0p11 /dev/block/param
     
-    export LD_SHIM_LIBS /system/lib/libsymbol_wrapper.so
+    export LD_SHIM_LIBS /system/lib/libril.so|/system/lib/libsymbol_wrapper.so
 
 on fs
 

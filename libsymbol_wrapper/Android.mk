@@ -15,8 +15,7 @@
 LOCAL_PATH := $(call my-dir)
 
 include $(CLEAR_VARS)
-LOCAL_SRC_FILES := symbols_ril.cpp \
-				   VectorImpl.cpp
+LOCAL_SRC_FILES := symbols_ril.cpp
 LOCAL_SHARED_LIBRARIES := libbinder libcutils libutils
 LOCAL_MODULE := libsymbol_wrapper
 LOCAL_MODULE_TAGS := optional
