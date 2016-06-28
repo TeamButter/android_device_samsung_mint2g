@@ -20,6 +20,8 @@
 # definition file).
 #
 
+-include device/samsung/sprd-common/BoardConfigCommon.mk
+
 TARGET_OTA_ASSERT_DEVICE := mint,mint2g,GT-S5282,GT-S5280
 
 # Architecture
@@ -37,8 +39,6 @@ TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 
 # Board
 TARGET_BOOTLOADER_BOARD_NAME := mint2g
-TARGET_NO_BOOTLOADER := true
-TARGET_NO_RADIOIMAGE := true
 
 # Platform
 TARGET_BOARD_PLATFORM := sc8810
@@ -87,29 +87,24 @@ TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/dwc_otg.0/gadget/lun0/
 
 # Graphics
 MALLOC_IMPL := dlmalloc
-USE_OPENGL_RENDERER := true
 BOARD_USE_MHEAP_SCREENSHOT := true
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
 BOARD_EGL_NEEDS_FNW := true
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := TRUE
 
-# Include an expanded selection of fonts
-EXTENDED_FONT_FOOTPRINT := true
-USE_MINIKIN := true
 
 # Camera
-USE_CAMERA_STUB := true
 COMMON_GLOBAL_CFLAGS += -DMR0_CAMERA_BLOB
+NEEDS_MEMORYHEAPION := true
+CAMERA_SUPPORT_SIZE := 2M
+TARGET_BOARD_NO_FRONT_SENSOR := true
 
 # RIL
-BOARD_RIL_CLASS := ../../../device/samsung/mint2g/ril
+BOARD_RIL_CLASS += ../../../device/samsung/mint2g/ril
 COMMON_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
 
 # Bluetooth
-BOARD_HAVE_BLUETOOTH := true
-BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/mint2g/bluetooth
-BOARD_BLUEDROID_VENDOR_CONF := device/samsung/mint2g/bluetooth/libbt_vndcfg.txt
 
 # FM Radio
 BOARD_HAVE_FM_RADIO := true
@@ -137,18 +132,9 @@ WIFI_BAND                        := 802_11_ABG
 BOARD_HAVE_SAMSUNG_WIFI          := true
 
 
-# Healthd
-BOARD_HAL_STATIC_LIBRARIES := libhealthd.mint2g
-
 # Audio
-BOARD_USES_TINYALSA_AUDIO := true
 LOCAL_CFLAGS += -DMR0_AUDIO_BLOB -DICS_AUDIO_BLOB
 USE_LEGACY_AUDIO_POLICY := 1
-TARGET_TINY_ALSA_IGNORE_SILENCE_SIZE := true
-
-
-# Compat
-TARGET_USES_LOGD := false
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 320
@@ -158,8 +144,6 @@ TARGET_SCREEN_WIDTH := 240
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 
-# CMHW
-BOARD_HARDWARE_CLASS := device/samsung/mint2g/cmhw/
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \
