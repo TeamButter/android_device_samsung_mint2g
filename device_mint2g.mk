@@ -73,6 +73,10 @@ PRODUCT_PACKAGES += \
 	wpa_supplicant \
 	hostapd \
 	wpa_supplicant.conf
+	
+# CPUFreq driver by @psych.half
+PRODUCT_PACKAGES += \
+    	cpufreq-sc8810.ko
     
 
 # Hw params
