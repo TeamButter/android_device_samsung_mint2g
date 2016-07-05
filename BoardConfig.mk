@@ -31,7 +31,6 @@ TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_CPU_SMP := true
-#TARGET_CORTEX_CACHE_LINE_32 := true
 
 # Board
 TARGET_BOOTLOADER_BOARD_NAME := mint2g
@@ -78,21 +77,21 @@ BOARD_UMS_LUNFILE := "/sys/class/android_usb/android0/f_mass_storage/lun/file"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/dwc_otg.0/gadget/lun0/file"
 
 # Graphics
-MALLOC_IMPL := dlmalloc
 USE_OPENGL_RENDERER := true
 BOARD_USE_MHEAP_SCREENSHOT := true
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
 BOARD_EGL_NEEDS_FNW := true
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := TRUE
-#New for test
+MALLOC_IMPL := dlmalloc
 HWUI_COMPILE_FOR_PERF := true
+
 
 # Camera
 USE_CAMERA_STUB := true
 COMMON_GLOBAL_CFLAGS += -DMR0_CAMERA_BLOB
-#NEEDS_MEMORYHEAPION := true  #will check later
 CAMERA_SUPPORT_SIZE := 2M
 TARGET_BOARD_NO_FRONT_SENSOR := true
+NEEDS_MEMORYHEAPION := true
 
 # Bluetooth
 BOARD_HAVE_BLUETOOTH := true
@@ -132,14 +131,9 @@ BOARD_HAL_STATIC_LIBRARIES := libhealthd.mint2g
 # Audio
 BOARD_USES_TINYALSA_AUDIO := true
 COMMON_GLOBAL_CFLAGS += -DMR0_AUDIO_BLOB
-#LOCAL_CFLAGS += -DMR0_AUDIO_BLOB -DICS_AUDIO_BLOB
-#USE_LEGACY_AUDIO_POLICY := 1
 
 # RIL
-#Remove All RIL items for now !
-#BOARD_RIL_CLASS := ../../../device/samsung/mint2g/ril 
-#Will check this later !
-#BOARD_MOBILEDATA_INTERFACE_NAME := "rmnet0"
+BOARD_RIL_CLASS := ../../../device/samsung/mint2g/ril 
 
 # Compat
 TARGET_USES_LOGD := false
@@ -152,15 +146,12 @@ TARGET_SCREEN_WIDTH := 240
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 
-# ART host flags
-#WITH_DEXPREOPT := true
-
 # CMHW
 BOARD_HARDWARE_CLASS := device/samsung/mint2g/cmhw/
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \
-    device/samsung/sprd-common/sepolicy
+    device/samsung/mint2g/sepolicy
 
 BOARD_SEPOLICY_UNION += \
     file_contexts
@@ -172,7 +163,7 @@ BOARD_SEPOLICY_UNION += \
 USE_SPRD_HWCOMPOSER := true
 
 # Media
-BOARD_USE_SAMSUNG_COLORFORMAT := true
+USE_SAMSUNG_COLORFORMAT := true
 
 #twrp
 #TWRP things are need for SLimKat
@@ -187,3 +178,4 @@ TW_FLASH_FROM_STORAGE := true
 TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel/brightness"
 TW_MAX_BRIGHTNESS := 255
 TWRP_EVENT_LOGGING := false
+

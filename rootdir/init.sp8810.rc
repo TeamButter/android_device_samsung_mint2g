@@ -1,7 +1,6 @@
 import init.sp8810.usb.rc
 
 on init
-	export LD_PRELOAD "libmemoryheapion.so"
 	stop ril-daemon
 	
 # See storage config details at http://source.android.com/tech/storage/
