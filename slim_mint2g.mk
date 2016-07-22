@@ -82,9 +82,6 @@ PRODUCT_PACKAGES += \
 	dhcpcd.conf \
 	wpa_supplicant.conf
 
-#	wpa_supplicant \
-#	hostapd \
-
 # Audio
 PRODUCT_PACKAGES += \
     audio.a2dp.default \
