@@ -24,13 +24,16 @@ TARGET_OTA_ASSERT_DEVICE := mint,mint2g,GT-S5282,GT-S5280
 
 # Architecture
 TARGET_ARCH := arm
-TARGET_ARCH_VARIANT := armv7-a
-TARGET_ARCH_VARIANT_CPU := cortex-a5
-TARGET_CPU_VARIANT := cortex-a5
+TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_ARCH_VARIANT_CPU := cortex-a9
+TARGET_CPU_VARIANT := cortex-a9
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
-ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_CPU_SMP := true
+ARCH_ARM_HAVE_TLS_REGISTER := true
+ARCH_ARM_HAVE_NEON := true
+TARGET_GLOBAL_CFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
+TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 
 # Board
 TARGET_BOOTLOADER_BOARD_NAME := mint2g
@@ -130,7 +133,8 @@ BOARD_HAL_STATIC_LIBRARIES := libhealthd.mint2g
 
 # Audio
 BOARD_USES_TINYALSA_AUDIO := true
-COMMON_GLOBAL_CFLAGS += -DMR0_AUDIO_BLOB
+LOCAL_CFLAGS += -DMR0_AUDIO_BLOB -DICS_AUDIO_BLOB
+USE_LEGACY_AUDIO_POLICY := 1
 
 # RIL
 BOARD_RIL_CLASS := ../../../device/samsung/mint2g/ril 
@@ -154,7 +158,12 @@ BOARD_SEPOLICY_DIRS += \
     device/samsung/mint2g/sepolicy
 
 BOARD_SEPOLICY_UNION += \
-    file_contexts
+    file_contexts \
+    init.te \
+    surfaceflinger.te \
+    netd.te \
+    slog.te \
+    pty_symlink.te
 
 # Host specific
 #PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
@@ -163,12 +172,12 @@ BOARD_SEPOLICY_UNION += \
 USE_SPRD_HWCOMPOSER := true
 
 # Media
-USE_SAMSUNG_COLORFORMAT := true
+BOARD_USE_SAMSUNG_COLORFORMAT := true
 
 #twrp
 #TWRP things are need for SLimKat
 #DEVICE_RESOLUTION := 240x320 #Need custom theme at bootable/recovery/gui/devices/
-DEVICE_RESOLUTION := 240x240
+DEVICE_RESOLUTION := 320x320
 RECOVERY_GRAPHICS_USE_LINELENGTH := true
 RECOVERY_SDCARD_ON_DATA := true
 BOARD_HAS_NO_REAL_SDCARD := true
@@ -179,3 +188,11 @@ TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel/brightness"
 TW_MAX_BRIGHTNESS := 255
 TWRP_EVENT_LOGGING := false
 
+# ART
+WITH_DEXPREOPT := true
+WITH_DEXPREOPT_BOOT_IMG_ONLY := true
+#DONT_DEXPREOPT_PREBUILTS := true
+
+# Include an expanded selection of fonts
+EXTENDED_FONT_FOOTPRINT := true
+USE_MINIKIN := true

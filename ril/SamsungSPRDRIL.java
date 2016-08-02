@@ -24,37 +24,42 @@ import android.os.Message;
 import android.os.Parcel;
 import android.os.SystemProperties;
 import android.telephony.Rlog;
-import com.android.internal.telephony.RILConstants;
-import java.util.Collections;
 import android.telephony.PhoneNumberUtils;
 
+import com.android.internal.telephony.uicc.SpnOverride;
+import com.android.internal.telephony.RILConstants;
+
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 /**
- * Custom RIL to handle unique behavior of D2 radio
+ * Custom RIL to handle unique behavior of SPRD RIL
  *
  * {@hide}
  */
 public class SamsungSPRDRIL extends RIL implements CommandsInterface {
+
     public SamsungSPRDRIL(Context context, int networkMode, int cdmaSubscription) {
         this(context, networkMode, cdmaSubscription, null);
     }
 
     public SamsungSPRDRIL(Context context, int networkMode,
             int cdmaSubscription, Integer instanceId) {
-        super(context, networkMode, cdmaSubscription/*, instanceId*/);
-        //mQANElements = 6;
+        super(context, networkMode, cdmaSubscription, instanceId);
+        mQANElements = SystemProperties.getInt("ro.telephony.ril_qanelements", 6);
     }
 
+    @Override
     public void
     dial(String address, int clirMode, UUSInfo uusInfo, Message result) {
         RILRequest rr = RILRequest.obtain(RIL_REQUEST_DIAL, result);
 
         rr.mParcel.writeString(address);
         rr.mParcel.writeInt(clirMode);
-        rr.mParcel.writeInt(0); // UUS information is absent: Samsung SPRD compat
-        rr.mParcel.writeInt(1); // Samsung magic
-        rr.mParcel.writeString(""); // Samsung magic
+        rr.mParcel.writeInt(0);     // CallDetails.call_type
+        rr.mParcel.writeInt(1);     // CallDetails.call_domain
+        rr.mParcel.writeString(""); // CallDetails.getCsvFromExtras
 
         if (uusInfo == null) {
             rr.mParcel.writeInt(0); // UUS information is absent
@@ -70,6 +75,7 @@ public class SamsungSPRDRIL extends RIL implements CommandsInterface {
         send(rr);
     }
 
+    @Override
     public void setUiccSubscription(int slotId, int appIndex, int subId,
             int subStatus, Message result) {
         if (RILJ_LOGD) riljLog("setUiccSubscription" + slotId + " " + appIndex + " " + subId + " " + subStatus);
@@ -80,54 +86,89 @@ public class SamsungSPRDRIL extends RIL implements CommandsInterface {
         result.sendToTarget();
 
         // TODO: Actually turn off/on the radio (and don't fight with the ServiceStateTracker)
-        //if (subStatus == 1 /* ACTIVATE */) {
+        if (subStatus == 1 /* ACTIVATE */) {
             // Subscription changed: enabled
-            /*if (mSubscriptionStatusRegistrants != null) {
+            if (mSubscriptionStatusRegistrants != null) {
                 mSubscriptionStatusRegistrants.notifyRegistrants(
                         new AsyncResult (null, new int[] {1}, null));
             }
-        }*/ //else if (subStatus == 0 /* DEACTIVATE */) {
+        } else if (subStatus == 0 /* DEACTIVATE */) {
             // Subscription changed: disabled
-        /*    if (mSubscriptionStatusRegistrants != null) {
+            if (mSubscriptionStatusRegistrants != null) {
                 mSubscriptionStatusRegistrants.notifyRegistrants(
                         new AsyncResult (null, new int[] {0}, null));
             }
-        }*/
+        }
     }
 
-
-/*    public void setDataSubscription(Message result) {
+    @Override
+    public void setDataAllowed(boolean allowed, Message result) {
         int simId = mInstanceId == null ? 0 : mInstanceId;
-        if (RILJ_LOGD) riljLog("Setting data subscription to " + simId);
-        invokeOemRilRequestRaw(new byte[] {(byte) 9, (byte) 4}, result);
-    }*/
-
-    public void setDefaultVoiceSub(int subIndex, Message response) {
-        // Fake the message
-        AsyncResult.forMessage(response, 0, null);
-        response.sendToTarget();
+        if (allowed) {
+            riljLog("Setting data subscription to sim [" + simId + "]");
+            invokeOemRilRequestRaw(new byte[] {0x9, 0x4}, result);
+        } else {
+            riljLog("Do nothing when turn-off data on sim [" + simId + "]");
+            if (result != null) {
+                AsyncResult.forMessage(result, 0, null);
+                result.sendToTarget();
+            }
+        }
     }
 
- /*   @Override
+    @Override
+    public void getHardwareConfig (Message result) {
+        riljLog("Ignoring call to 'getHardwareConfig'");
+        if (result != null) {
+            AsyncResult.forMessage(result, null, new CommandException(
+                    CommandException.Error.REQUEST_NOT_SUPPORTED));
+            result.sendToTarget();
+        }
+    }
+
+    @Override
+    protected RadioState getRadioStateFromInt(int stateInt) {
+        RadioState state;
+
+        /* RIL_RadioState ril.h */
+        switch(stateInt) {
+            case 0: state = RadioState.RADIO_OFF; break;
+            case 1: state = RadioState.RADIO_UNAVAILABLE; break;
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+            case 10:
+            case 13: state = RadioState.RADIO_ON; break;
+
+            default:
+                throw new RuntimeException(
+                            "Unrecognized RIL_RadioState: " + stateInt);
+        }
+        return state;
+    }
+
+    @Override
     protected void notifyRegistrantsRilConnectionChanged(int rilVer) {
         super.notifyRegistrantsRilConnectionChanged(rilVer);
         if (rilVer != -1) {
             if (mInstanceId != null) {
-               riljLog("Enable simultaneous data/voice on Multi-SIM");
+                riljLog("Enable simultaneous data/voice on Multi-SIM");
                 invokeOemRilRequestSprd((byte) 3, (byte) 1, null);
             } else {
-                // Set data subscription to allow data in either SIM slot when using single SIM mode
-                setDataSubscription(null);
+                riljLog("Set data subscription to allow data in either SIM slot when using single SIM mode");
+                setDataAllowed(true, null);
             }
         }
-    }*/
-
-    private void invokeOemRilRequestSprd(byte key, byte value, Message response) {
-        invokeOemRilRequestRaw(new byte[] { 'S', 'P', 'R', 'D', key, value }, response);
     }
 
+    @Override
     protected RILRequest
-    processSolicited (Parcel p) {
+    processSolicited(Parcel p) {
         int serial, error;
 
         serial = p.readInt();
@@ -160,7 +201,7 @@ public class SamsungSPRDRIL extends RIL implements CommandsInterface {
             case RIL_REQUEST_ENTER_SIM_PUK2: ret =  responseInts(p); break;
             case RIL_REQUEST_CHANGE_SIM_PIN: ret =  responseInts(p); break;
             case RIL_REQUEST_CHANGE_SIM_PIN2: ret =  responseInts(p); break;
-           // case RIL_REQUEST_ENTER_DEPERSONALIZATION_CODE: ret =  responseInts(p); break;
+            case RIL_REQUEST_ENTER_DEPERSONALIZATION_CODE: ret =  responseInts(p); break;
             case RIL_REQUEST_GET_CURRENT_CALLS: ret =  responseCallList(p); break;
             case RIL_REQUEST_DIAL: ret =  responseVoid(p); break;
             case RIL_REQUEST_GET_IMSI: ret =  responseString(p); break;
@@ -291,7 +332,6 @@ public class SamsungSPRDRIL extends RIL implements CommandsInterface {
         // Here and below fake RIL_UNSOL_RESPONSE_SIM_STATUS_CHANGED, see b/7255789.
         // This is needed otherwise we don't automatically transition to the main lock
         // screen when the pin or puk is entered incorrectly.
-        // Note for the I9082: we're faking more than the standard RIL
         switch (rr.mRequest) {
             case RIL_REQUEST_ENTER_SIM_PUK:
             case RIL_REQUEST_ENTER_SIM_PUK2:
@@ -324,6 +364,11 @@ public class SamsungSPRDRIL extends RIL implements CommandsInterface {
         }
 
         return rr;
+    }
+
+
+    private void invokeOemRilRequestSprd(byte key, byte value, Message response) {
+        invokeOemRilRequestRaw(new byte[] { 'S', 'P', 'R', 'D', key, value }, response);
     }
 }
 

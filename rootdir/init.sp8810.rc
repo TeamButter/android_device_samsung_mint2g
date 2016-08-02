@@ -1,8 +1,9 @@
 import init.sp8810.usb.rc
+import /init.swap.rc
 
 on init
 	stop ril-daemon
-	
+
 # See storage config details at http://source.android.com/tech/storage/
 	mkdir /mnt/shell/emulated 0700 shell shell
     mkdir /storage/emulated 0555 root root
@@ -24,7 +25,6 @@ on init
     mkdir /efs 0775 radio system
     symlink /efs /factory
     symlink /dev/block/mmcblk0p11 /dev/block/param
-    
 
 on fs
 
@@ -33,10 +33,9 @@ on fs
     setprop ro.crypto.fuse_sdcard true
 
 on post-fs
+    insmod /system/lib/modules/cpufreq-sc8810.ko
     insmod /system/lib/modules/ump.ko
     insmod /system/lib/modules/mali.ko
-    
-    insmod /system/lib/modules/cpufreq-sc8810.ko
 
     chown system system /productinfo
     chmod 0774 /productinfo
@@ -269,16 +268,12 @@ service vcharged /bin/vcharged
     group system
     oneshot
 
-
-
 service charge /bin/charge
     class charger
     user root
     oneshot
 
-
-
-#start nvitem daemon.
+# Start nvitem daemon.
 service nvm_daemon /system/bin/nvm_daemon
     class main
     user system
@@ -286,41 +281,32 @@ service nvm_daemon /system/bin/nvm_daemon
     oneshot
 
 
-
-#start samsung daemon.
+# Start samsung daemon.
 service ss_daemon /system/bin/ss_daemon
     class main
     user system
     group system radio shell
     oneshot
 
-
-
-#telephony service
+# Telephony service
 service sprd_monitor /system/bin/sprd_monitor
     class core
     user system
     group system radio shell
     oneshot
 
-
-
 service modemd /system/bin/modemd
     class main
     user system
     group system radio
     oneshot
-
-
-
+    
 service engpcclient /system/bin/engpcclient
     class main
     user system
     group shell system
     disabled
     oneshot
-
-
 
 service engservice /system/bin/engservice
     class main
@@ -329,8 +315,6 @@ service engservice /system/bin/engservice
     disabled
     oneshot
 
-
-
 service engmodemclient /system/bin/engmodemclient
     class main
     user system
@@ -338,13 +322,10 @@ service engmodemclient /system/bin/engmodemclient
     disabled
     oneshot
 
-
-
 service engsetmacaddr /system/bin/engsetmacaddr
     class main
     user system
     oneshot
-
 
 
 service phoneserver /system/bin/phoneserver
@@ -353,9 +334,7 @@ service phoneserver /system/bin/phoneserver
     group system radio shell
     disabled
     oneshot
-
-
-
+    
 service phoneserver_2sim /system/bin/phoneserver_2sim
     class core
     user system
@@ -363,33 +342,30 @@ service phoneserver_2sim /system/bin/phoneserver_2sim
     disabled
     oneshot
 
-
-
 service calibrationinit /system/bin/calibration_init
     class main
     oneshot
 
+# rild service
 
-
-#rild service
 service sprd-ril-daemon /system/bin/rild_sp  -l /system/lib/libreference-ril.so -- -n 0
-    class main
+    class core
     socket rild stream 660 root radio
     socket rild-debug stream 660 radio system
     user root
-    group radio cache inet misc audio sdcard_rw log sdcard_r
-
-
-
+    group radio cache inet misc audio sdcard_rw log
+    
 service sprd-ril-daemon2 /system/bin/rild_sp  -l /system/lib/libreference-ril.so -- -n 1
-    class main
+    class core
     socket rild1 stream 660 root radio
     socket rild-debug1 stream 660 radio system
     user root
-    group radio cache inet misc audio sdcard_rw log sdcard_r
-
-
-
+    group radio cache inet misc audio sdcard_rw log
+    
+service charger /sbin/healthd -c
+    class charger
+    critical
+    seclabel u:r:healthd:s0
 
 # create virtual SD card at /storage/sdcard0, based on the /data/media directory
 # daemon will drop to user/group system/media_rw after initializing
@@ -529,6 +505,4 @@ on alarm
     class_start core
     start media
     exec /bin/poweroff_alarm
-
-
 

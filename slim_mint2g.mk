@@ -31,18 +31,20 @@ LOCAL_PATH := device/samsung/mint2g
 $(shell mkdir -p $(LOCAL_PATH)/../../../out/target/product/mint/recovery/root/system/bin)
 $(shell ln -sf -t $(LOCAL_PATH)/../../../out/target/product/mint/recovery/root/system/bin ../../sbin/sh)
 
+
 # Init Files
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/init.sp8810.rc:root/init.sp8810.rc \
     $(LOCAL_PATH)/rootdir/init.sp8810.usb.rc:root/init.sp8810.usb.rc \
     $(LOCAL_PATH)/rootdir/fstab.sp8810:root/fstab.sp8810 \
-    $(LOCAL_PATH)/rootdir/lpm.rc:root/lpm.rc \
+    $(LOCAL_PATH)/rootdir/fstab.swap:root/fstab.swap \
+    $(LOCAL_PATH)/rootdir/init.swap.rc:root/init.swap.rc \
     $(LOCAL_PATH)/rootdir/ueventd.sp8810.rc:root/ueventd.sp8810.rc \
     $(LOCAL_PATH)/rootdir/bin/charge:root/bin/charge \
     $(LOCAL_PATH)/rootdir/modem_control:root/modem_control \
     $(LOCAL_PATH)/rootdir/bin/poweroff_alarm:root/bin/poweroff_alarm \
     $(LOCAL_PATH)/rootdir/bin/vcharged:root/bin/vcharged \
-    $(LOCAL_PATH)/rootdir/bin/rawdatad:root/bin/rawdatad 
+    $(LOCAL_PATH)/rootdir/bin/rawdatad:root/bin/rawdatad
 
 
 # Bluetooth
@@ -79,6 +81,8 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 #Wifi
 PRODUCT_PACKAGES += \
+	wpa_supplicant \
+	hostapd \
 	dhcpcd.conf \
 	wpa_supplicant.conf
 
@@ -187,5 +191,22 @@ $(call inherit-product, hardware/broadcom/wlan/bcmdhd/config/config-bcm.mk)
 
 TARGET_SCREEN_HEIGHT := 320
 TARGET_SCREEN_WIDTH := 240
+
+
+# Prebuilt APPs
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/apps/app/Music/Music.apk:system/app/Music/Music.apk \
+    $(LOCAL_PATH)/apps/app/OpenCamera/OpenCamera.apk:/system/app/OpenCamera/OpenCamera.apk \
+    $(LOCAL_PATH)/apps/priv-app/Launcher3/Launcher3.apk:system/priv-app/Launcher3/Launcher3.apk 
+
+# ART device props
+PRODUCT_PROPERTY_OVERRIDES += \
+	dalvik.vm.dex2oat-Xms=8m \
+	dalvik.vm.dex2oat-Xmx=96m \
+	dalvik.vm.dex2oat-flags=--no-watch-dog \
+	dalvik.vm.dex2oat-filter=interpret-only \
+	dalvik.vm.image-dex2oat-Xms=48m \
+	dalvik.vm.image-dex2oat-Xmx=48m \
+	dalvik.vm.image-dex2oat-filter=speed
 
 
