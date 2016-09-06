@@ -15,4 +15,4 @@
 #
 
 PRODUCT_MAKEFILES := \
-    $(LOCAL_DIR)/full_mint2g.mk
+    $(LOCAL_DIR)/aosp_mint2g.mk
