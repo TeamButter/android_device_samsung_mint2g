@@ -141,7 +141,7 @@ public class SamsungMint2GRIL extends SamsungSPRDRIL implements CommandsInterfac
                 p.setDataPosition(dataPosition);
 
                 // Forward responses that we are not overriding to the super class
-                super.processUnsolicited(p);
+                super.processUnsolicited(p, 0);
                 return;
         }
 
