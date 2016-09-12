@@ -33,6 +33,16 @@ LOCAL_PATH := device/samsung/mint2g
 $(shell mkdir -p $(LOCAL_PATH)/../../../out/target/product/mint/recovery/root/system/bin)
 $(shell ln -sf -t $(LOCAL_PATH)/../../../out/target/product/mint/recovery/root/system/bin ../../sbin/sh)
 
+# Kernel 
+ifeq ($(TARGET_PREBUILT_KERNEL),)
+LOCAL_KERNEL := device/samsung/mint2g/kernel
+else
+LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
+endif
+
+PRODUCT_COPY_FILES := \
+$(LOCAL_KERNEL):kernel
+
 # Init Files
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/init.sp8810.rc:root/init.sp8810.rc \
