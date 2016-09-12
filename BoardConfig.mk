@@ -53,9 +53,7 @@ BOARD_KERNEL_PAGESIZE := 2048
 TARGET_KERNEL_SOURCE := kernel/samsung/mint2g
 TARGET_KERNEL_CONFIG := cyanogenmod_mint_defconfig
 BOARD_KERNEL_IMAGE_NAME := Image
-# FIXME: Replace with path to some other toolchain apart from gcc 4.8
-#KERNEL_TOOLCHAIN := /home/boo/android/toolchains/build/5.2/bin
-KERNEL_TOOLCHAIN_PREFIX := arm-eabi-
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-linux-androideabi-
 
 
 # Partitions
