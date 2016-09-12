@@ -138,3 +138,6 @@ PRODUCT_TAGS += dalvik.gc.type-precise
 # Boot animation
 TARGET_SCREEN_HEIGHT := 320
 TARGET_SCREEN_WIDTH := 240
+
+# Aapt conf
+PRODUCT_AAPT_PREF_CONFIG := ldpi
