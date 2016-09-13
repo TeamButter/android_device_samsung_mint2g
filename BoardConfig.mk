@@ -144,6 +144,8 @@ TARGET_SCREEN_WIDTH := 240
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 
+# Healthd
+BOARD_HAL_STATIC_LIBRARIES := libhealthd.sc8810
 
 # SELinux
 BOARD_SEPOLICY_DIRS += \
