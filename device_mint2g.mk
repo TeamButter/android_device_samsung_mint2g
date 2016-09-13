@@ -76,7 +76,7 @@ PRODUCT_PACKAGES += \
 	
 # CPUFreq driver by @psych.half
 PRODUCT_PACKAGES += \
-    	cpufreq-sc8810.ko
+    cpufreq-sc8810.ko
     
 
 # Hw params
@@ -84,6 +84,12 @@ PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/audio_para:system/etc/audio_para \
      $(LOCAL_PATH)/codec_pga.xml:system/etc/codec_pga.xml\
      $(LOCAL_PATH)/tiny_hw.xml:system/etc/tiny_hw.xml
+     
+     
+# Hw params
+PRODUCT_COPY_FILES += \
+     $(LOCAL_PATH)/media_codecs.xml:system/etc/media_codecs.xml \
+     $(LOCAL_PATH)/media_profiles.xml:system/etc/media_profiles.xml
 
 
 
