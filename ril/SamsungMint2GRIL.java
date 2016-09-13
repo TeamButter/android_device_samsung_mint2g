@@ -97,7 +97,7 @@ public class SamsungMint2GRIL extends SamsungSPRDRIL implements CommandsInterfac
 
     @Override
     protected void
-    processUnsolicited (Parcel p) {
+    processUnsolicited (Parcel p, int type) {
         Object ret;
         int dataPosition = p.dataPosition(); // save off position within the Parcel
         int response = p.readInt();
@@ -141,7 +141,7 @@ public class SamsungMint2GRIL extends SamsungSPRDRIL implements CommandsInterfac
                 p.setDataPosition(dataPosition);
 
                 // Forward responses that we are not overriding to the super class
-                super.processUnsolicited(p, 0);
+                super.processUnsolicited(p, type);
                 return;
         }
 
