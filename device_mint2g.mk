@@ -129,6 +129,11 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.secure=0 \
     ro.debuggable=1
 
+
+ADDITIONAL_DEFAULT_PROPERTIES += \
+    ro.adb.secure=0 \
+    persist.service.adb.enable=1
+
     
 # ART device props
 PRODUCT_PROPERTY_OVERRIDES += \
