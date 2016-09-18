@@ -86,10 +86,16 @@ PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/tiny_hw.xml:system/etc/tiny_hw.xml
      
      
-# Hw params
+# Media config
+MEDIA_CONFIGS := \
+	$(LOCAL_PATH)/media_codecs.xml \
+	$(LOCAL_PATH)/media_profiles.xml \
+	frameworks/av/media/libstagefright/data/media_codecs_google_audio.xml \
+	frameworks/av/media/libstagefright/data/media_codecs_google_video_le.xml \
+	frameworks/av/media/libstagefright/data/media_codecs_google_telephony.xml
+
 PRODUCT_COPY_FILES += \
-     $(LOCAL_PATH)/media_codecs.xml:system/etc/media_codecs.xml \
-     $(LOCAL_PATH)/media_profiles.xml:system/etc/media_profiles.xml
+$(foreach f,$(MEDIA_CONFIGS),$(f):system/etc/$(notdir $(f)))
 
 
 

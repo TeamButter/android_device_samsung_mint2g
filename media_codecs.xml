@@ -77,32 +77,18 @@ Only the three quirks included above are recognized at this point:
 
 <MediaCodecs>
     <Decoders>
-        <MediaCodec name="OMX.google.mp3.decoder" type="audio/mpeg" />
-        <MediaCodec name="OMX.google.amrnb.decoder" type="audio/3gpp" />
-        <MediaCodec name="OMX.google.amrwb.decoder" type="audio/amr-wb" />
-        <MediaCodec name="OMX.google.aac.decoder" type="audio/mp4a-latm" />
-        <MediaCodec name="OMX.google.g711.alaw.decoder" type="audio/g711-alaw" />
-        <MediaCodec name="OMX.google.g711.mlaw.decoder" type="audio/g711-mlaw" />
-        <MediaCodec name="OMX.google.imaadpcm.decoder" type="audio/ima-adpcm" />
-        <MediaCodec name="OMX.google.vorbis.decoder" type="audio/vorbis" />
-
-        <MediaCodec name="OMX.google.mpeg4.decoder" type="video/mp4v-es" />
-        <MediaCodec name="OMX.google.h263.decoder" type="video/3gpp" />
-        <MediaCodec name="OMX.google.h264.decoder" type="video/avc" />
-        <MediaCodec name="OMX.google.vp8.decoder" type="video/x-vnd.on2.vp8" />
-        <MediaCodec name="OMX.google.vp9.decoder" type="video/x-vnd.on2.vp9" />
-        <MediaCodec name="OMX.google.mjpg.decoder" type="video/mjpg" />
+		<MediaCodec name="OMX.PV.mpeg4dec" type="video/mp4v-es" />
+		<MediaCodec name="OMX.PV.h263dec" type="video/3gpp" />
+		<MediaCodec name="OMX.PV.avcdec" type="video/avc" />
     </Decoders>
 
     <Encoders>
-
-        <MediaCodec name="OMX.google.aac.encoder" type="audio/mp4a-latm" />
-        <MediaCodec name="OMX.google.amrnb.encoder" type="audio/3gpp" />
-        <MediaCodec name="OMX.google.amrwb.encoder" type="audio/amr-wb" />
-        <MediaCodec name="OMX.google.h263.encoder" type="video/3gpp" />
-        <MediaCodec name="OMX.google.h264.encoder" type="video/avc" />
-        <MediaCodec name="OMX.google.mpeg4.encoder" type="video/mp4v-es" />
-        <MediaCodec name="OMX.google.flac.encoder" type="audio/flac" />
+        <MediaCodec name="OMX.PV.mpeg4enc" type="video/mp4v-es" />
+        <MediaCodec name="OMX.PV.h263enc" type="video/3gpp" />
     </Encoders>
+    
+    <Include href="media_codecs_google_audio.xml" />
+    <Include href="media_codecs_google_video_le.xml" />
+	<Include href="media_codecs_google_telephony.xml" />
 </MediaCodecs>
 
