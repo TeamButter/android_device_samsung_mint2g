@@ -153,6 +153,6 @@ BOARD_SEPOLICY_DIRS += \
     device/samsung/mint2g/sepolicy
 
 # Host specific
-PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
+#PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
 #ANDROID_COMPILE_WITH_JACK := false
 #USE_NINJA := false
