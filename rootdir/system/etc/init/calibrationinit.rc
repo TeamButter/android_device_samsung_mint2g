@@ -1,0 +1,3 @@
+service calibrationinit /system/bin/calibration_init
+    class main
+    oneshot

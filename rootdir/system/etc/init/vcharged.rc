@@ -1,0 +1,5 @@
+service vcharged /bin/vcharged
+    class core
+    user system
+    group system
+    oneshot

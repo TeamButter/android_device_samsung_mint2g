@@ -47,7 +47,24 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/rootdir/bin/poweroff_alarm:root/bin/poweroff_alarm \
     $(LOCAL_PATH)/rootdir/bin/vcharged:root/bin/vcharged \
     $(LOCAL_PATH)/rootdir/bin/rawdatad:root/bin/rawdatad
-
+    
+# System init fragments
+SYSTEM_INIT_RC_FILES := \
+	$(LOCAL_PATH)/rootdir/system/etc/init/at_distributor.rc \
+	$(LOCAL_PATH)/rootdir/system/etc/init/calibrationinit.rc \
+	$(LOCAL_PATH)/rootdir/system/etc/init/charge.rc \
+	$(LOCAL_PATH)/rootdir/system/etc/init/data.rc \
+	$(LOCAL_PATH)/rootdir/system/etc/init/healthd.rc \
+	$(LOCAL_PATH)/rootdir/system/etc/init/nvitem.rc \
+	$(LOCAL_PATH)/rootdir/system/etc/init/rild.rc \
+	$(LOCAL_PATH)/rootdir/system/etc/init/ss_daemon.rc \
+	$(LOCAL_PATH)/rootdir/system/etc/init/symlink.rc \
+	$(LOCAL_PATH)/rootdir/system/etc/init/telephony.rc \
+	$(LOCAL_PATH)/rootdir/system/etc/init/vcharged.rc \
+	$(LOCAL_PATH)/rootdir/system/etc/init/wifi.rc
+	
+PRODUCT_COPY_FILES += \
+	$(foreach f,$(SYSTEM_INIT_RC_FILES),$(f):system/etc/init/$(notdir $(f)))
     
 # Idc
 PRODUCT_COPY_FILES += \
@@ -78,7 +95,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     cpufreq-sc8810.ko
     
-#Gello
+# Gello
 PRODUCT_PACKAGES += \
 	Gello
     
@@ -100,7 +117,6 @@ MEDIA_CONFIGS := \
 
 PRODUCT_COPY_FILES += \
 $(foreach f,$(MEDIA_CONFIGS),$(f):system/etc/$(notdir $(f)))
-
 
 
 # enable Google-specific location features,

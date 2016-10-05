@@ -1,0 +1,6 @@
+# Start samsung daemon.
+service ss_daemon /system/bin/ss_daemon
+    class main
+    user system
+    group system radio shell
+    oneshot
