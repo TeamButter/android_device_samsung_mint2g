@@ -1,0 +1,4 @@
+type sprd_monitor, domain;
+type sprd_monitor_exec, exec_type, file_type;
+
+init_daemon_domain(sprd_monitor)

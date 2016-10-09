@@ -1,0 +1,4 @@
+type modemd, domain;
+type modemd_exec, exec_type, file_type;
+
+init_daemon_domain(modemd)

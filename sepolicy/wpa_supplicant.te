@@ -1,3 +1,8 @@
+type wpa_supplicant, domain;
+type wpa_supplicant_exec, exec_type, file_type;
+
+init_daemon_domain(wpa_supplicant)
+
 allow wpa init:unix_dgram_socket { read write };
 
 allow wpa devpts:chr_file { read write };
