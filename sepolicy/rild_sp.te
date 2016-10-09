@@ -1,0 +1,5 @@
+# rild - We use rild_sp
+type rild_sp, domain;
+type rild_sp_exec, exec_type, file_type;
+
+init_daemon_domain(rild_sp)

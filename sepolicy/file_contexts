@@ -4,3 +4,6 @@
 /dev/sprd_rotation	  	  u:object_r:graphics_device:s0
 /dev/sprd_scale	          u:object_r:graphics_device:s0
 /data/system(/.*)?        u:object_r:system_data_file:s0
+
+# rild
+/system/bin/rild_sp   	  u:object_r:rild_sp_exec:s0
