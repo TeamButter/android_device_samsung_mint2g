@@ -3,18 +3,36 @@ import /init.swap.rc
 
 on init
 
-	symlink /sdcard /mnt/sdcard
+    symlink /sdcard /mnt/sdcard
     symlink /sdcard /storage/sdcard0
 
 	
-	export SECONDARY_STORAGE /storage/sdcard1
-	mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
-	mkdir /storage/sdcard1 0700 root root
+    export SECONDARY_STORAGE /storage/sdcard1
+    mkdir /mnt/media_rw/sdcard1 0700 media_rw media_rw
+    mkdir /storage/sdcard1 0700 root root
 
    
     mkdir /efs 0775 radio system
     symlink /efs /factory
     symlink /dev/block/mmcblk0p11 /dev/block/param
+    
+    symlink /dev/pts/2 /dev/CHNPTY0
+    symlink /dev/pts/3 /dev/CHNPTY1
+    symlink /dev/pts/4 /dev/CHNPTY2
+    symlink /dev/pts/5 /dev/CHNPTY3
+    symlink /dev/pts/0 /dev/CHNPTY4
+    symlink /dev/pts/6 /dev/CHNPTY5
+    symlink /dev/pts/7 /dev/CHNPTY6
+    symlink /dev/pts/8 /dev/CHNPTY7
+    symlink /dev/pts/9 /dev/CHNPTY8
+    symlink /dev/pts/10 /dev/CHNPTY9
+    symlink /dev/pts/11 /dev/CHNPTY10
+    symlink /dev/pts/12 /dev/CHNPTY11
+    symlink /dev/pts/13 /dev/CHNPTY12
+    symlink /dev/pts/14 /dev/CHNPTY13
+    symlink /dev/pts/15 /dev/CHNPTY14
+    
+    symlink /dev/pts/1 /dev/umts_router
     
     export LD_SHIM_LIBS /system/lib/libril.so|/system/lib/libril_shim.so
 
