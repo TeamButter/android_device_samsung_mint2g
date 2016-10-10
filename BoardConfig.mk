@@ -144,6 +144,7 @@ BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charg
 BOARD_HAL_STATIC_LIBRARIES := libhealthd.sc8810
 
 # SELinux
+SERVICES_WITHOUT_SELINUX_DOMAIN := true
 BOARD_SEPOLICY_DIRS += \
     device/samsung/mint2g/sepolicy
 
