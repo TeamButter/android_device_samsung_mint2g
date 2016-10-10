@@ -98,6 +98,10 @@ PRODUCT_PACKAGES += \
 # Gello
 PRODUCT_PACKAGES += \
 	Gello
+	
+# Graphics
+PRODUCT_PACKAGES += \
+	libUMP
     
 
 # Hw params
