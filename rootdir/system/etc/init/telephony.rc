@@ -40,14 +40,14 @@ service engsetmacaddr /system/bin/engsetmacaddr
 
 service phoneserver /system/bin/phoneserver
     class core
-    user system
+    user root
     group system radio shell
     disabled
     oneshot
     
 service phoneserver_2sim /system/bin/phoneserver_2sim
     class core
-    user system
+    user root
     group system radio shell
     disabled
     oneshot
