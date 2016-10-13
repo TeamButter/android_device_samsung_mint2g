@@ -102,6 +102,10 @@ PRODUCT_PACKAGES += \
 # Graphics
 PRODUCT_PACKAGES += \
 	libUMP
+	
+# RIL
+PRODUCT_PACKAGES += \
+	ATChannel
     
 
 # Hw params
