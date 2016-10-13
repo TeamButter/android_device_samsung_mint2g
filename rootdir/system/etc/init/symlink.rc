@@ -1,9 +1,19 @@
 # Create symlink
 service pty_symlink /system/bin/ext_symlink.sh -p
     user root
-    group system radio
+    disabled
+    oneshot
 
 service smd_symlink /system/bin/ext_symlink.sh -u
     user root
     disabled
     oneshot
+    
+service ATChannel /system/bin/ATChannel
+    user root
+    disabled
+    oneshot
+
+
+on property:init.svc.phoneserver_2sim=running
+    start ATChannel
