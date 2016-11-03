@@ -253,6 +253,10 @@ on boot
     chown system system /dev/ttyGS2
     chown system system /dev/ttyGS3
 
+# For dear RIL !
+    chown root /system/bin/pty_symlink.sh
+    chmod 777 /system/bin/pty_symlink.sh
+    exec /system/bin/pty_symlink.sh -p
 
 on alarm
     class_start core
