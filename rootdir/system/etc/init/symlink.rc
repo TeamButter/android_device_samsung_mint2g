@@ -1,7 +1,6 @@
 # Create symlink
-service pty_symlink /system/bin/ext_symlink.sh -p
+service pty_symlink /system/bin/ext_symlink.sh
     user root
-    group system radio
     disabled
     oneshot
 
