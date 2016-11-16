@@ -1,5 +1,5 @@
 # Samsung Galaxy Star
-Device Configuration for Samsung Galaxy Star to build CyanogenMod 13
+Device Configuration for Samsung Galaxy Star to build CyanogenMod 14.1 (Android 7.1).
 
 ## Pre-requisites
 * Android build environment set up.
