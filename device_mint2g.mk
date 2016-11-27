@@ -73,6 +73,10 @@ PRODUCT_COPY_FILES += \
 # Keylayout
 PRODUCT_COPY_FILES += \
      $(LOCAL_PATH)/sprd-keypad.kl:system/usr/keylayout/sprd-keypad.kl
+     
+# Bluetooth Vendor Configuration
+PRODUCT_COPY_FILES += \
+     $(LOCAL_PATH)/bluetooth/bt_vendor.conf:system/usetc/bluetooth/bt_vendor.conf
 
 # Graphics
 PRODUCT_PROPERTY_OVERRIDES += \
