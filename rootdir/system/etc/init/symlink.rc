@@ -1,5 +1,5 @@
 # Create symlink
-service pty_symlink /system/bin/ext_symlink.sh
+service pty_symlink xxxx
     user root
     disabled
     oneshot
