@@ -2,3 +2,12 @@ type sprd_monitor, domain;
 type sprd_monitor_exec, exec_type, file_type;
 
 init_daemon_domain(sprd_monitor)
+
+allow sprd_monitor rootfs:lnk_file r_file_perms;
+allow sprd_monitor sprd_monitor_exec:file { execute execmod };
+allow sprd_monitor shell_exec:file rwx_file_perms;
+allow sprd_monitor ctl_default_prop:property_service set;
+allow sprd_monitor device:chr_file rw_file_perms;
+allow sprd_monitor proc:file rw_file_perms;
+allow sprd_monitor property_socket:sock_file rw_socket_perms;
+allow sprd_monitor init:unix_stream_socket connectto;
