@@ -1,1 +1,6 @@
-allow fsck block_device:blk_file rw_file_perms;
+###########
+# this line has a violation .
+#
+
+# allow fsck block_device:blk_file { getattr ioctl lock append lock read write open };
+allow fsck block_device:blk_file { getattr ioctl lock append lock };
