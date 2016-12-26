@@ -172,6 +172,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	dalvik.vm.image-dex2oat-Xms=48m \
 	dalvik.vm.image-dex2oat-Xmx=48m \
 	dalvik.vm.image-dex2oat-filter=speed
+
+# Provides overrides to configure the Dalvik heap for mint2g
+PRODUCT_PROPERTY_OVERRIDES += \
+	dalvik.vm.heapstartsize=5m \
+	dalvik.vm.heapsize=64m \
+	dalvik.vm.heapgrowthlimit=48m
     
 # Force use old camera api
 PRODUCT_PROPERTY_OVERRIDES += \

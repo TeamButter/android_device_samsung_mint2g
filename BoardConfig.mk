@@ -153,6 +153,10 @@ SERVICES_WITHOUT_SELINUX_DOMAIN := true
 BOARD_SEPOLICY_DIRS += \
     device/samsung/mint2g/sepolicy
 
+# Art coonfigurations 
+WITH_DEXPREOPT := true
+DONT_DEXPREOPT_PREBUILTS := true
+
 # Host specific
 #PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
 #ANDROID_COMPILE_WITH_JACK := false
