@@ -30,8 +30,8 @@ DEVICE_PACKAGE_OVERLAYS += device/samsung/mint2g/overlay
 LOCAL_PATH := device/samsung/mint2g
 
 # Softlink sh
-$(shell mkdir -p $(LOCAL_PATH)/../../../out/target/product/mint/recovery/root/system/bin)
-$(shell ln -sf -t $(LOCAL_PATH)/../../../out/target/product/mint/recovery/root/system/bin ../../sbin/sh)
+$(shell mkdir -p $(LOCAL_PATH)/../../../out/target/product/mint2g/recovery/root/system/bin)
+$(shell ln -sf -t $(LOCAL_PATH)/../../../out/target/product/mint2g/recovery/root/system/bin ../../sbin/sh)
 
 # Init Files
 PRODUCT_COPY_FILES += \
