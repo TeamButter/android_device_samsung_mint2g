@@ -1,2 +1,2 @@
-add_lunch_combo cm_mint2g-eng
-add_lunch_combo cm_mint2g-userdebug
+add_lunch_combo lineage_mint2g-eng
+add_lunch_combo lineage_mint2g-userdebug
