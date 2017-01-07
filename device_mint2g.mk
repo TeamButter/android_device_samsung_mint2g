@@ -173,6 +173,9 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	dalvik.vm.image-dex2oat-Xmx=48m \
 	dalvik.vm.image-dex2oat-filter=speed
 
+# Low ram optimization 
+PRODUCT_PROPERTY_OVERRIDES += ro.config.low_ram=true
+
 # Force use old camera api
 PRODUCT_PROPERTY_OVERRIDES += \
     camera2.portability.force_api=1
