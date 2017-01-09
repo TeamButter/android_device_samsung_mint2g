@@ -4,7 +4,7 @@ import /init.swap.rc
 on init
 
 	symlink /sdcard /mnt/sdcard
-    symlink /sdcard /storage/sdcard0
+        symlink /sdcard /storage/sdcard0
 
 	
 	export SECONDARY_STORAGE /storage/sdcard1
