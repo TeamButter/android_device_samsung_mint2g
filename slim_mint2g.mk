@@ -195,9 +195,11 @@ TARGET_SCREEN_WIDTH := 240
 
 # Prebuilt APPs
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/apps/app/Music/Music.apk:system/app/Music/Music.apk \
     $(LOCAL_PATH)/apps/app/OpenCamera/OpenCamera.apk:/system/app/OpenCamera/OpenCamera.apk \
-    $(LOCAL_PATH)/apps/priv-app/Launcher3/Launcher3.apk:system/priv-app/Launcher3/Launcher3.apk 
+    $(LOCAL_PATH)/apps/priv-app/Launcher3/Launcher3.apk:system/priv-app/Launcher3/Launcher3.apk \
+    $(LOCAL_PATH)/apps/app/SimpleExplorer/SimpleExplorer.apk:system/app/SimpleExplorer/SimpleExplorer.apk 
+
+#    $(LOCAL_PATH)/apps/app/Music/Music.apk:system/app/Music/Music.apk \
 
 # ART device props
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -208,5 +210,16 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	dalvik.vm.image-dex2oat-Xms=48m \
 	dalvik.vm.image-dex2oat-Xmx=48m \
 	dalvik.vm.image-dex2oat-filter=speed
+
+PRODUCT_PACKAGES := \
+	Music \
+	SlimFileManager \
+	FMRadio \
+	Camera2 \
+	LegacyCamera \
+	Terminal
+
+
+
 
 
