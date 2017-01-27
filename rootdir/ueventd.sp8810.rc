@@ -39,7 +39,8 @@
 /dev/block/mmcblk0p1    0660     system  system
 /dev/block/mmcblk0p2    0660     system  system
 
-/dev/pts/*              0660     system  system
+/dev/pts/*              0660     system  radio
+/dev/CHNPTY*			0660	 system	 radio
 /dev/ptmx               0666     system  system
 /dev/input/event0       0666     system  system
-/dev/umts_router        0666     system  system
+/dev/umts_router        0666     system  radio

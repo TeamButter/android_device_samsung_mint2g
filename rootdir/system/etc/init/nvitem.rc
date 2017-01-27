@@ -1,0 +1,6 @@
+# Start nvitem daemon.
+service nvm_daemon /system/bin/nvm_daemon
+    class main
+    user system
+    group system radio shell
+    oneshot

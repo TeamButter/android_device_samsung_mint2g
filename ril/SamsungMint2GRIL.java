@@ -41,6 +41,7 @@ import com.android.internal.telephony.gsm.SmsBroadcastConfigInfo;
 import com.android.internal.telephony.cdma.CdmaInformationRecords;
 import com.android.internal.telephony.cdma.CdmaInformationRecords.CdmaSignalInfoRec;
 import com.android.internal.telephony.cdma.SignalToneUtil;
+import com.android.internal.telephony.uicc.IccUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -55,19 +56,25 @@ public class SamsungMint2GRIL extends SamsungSPRDRIL implements CommandsInterfac
     public SamsungMint2GRIL(Context context, int preferredNetworkType,
             int cdmaSubscription, Integer instanceId) {
         super(context, preferredNetworkType, cdmaSubscription, instanceId);
-        mQANElements = 5; //Setting it to 5 solved choose preferred network operator ;
+        mQANElements = SystemProperties.getInt("ro.ril.telephony.mqanelements", 5);
     }
 
     public SamsungMint2GRIL(Context context, int networkMode,
             int cdmaSubscription) {
         super(context, networkMode, cdmaSubscription);
-        mQANElements = 5; //Setting it to 5 solved choose preferred network operator ;
+        mQANElements = SystemProperties.getInt("ro.ril.telephony.mqanelements", 5);
     }
     
      @Override
     public void
     setNetworkSelectionModeAutomatic(Message response) {
         // Do nothing :D, coz if you do it, modem will crash :o
+    }
+    
+    @Override
+    public void
+    getHardwareConfig (Message result) {
+        // Hi, I am getHardwareConfig and I am not meant to be invoked
     }
     
     @Override
@@ -90,7 +97,7 @@ public class SamsungMint2GRIL extends SamsungSPRDRIL implements CommandsInterfac
 
     @Override
     protected void
-    processUnsolicited (Parcel p) {
+    processUnsolicited (Parcel p, int type) {
         Object ret;
         int dataPosition = p.dataPosition(); // save off position within the Parcel
         int response = p.readInt();
@@ -134,7 +141,7 @@ public class SamsungMint2GRIL extends SamsungSPRDRIL implements CommandsInterfac
                 p.setDataPosition(dataPosition);
 
                 // Forward responses that we are not overriding to the super class
-                super.processUnsolicited(p);
+                super.processUnsolicited(p, type);
                 return;
         }
 

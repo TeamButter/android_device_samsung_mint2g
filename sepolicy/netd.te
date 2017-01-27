@@ -1,2 +1,2 @@
 # allow netd access to /proc
-allow rild proc:file write;
+allow netd kernel:system module_request;

@@ -1,0 +1,13 @@
+# Create symlink
+service pty_symlink xxxx
+    user root
+    disabled
+    oneshot
+
+service smd_symlink /system/bin/ext_symlink.sh -u
+    user root
+    disabled
+    oneshot
+    
+on property:sys.boot_completed=1
+    exec /system/bin/ext_symlink.sh -p

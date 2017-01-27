@@ -1,0 +1,53 @@
+# Telephony service
+service sprd_monitor /system/bin/sprd_monitor
+    class core
+    user system
+    group system radio shell
+    oneshot
+
+service modemd /system/bin/modemd
+    class main
+    user system
+    group system radio
+    oneshot
+    
+service engpcclient /system/bin/engpcclient
+    class main
+    user system
+    group shell system
+    disabled
+    oneshot
+
+service engservice /system/bin/engservice
+    class main
+    user system
+    group system
+    disabled
+    oneshot
+
+service engmodemclient /system/bin/engmodemclient
+    class main
+    user system
+    group system radio
+    disabled
+    oneshot
+
+service engsetmacaddr /system/bin/engsetmacaddr
+    class main
+    user system
+    oneshot
+
+
+service phoneserver /system/bin/phoneserver
+    class core
+    user root
+    group system radio shell
+    disabled
+    oneshot
+    
+service phoneserver_2sim /system/bin/phoneserver_2sim
+    class core
+    user root
+    group system radio shell
+    disabled
+    oneshot

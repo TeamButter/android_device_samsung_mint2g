@@ -1,2 +1,6 @@
+########################
 # allow surfaceflinger load unprotected libraries
+#
+
 allow surfaceflinger self:process execmem;
+allow surfaceflinger system_file:file execmod;

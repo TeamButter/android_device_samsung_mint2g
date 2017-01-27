@@ -1,5 +1,0 @@
-# pty_symlink
-type pty_symlink, domain;
-type pty_symlink_exec, exec_type, file_type;
-
-init_daemon_domain(pty_symlink)

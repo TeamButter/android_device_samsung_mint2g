@@ -20,6 +20,8 @@
 # definition file).
 #
 
+-include device/samsung/sprd-common/BoardConfigCommon.mk
+
 TARGET_OTA_ASSERT_DEVICE := mint,mint2g,GT-S5282,GT-S5280
 
 # Architecture
@@ -32,18 +34,15 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
 ARCH_ARM_HAVE_TLS_REGISTER := true
 ARCH_ARM_HAVE_NEON := true
-TARGET_GLOBAL_CFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
-TARGET_GLOBAL_CPPFLAGS += -mtune=cortex-a9 -mfpu=neon -mfloat-abi=softfp
 
 # Board
 TARGET_BOOTLOADER_BOARD_NAME := mint2g
-TARGET_NO_BOOTLOADER := true
-TARGET_NO_RADIOIMAGE := true
 
 # Platform
 TARGET_BOARD_PLATFORM := sc8810
-COMMON_GLOBAL_CFLAGS += -DSPRD_HARDWARE
-TARGET_RELEASE_CPPFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
+BOARD_GLOBAL_CFLAGS += -DSPRD_HARDWARE
+TARGET_INIT_PARSE_PROC_CPUINFO := true
+
 
 # Kernel
 BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8 androidboot.selinux=permissive
@@ -52,17 +51,28 @@ BOARD_KERNEL_PAGESIZE := 2048
 TARGET_KERNEL_SOURCE := kernel/samsung/mint2g
 TARGET_KERNEL_CONFIG := cyanogenmod_mint_defconfig
 BOARD_KERNEL_IMAGE_NAME := Image
+TARGET_KERNEL_CROSS_COMPILE_PREFIX := arm-eabi-
+KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/linux-x86/arm/arm-eabi-4.8/bin
+KERNEL_HAS_FINIT_MODULE := false
 
 
 # Partitions
 BOARD_BOOTIMAGE_PARTITION_SIZE := 10485760
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 20485760
 BOARD_CACHEIMAGE_PARTITION_SIZE := 536870912
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 939524096
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 2172649472
 BOARD_FLASH_BLOCK_SIZE := 131072
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
+## original system partition size 
+#BOARD_SYSTEMIMAGE_PARTITION_SIZE := 939524096
+
+## Lehkeda's speakig : I've changed partition system size to fit my new system partition 
+# size as I have repartitioned my device and you shouldn't use this new size 
+# if you're going to use this tree for any thing so you must first use the old 
+# system parition size which is above ^^^
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 912261120
+
 
 # Recovery
 DEVICE_RESOLUTION := 240x320
@@ -80,32 +90,35 @@ BOARD_UMS_LUNFILE := "/sys/class/android_usb/android0/f_mass_storage/lun/file"
 TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/dwc_otg.0/gadget/lun0/file"
 
 # Graphics
-USE_OPENGL_RENDERER := true
 BOARD_USE_MHEAP_SCREENSHOT := true
 BOARD_EGL_WORKAROUND_BUG_10194508 := true
 BOARD_EGL_NEEDS_FNW := true
+BOARD_EGL_NEEDS_HANDLE_VALUE := true
 TARGET_RUNNING_WITHOUT_SYNC_FRAMEWORK := TRUE
-MALLOC_IMPL := dlmalloc
-HWUI_COMPILE_FOR_PERF := true
 
+# Bionic
+BOARD_GLOBAL_CFLAGS += -DUSES_LEGACY_BLOBS
+MALLOC_SVELTE := true
+BOARD_USES_LEGACY_MMAP := true
+TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS := true
 
 # Camera
-USE_CAMERA_STUB := true
-COMMON_GLOBAL_CFLAGS += -DMR0_CAMERA_BLOB
+NEEDS_MEMORYHEAPION := true
 CAMERA_SUPPORT_SIZE := 2M
 TARGET_BOARD_NO_FRONT_SENSOR := true
-NEEDS_MEMORYHEAPION := true
+TARGET_CAMERA_HAS_NO_FLASH := true
+BOARD_NUMBER_OF_CAMERAS := 1
+
+# RIL
+BOARD_RIL_CLASS += ../../../device/samsung/mint2g/ril
+BOARD_GLOBAL_CFLAGS += -DDISABLE_ASHMEM_TRACKING
 
 # Bluetooth
-BOARD_HAVE_BLUETOOTH := true
-BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/samsung/mint2g/bluetooth
-BOARD_BLUEDROID_VENDOR_CONF := device/samsung/mint2g/bluetooth/libbt_vndcfg.txt
 
 # FM Radio
 BOARD_HAVE_FM_RADIO := true
 BOARD_FM_DEVICE := bcm4330
-BOARD_GLOBAL_CFLAGS += -DHAVE_FM_RADIO
 
 
 # Connectivity - Wi-Fi
@@ -128,19 +141,9 @@ WIFI_BAND                        := 802_11_ABG
 BOARD_HAVE_SAMSUNG_WIFI          := true
 
 
-# Healthd
-BOARD_HAL_STATIC_LIBRARIES := libhealthd.mint2g
-
 # Audio
-BOARD_USES_TINYALSA_AUDIO := true
-LOCAL_CFLAGS += -DMR0_AUDIO_BLOB -DICS_AUDIO_BLOB
+BOARD_GLOBAL_CFLAGS += -DMR0_AUDIO_BLOB -DICS_AUDIO_BLOB
 USE_LEGACY_AUDIO_POLICY := 1
-
-# RIL
-BOARD_RIL_CLASS := ../../../device/samsung/mint2g/ril 
-
-# Compat
-TARGET_USES_LOGD := false
 
 # Boot animation
 TARGET_SCREEN_HEIGHT := 320
@@ -150,49 +153,19 @@ TARGET_SCREEN_WIDTH := 240
 BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 
-# CMHW
-BOARD_HARDWARE_CLASS := device/samsung/mint2g/cmhw/
+# Healthd
+BOARD_HAL_STATIC_LIBRARIES := libhealthd.sc8810
 
 # SELinux
+SERVICES_WITHOUT_SELINUX_DOMAIN := true
 BOARD_SEPOLICY_DIRS += \
     device/samsung/mint2g/sepolicy
 
-BOARD_SEPOLICY_UNION += \
-    file_contexts \
-    init.te \
-    surfaceflinger.te \
-    netd.te \
-    slog.te \
-    pty_symlink.te
+# Art coonfigurations 
+WITH_DEXPREOPT := true
+DONT_DEXPREOPT_PREBUILTS := true
 
 # Host specific
 #PRODUCT_PREBUILT_WEBVIEWCHROMIUM := yes
-
-# HWComposer
-USE_SPRD_HWCOMPOSER := true
-
-# Media
-BOARD_USE_SAMSUNG_COLORFORMAT := true
-
-#twrp
-#TWRP things are need for SLimKat
-#DEVICE_RESOLUTION := 240x320 #Need custom theme at bootable/recovery/gui/devices/
-DEVICE_RESOLUTION := 320x320
-RECOVERY_GRAPHICS_USE_LINELENGTH := true
-RECOVERY_SDCARD_ON_DATA := true
-BOARD_HAS_NO_REAL_SDCARD := true
-TW_EXTERNAL_STORAGE_PATH := "/external_sd"
-TW_EXTERNAL_STORAGE_MOUNT_POINT := "external_sd"
-TW_FLASH_FROM_STORAGE := true
-TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel/brightness"
-TW_MAX_BRIGHTNESS := 255
-TWRP_EVENT_LOGGING := false
-
-# ART
-WITH_DEXPREOPT := true
-WITH_DEXPREOPT_BOOT_IMG_ONLY := true
-#DONT_DEXPREOPT_PREBUILTS := true
-
-# Include an expanded selection of fonts
-EXTENDED_FONT_FOOTPRINT := true
-USE_MINIKIN := true
+#ANDROID_COMPILE_WITH_JACK := false
+#USE_NINJA := false
