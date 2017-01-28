@@ -1,0 +1,4 @@
+allow bluetooth sysfs:file write;
+allow bluetooth serial_device:chr_file { rw_file_perms ioctl };
+allow bluetooth unlabeled:dir { r_dir_perms };
+allow bluetooth unlabeled:file { r_file_perms };
