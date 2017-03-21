@@ -94,7 +94,7 @@
             64 - Volume rocker
          For example, a device with Home, Back and Menu keys would set this
          config to 7. -->
-    <!--integer name="config_deviceHardwareKeys">71</integer-->
+    <!-- <integer name="config_deviceHardwareKeys">71</integer> -->
     
     <!-- Hardware keys present on the device with the ability to wake, stored as a bit field.
          This integer should equal the sum of the corresponding value for each
@@ -108,7 +108,16 @@
             64 - Volume rocker
          For example, a device with Home, Back and Menu keys would set this
          config to 7. -->
-    <!-- integer name="config_deviceHardwareWakeKeys">65</integer -->
+    <!-- <integer name="config_deviceHardwareWakeKeys">65</integer> -->
+
+    <!-- Control the behavior when the user long presses the home button.
+            0 - Nothing
+            1 - Recent apps view in SystemUI
+            2 - Launch assist intent
+         This needs to match the constants in
+         policy/src/com/android/internal/policy/impl/PhoneWindowManager.java
+    -->
+    <integer name="config_longPressOnHomeBehavior">1</integer>
     
     <!-- If this is true, the screen will come on when you unplug usb/power/whatever. -->
     <bool name="config_unplugTurnsOnScreen">true</bool>
@@ -137,7 +146,7 @@
 
     <!-- Older rotation sensors are not setting event.timestamp correctly. Setting to
          true will use SystemClock.elapsedRealtimeNanos() to set timestamp. -->
-    <!--bool name="config_useSystemClockforRotationSensor">true</bool -->
+    <!-- <bool name="config_useSystemClockforRotationSensor">true</bool> -->
 
     <!-- The RadioAccessFamilies supported by the device.
          Empty is viewed as "all".  Only used on devices which
