@@ -55,7 +55,6 @@ public class SamsungMint2GRIL extends SamsungSPRDRIL implements CommandsInterfac
             int cdmaSubscription, Integer instanceId) {
         super(context, preferredNetworkType, cdmaSubscription/*, instanceId*/);
         //mQANElements = SystemProperties.getInt("ro.ril.telephony.mqanelements", 4);
-        mQANElements = 5; //Setting it to 5 solved choose preferred network operator ;
     }
 	
     public SamsungMint2GRIL(Context context, int networkMode,
