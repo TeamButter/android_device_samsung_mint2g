@@ -47,7 +47,7 @@ BOARD_KERNEL_CMDLINE := console=ttyS1,115200n8 androidboot.selinux=permissive
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
 TARGET_KERNEL_SOURCE := kernel/samsung/mint2g
-TARGET_KERNEL_CONFIG := cyanogenmod_mint_defconfig
+TARGET_KERNEL_CONFIG := slimkat_mint2g_defconfig
 BOARD_KERNEL_IMAGE_NAME := Image
 
 
@@ -55,11 +55,19 @@ BOARD_KERNEL_IMAGE_NAME := Image
 BOARD_BOOTIMAGE_PARTITION_SIZE := 10485760
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 20485760
 BOARD_CACHEIMAGE_PARTITION_SIZE := 536870912
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 939524096
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 2172649472
 BOARD_FLASH_BLOCK_SIZE := 131072
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
+## original system partition size 
+#BOARD_SYSTEMIMAGE_PARTITION_SIZE := 939524096
+
+## Lehkeda's speakig : I've changed partition system size to fit my new system partition 
+# size as I have repartitioned my device and you shouldn't use this new size 
+# if you're going to use this tree for any thing so you must first use the old 
+# system parition size which is above ^^^
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 912261120
+
 
 # Recovery
 DEVICE_RESOLUTION := 240x320
@@ -178,4 +186,12 @@ TW_FLASH_FROM_STORAGE := true
 TW_BRIGHTNESS_PATH := "/sys/class/backlight/panel/brightness"
 TW_MAX_BRIGHTNESS := 255
 TWRP_EVENT_LOGGING := false
+
+
+TARGET_BOOTANIMATION_NAME := "480"
+BUILD_WITHOUT_PV := false
+BUILD_PV_VIDEO_ENCODERS := 1
+BUILD_PV_TEST_APPS := 1
+
+
 
