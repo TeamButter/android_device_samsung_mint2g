@@ -75,10 +75,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 #Wifi
 PRODUCT_PACKAGES += \
+	wpa_supplicant \
+	hostapd \
 	dhcpcd.conf \
 	wpa_supplicant.conf \
-	wpa_supplicant \
-	hostapd
+
 
 # Audio
 PRODUCT_PACKAGES += \
