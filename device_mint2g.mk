@@ -98,10 +98,6 @@ PRODUCT_PACKAGES += \
 # CPUFreq driver by @psych.half
 PRODUCT_PACKAGES += \
     cpufreq-sc8810.ko
-    
-# Gello
-PRODUCT_PACKAGES += \
-	Gello
 	
 # Graphics
 PRODUCT_PACKAGES += \
