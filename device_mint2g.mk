@@ -106,6 +106,10 @@ PRODUCT_PACKAGES += \
 # Graphics
 PRODUCT_PACKAGES += \
 	libUMP
+	
+# Camera
+PRODUCT_PACKAGES += \
+	camera.sc8810
     
 
 # Hw params
