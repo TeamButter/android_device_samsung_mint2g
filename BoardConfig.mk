@@ -146,7 +146,8 @@ BOARD_CHARGER_ENABLE_SUSPEND := true
 BOARD_CHARGING_MODE_BOOTING_LPM := /sys/class/power_supply/battery/batt_lp_charging
 
 # Healthd
-BOARD_HAL_STATIC_LIBRARIES := libhealthd.sc8810
+WITH_CM_CHARGER := false
+BOARD_HAL_STATIC_LIBRARIES += libhealthd.sc8810
 
 # SELinux
 SERVICES_WITHOUT_SELINUX_DOMAIN := true
