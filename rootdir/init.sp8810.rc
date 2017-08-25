@@ -1,6 +1,9 @@
 import init.sp8810.usb.rc
 import /init.swap.rc
 
+on early-init
+	mount debugfs /sys/kernel/debug /sys/kernel/debug mode=755
+
 on init
 
 	symlink /sdcard /mnt/sdcard
@@ -243,10 +246,8 @@ on boot
 
 # WIFI
 	setprop wifi.interface wlan0
-	mount debugfs debugfs /sys/kernel/debug    
 
-	
-# For Datarouter
+	# For Datarouter
 	chown system system /dev/dun
 	chown system system /dev/ttyGS0
 	chown system system /dev/ttyGS1
