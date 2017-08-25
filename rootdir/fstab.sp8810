@@ -18,3 +18,5 @@
 # vold-managed volumes ("block device" is actually a sysfs devpath)
 /devices/platform/sprd-sdhci.0/mmc_host*    auto               auto       defaults                                                  voldmanaged=sdcard1:auto,encryptable=userdata
 
+# Z-RAM
+/dev/block/zram0                            none               swap       defaults                                                  zramsize=134217728,zramstreams=2

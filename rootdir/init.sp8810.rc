@@ -25,6 +25,7 @@ on fs
 
 	mkdir /productinfo 0774 system system
 	mount_all /fstab.sp8810
+	swapon_all fstab.sp8810
 
 on post-fs
 	insmod /system/lib/modules/cpufreq-sc8810.ko
