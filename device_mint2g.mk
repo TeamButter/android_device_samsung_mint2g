@@ -146,6 +146,15 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.ril_class=SamsungMint2GRIL
     ro.telephony.call_ring=0 
 
+# OpenGL
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.hwui.r_buffer_cache_size=1 \
+    ro.hwui.layer_cache_size=8 \
+    ro.hwui.path_cache_size=2 \
+    ro.hwui.drop_shadow_cache_size=1 \
+    ro.hwui.shape_cache_size=0.5 \
+    ro.hwui.texture_cache_size=12 \
+
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     persist.sys.usb.config=adb,mtp \
