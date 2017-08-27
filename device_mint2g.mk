@@ -32,16 +32,16 @@ LOCAL_PATH := device/samsung/mint2g
 
 # Init Files
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/rootdir/init.sp8810.rc:root/init.sp8810.rc \
-    $(LOCAL_PATH)/rootdir/init.sp8810.usb.rc:root/init.sp8810.usb.rc \
-    $(LOCAL_PATH)/rootdir/fstab.sp8810:root/fstab.sp8810 \
-    $(LOCAL_PATH)/rootdir/ueventd.sp8810.rc:root/ueventd.sp8810.rc \
-    $(LOCAL_PATH)/rootdir/bin/charge:root/bin/charge \
-    $(LOCAL_PATH)/rootdir/modem_control:root/modem_control \
-    $(LOCAL_PATH)/rootdir/bin/poweroff_alarm:root/bin/poweroff_alarm \
-    $(LOCAL_PATH)/rootdir/bin/vcharged:root/bin/vcharged \
-    $(LOCAL_PATH)/rootdir/bin/rawdatad:root/bin/rawdatad
-    
+	$(LOCAL_PATH)/rootdir/init.sp8810.rc:root/init.sp8810.rc \
+	$(LOCAL_PATH)/rootdir/init.sp8810.usb.rc:root/init.sp8810.usb.rc \
+	$(LOCAL_PATH)/rootdir/fstab.sp8810:root/fstab.sp8810 \
+	$(LOCAL_PATH)/rootdir/ueventd.sp8810.rc:root/ueventd.sp8810.rc \
+	$(LOCAL_PATH)/rootdir/bin/charge:root/bin/charge \
+	$(LOCAL_PATH)/rootdir/modem_control:root/modem_control \
+	$(LOCAL_PATH)/rootdir/bin/poweroff_alarm:root/bin/poweroff_alarm \
+	$(LOCAL_PATH)/rootdir/bin/vcharged:root/bin/vcharged \
+	$(LOCAL_PATH)/rootdir/bin/rawdatad:root/bin/rawdatad
+	
 # System init fragments
 SYSTEM_INIT_RC_FILES := \
 	$(LOCAL_PATH)/rootdir/system/etc/init/at_distributor.rc \
@@ -49,7 +49,7 @@ SYSTEM_INIT_RC_FILES := \
 	$(LOCAL_PATH)/rootdir/system/etc/init/charge.rc \
 	$(LOCAL_PATH)/rootdir/system/etc/init/data.rc \
 	$(LOCAL_PATH)/rootdir/system/etc/init/healthd.rc \
-    $(LOCAL_PATH)/rootdir/system/etc/init/ksm.rc \
+	$(LOCAL_PATH)/rootdir/system/etc/init/ksm.rc \
 	$(LOCAL_PATH)/rootdir/system/etc/init/nvitem.rc \
 	$(LOCAL_PATH)/rootdir/system/etc/init/rild.rc \
 	$(LOCAL_PATH)/rootdir/system/etc/init/ss_daemon.rc \
@@ -60,29 +60,29 @@ SYSTEM_INIT_RC_FILES := \
 	
 PRODUCT_COPY_FILES += \
 	$(foreach f,$(SYSTEM_INIT_RC_FILES),$(f):system/etc/init/$(notdir $(f)))
-    
+	
 # Idc
 PRODUCT_COPY_FILES += \
-     $(LOCAL_PATH)/sec_touchscreen.idc:system/usr/idc/sec_touchscreen.idc
+	 $(LOCAL_PATH)/sec_touchscreen.idc:system/usr/idc/sec_touchscreen.idc
 
 # Keylayout
 PRODUCT_COPY_FILES += \
-     $(LOCAL_PATH)/sprd-keypad.kl:system/usr/keylayout/sprd-keypad.kl
-     
+	 $(LOCAL_PATH)/sprd-keypad.kl:system/usr/keylayout/sprd-keypad.kl
+	 
 # Bluetooth Vendor Configuration
 PRODUCT_COPY_FILES += \
-     $(LOCAL_PATH)/bluetooth/bt_vendor.conf:system/usetc/bluetooth/bt_vendor.conf
+	 $(LOCAL_PATH)/bluetooth/bt_vendor.conf:system/usetc/bluetooth/bt_vendor.conf
 
 # Graphics
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.opengles.version=131072 \
+	ro.opengles.version=131072 \
 
 
 # These are the hardware-specific settings that are stored in system properties.
 # Note that the only such settings should be the ones that are too low-level to
 # be reachable from resources or other mechanisms.
 PRODUCT_PROPERTY_OVERRIDES += \
-    wifi.supplicant_scan_interval=180
+	wifi.supplicant_scan_interval=180
 
 #Wifi
 PRODUCT_PACKAGES += \
@@ -92,7 +92,7 @@ PRODUCT_PACKAGES += \
 	
 # CPUFreq driver by @psych.half
 PRODUCT_PACKAGES += \
-    cpufreq-sc8810.ko
+	cpufreq-sc8810.ko
 	
 # Graphics
 PRODUCT_PACKAGES += \
@@ -101,15 +101,15 @@ PRODUCT_PACKAGES += \
 # Camera
 PRODUCT_PACKAGES += \
 	camera.sc8810
-    
+	
 
 # Hw params
 PRODUCT_COPY_FILES += \
-     $(LOCAL_PATH)/audio_para:system/etc/audio_para \
-     $(LOCAL_PATH)/codec_pga.xml:system/etc/codec_pga.xml\
-     $(LOCAL_PATH)/tiny_hw.xml:system/etc/tiny_hw.xml
-     
-     
+	 $(LOCAL_PATH)/audio_para:system/etc/audio_para \
+	 $(LOCAL_PATH)/codec_pga.xml:system/etc/codec_pga.xml\
+	 $(LOCAL_PATH)/tiny_hw.xml:system/etc/tiny_hw.xml
+	 
+	 
 # Media config
 MEDIA_CONFIGS := \
 	$(LOCAL_PATH)/media_codecs.xml \
@@ -125,49 +125,49 @@ $(foreach f,$(MEDIA_CONFIGS),$(f):system/etc/$(notdir $(f)))
 # enable Google-specific location features,
 # like NetworkLocationProvider and LocationCollector
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.com.google.locationfeatures=1 \
-    ro.com.google.networklocation=1
+	ro.com.google.locationfeatures=1 \
+	ro.com.google.networklocation=1
 
 # Extended JNI checks
 # The extended JNI checks will cause the system to run more slowly, but they can spot a variety of nasty bugs
 # before they have a chance to cause problems.
 # Default=true for development builds, set by android buildsystem.
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.kernel.android.checkjni=0 \
-    dalvik.vm.checkjni=false \
-    wifi.interface=wlan0 \
-    ro.zygote.disable_gl_preload=true \
-    persist.msms.phone_count=2 \
-    persist.radio.multisim.config=dsds \
-    ro.telephony.call_ring.multiple=0 \
-    dalvik.vm.heapgrowthlimit=46m \
-    dalvik.vm.heapsize=92m \
-    ro.ksm.default=1 \
-    ro.telephony.ril_class=SamsungMint2GRIL
-    ro.telephony.call_ring=0 
+	ro.kernel.android.checkjni=0 \
+	dalvik.vm.checkjni=false \
+	wifi.interface=wlan0 \
+	ro.zygote.disable_gl_preload=true \
+	persist.msms.phone_count=2 \
+	persist.radio.multisim.config=dsds \
+	ro.telephony.call_ring.multiple=0 \
+	dalvik.vm.heapgrowthlimit=46m \
+	dalvik.vm.heapsize=92m \
+	ro.ksm.default=1 \
+	ro.telephony.ril_class=SamsungMint2GRIL
+	ro.telephony.call_ring=0 
 
 # OpenGL
 PRODUCT_PROPERTY_OVERRIDES += \
-    ro.hwui.r_buffer_cache_size=1 \
-    ro.hwui.layer_cache_size=8 \
-    ro.hwui.path_cache_size=2 \
-    ro.hwui.drop_shadow_cache_size=1 \
-    ro.hwui.shape_cache_size=0.5 \
-    ro.hwui.texture_cache_size=12 \
+	ro.hwui.r_buffer_cache_size=1 \
+	ro.hwui.layer_cache_size=8 \
+	ro.hwui.path_cache_size=2 \
+	ro.hwui.drop_shadow_cache_size=1 \
+	ro.hwui.shape_cache_size=0.5 \
+	ro.hwui.texture_cache_size=12 \
 
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
-    persist.sys.usb.config=adb,mtp \
-    ro.adb.secure=0 \
-    ro.secure=0 \
-    ro.debuggable=1
+	persist.sys.usb.config=adb,mtp \
+	ro.adb.secure=0 \
+	ro.secure=0 \
+	ro.debuggable=1
 
 
 ADDITIONAL_DEFAULT_PROPERTIES += \
-    ro.adb.secure=0 \
-    persist.service.adb.enable=1
+	ro.adb.secure=0 \
+	persist.service.adb.enable=1
 
-    
+	
 # ART device props
 PRODUCT_PROPERTY_OVERRIDES += \
 	dalvik.vm.dex2oat-Xms=8m \
@@ -177,11 +177,11 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	dalvik.vm.image-dex2oat-Xms=48m \
 	dalvik.vm.image-dex2oat-Xmx=48m \
 	dalvik.vm.image-dex2oat-filter=speed
-    
+	
 # Force use old camera api
 PRODUCT_PROPERTY_OVERRIDES += \
-    camera2.portability.force_api=1
-    
+	camera2.portability.force_api=1
+	
 PRODUCT_TAGS += dalvik.gc.type-precise 
 
 
