@@ -55,8 +55,6 @@ BOARD_KERNEL_PAGESIZE := 2048
 TARGET_KERNEL_SOURCE := kernel/samsung/mint2g
 TARGET_KERNEL_CONFIG := cyanogenmod_mint_defconfig
 BOARD_KERNEL_IMAGE_NAME := Image
-# FIXME: Replace with path to some other toolchain apart from gcc 4.8
-#KERNEL_TOOLCHAIN := /home/boo/android/toolchains/build/5.2/bin
 KERNEL_TOOLCHAIN_PREFIX := arm-eabi-
 
 # Partitions
@@ -67,15 +65,7 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 2172649472
 BOARD_FLASH_BLOCK_SIZE := 131072
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
-
-## original system partition size 
-#BOARD_SYSTEMIMAGE_PARTITION_SIZE := 939524096
-
-## Lehkeda's speakig : I've changed partition system size to fit my new system partition 
-# size as I have repartitioned my device and you shouldn't use this new size 
-# if you're going to use this tree for any thing so you must first use the old 
-# system parition size which is above ^^^
-BOARD_SYSTEMIMAGE_PARTITION_SIZE := 912261120
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 939524096
 
 # Recovery
 DEVICE_RESOLUTION := 240x320
