@@ -49,6 +49,7 @@ SYSTEM_INIT_RC_FILES := \
 	$(LOCAL_PATH)/rootdir/system/etc/init/charge.rc \
 	$(LOCAL_PATH)/rootdir/system/etc/init/data.rc \
 	$(LOCAL_PATH)/rootdir/system/etc/init/healthd.rc \
+    $(LOCAL_PATH)/rootdir/system/etc/init/ksm.rc \
 	$(LOCAL_PATH)/rootdir/system/etc/init/nvitem.rc \
 	$(LOCAL_PATH)/rootdir/system/etc/init/rild.rc \
 	$(LOCAL_PATH)/rootdir/system/etc/init/ss_daemon.rc \
@@ -141,6 +142,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.telephony.call_ring.multiple=0 \
     dalvik.vm.heapgrowthlimit=46m \
     dalvik.vm.heapsize=92m \
+    ro.ksm.default=1 \
     ro.telephony.ril_class=SamsungMint2GRIL
     ro.telephony.call_ring=0 
 
