@@ -35,7 +35,7 @@ int restart_vser(void)
 	if(vser_fd < 0) {
 		ENG_LOG("cannot open general serial\n");
 //		exit(1);
-        return NULL;
+        return -1;
 	}
 	ENG_LOG("reopen usb serial:%d\n", vser_fd);
     return 0;

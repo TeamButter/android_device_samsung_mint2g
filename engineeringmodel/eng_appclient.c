@@ -24,7 +24,7 @@
 #include <sys/types.h>
 #include <sys/stat.h>
 #include <fcntl.h>
-#include <linux/delay.h>
+#include <time.h>
 #include <sys/socket.h>
 
 #include "engopt.h"

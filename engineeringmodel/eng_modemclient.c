@@ -27,7 +27,7 @@
 #include <fcntl.h>
 #include <sys/socket.h>
 #include <netinet/in.h>
-#include <linux/delay.h>
+#include <time.h>
 #include <termios.h>
 #include <errno.h>
 #include <semaphore.h>
