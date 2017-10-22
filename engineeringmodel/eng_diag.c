@@ -1014,8 +1014,9 @@ int eng_diag_audio(char *buf,int len, char *rsp)
 		if ( g_indicator ) {
 			ENG_LOG("data is ready!g_indicator = 0x%x\n",g_indicator);
 			g_indicator = 0;
-			parse_vb_effect_params((void *)audio_total, 4*sizeof(AUDIO_TOTAL_T));
-			SetAudio_pga_parameter_eng(&audio_total[g_index],sizeof(AUDIO_TOTAL_T),1);
+			/* FIXME: disabled for now, need to search the library */
+			// parse_vb_effect_params((void *)audio_total, 4*sizeof(AUDIO_TOTAL_T));
+			// SetAudio_pga_parameter_eng(&audio_total[g_index],sizeof(AUDIO_TOTAL_T),1);
 		}
 
 		sprintf(rsp,"\r\nOK\r\n");
