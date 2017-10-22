@@ -83,7 +83,9 @@ int eng_server(int port, int type)
                 0, SOCK_STREAM);
 
     if (ret < 0) {
+    	#ifdef ENG_VERBOSE_LOG
          ALOGD("eng_server Unable to bind socket errno:%d", errno);
+        #endif
          exit (-1);
     }
     return ret;

@@ -69,8 +69,10 @@ int eng_at_open(int type)
 	soc_fd = eng_client(ENG_SOCKET_PORT, SOCK_STREAM);
 		
 	if (soc_fd < 0) {
+		#ifdef ENG_VERBOSE_LOG
 	    ALOGD ("%s: opening engmode server socket failed", __FUNCTION__);
 	    err=-1;
+	    #endif
 		goto error;
 	}
 

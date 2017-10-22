@@ -163,7 +163,9 @@ static int read_btwifimac_from_modem(char *btmac, char *wifimac)
 	while (fd < 0) {
 		usleep(100*1000);
 		fd = engapi_open(0);
+		#ifdef ENG_VERBOSE_LOG
 		ALOGD("%s modem_fd=%d",__FUNCTION__, fd);
+		#endif
 	}
 
 

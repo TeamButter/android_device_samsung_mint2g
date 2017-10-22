@@ -48,7 +48,9 @@ int eng_client(int port, int type)
     fd = socket_local_client( "engineeringmodel",
                          0, SOCK_STREAM);
     if (fd < 0) {
+    	#ifdef ENG_VERBOSE_LOG
         ALOGD("eng_client Unable to bind socket errno:%d[%s]", errno, strerror(errno));
+        #endif
     }
 
     return fd;
