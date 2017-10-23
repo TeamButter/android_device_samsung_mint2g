@@ -3,10 +3,6 @@ bin/at_distributor
 bin/bcm4330.hcd
 bin/calibration_init
 bin/cpu
-bin/engmodemclient
-bin/engpcclient
-bin/engservice
-bin/engsetmacaddr
 bin/ext_data.sh
 bin/ext_kill.sh
 bin/ext_symlink.sh
@@ -71,7 +67,6 @@ lib/hw/sensors.sc8810.so
 lib/modules/VoiceSolution.ko
 lib/libatparser.so
 lib/libcontrolcsc.so
-lib/libengclient.so
 lib/libeng_wifi_ptest.so
 lib/libfactoryutil.so
 lib/libLifevibes_lvvefs.so
