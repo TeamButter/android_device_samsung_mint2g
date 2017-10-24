@@ -90,7 +90,6 @@ lib/libsecnativefeature.so
 lib/libsecril-client.so
 lib/libstagefright_soft_h264dec_sprd.so
 lib/libstagefright_soft_mpeg4dec_sprd.so
-lib/libUMP.so
 lib/libvbeffect.so
 lib/libvbpga.so
 lib/libwvdrm_L3.so
