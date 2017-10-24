@@ -67,7 +67,6 @@ lib/hw/sensors.sc8810.so
 lib/modules/VoiceSolution.ko
 lib/libatparser.so
 lib/libcontrolcsc.so
-lib/libeng_wifi_ptest.so
 lib/libfactoryutil.so
 lib/libLifevibes_lvvefs.so
 lib/liblvvewrapper.so

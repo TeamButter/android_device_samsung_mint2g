@@ -28,8 +28,6 @@ LOCAL_PRELINK_MODULE := false
 
 #LOCAL_CFLAGS += -DENG_API_LOG
 
-LOCAL_SHARED_LIBRARIES := libcutils
-
 LOCAL_C_INCLUDES  += engopt.h \
 	engapi.h
 
@@ -48,6 +46,29 @@ LOCAL_SHARED_LIBRARIES := libdl \
 	libcutils
 
 LOCAL_MODULE:= libengclient
+LOCAL_MODULE_TAGS := optional
+
+include $(BUILD_SHARED_LIBRARY)
+
+# libeng_wifi_ptest
+include $(CLEAR_VARS)
+
+LOCAL_PRELINK_MODULE := false
+
+#LOCAL_CFLAGS += -DENG_API_LOG
+
+LOCAL_C_INCLUDES  += engopt.h \
+	engapi.h
+
+LOCAL_SRC_FILES :=  eng_wifi_ptest.c \
+      bt_eut.c \
+      wifi_eut.c
+
+LOCAL_SHARED_LIBRARIES := libdl \
+	liblog \
+	libcutils
+
+LOCAL_MODULE:= libeng_wifi_ptest
 LOCAL_MODULE_TAGS := optional
 
 include $(BUILD_SHARED_LIBRARY)
