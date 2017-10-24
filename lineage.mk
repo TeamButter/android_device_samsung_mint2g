@@ -11,8 +11,8 @@ $(call inherit-product, vendor/cm/config/common_full_phone.mk)
 $(call inherit-product, device/samsung/mint2g/full_mint2g.mk)
 
 PRODUCT_BUILD_PROP_OVERRIDES += \
-    PRODUCT_NAME=mint \
-    TARGET_DEVICE=mint \
+    PRODUCT_NAME=mint2g \
+    TARGET_DEVICE=mint2g \
     BUILD_FINGERPRINT="samsung/mintxx/mint:4.1.2/JZO54K/S5282XXANF3:user/release-keys" \
     PRIVATE_BUILD_DESC="mintxx-user 4.1.2 JZO54K S5282XXANF3 release-keys"
     
