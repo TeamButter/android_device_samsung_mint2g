@@ -97,7 +97,15 @@ PRODUCT_PACKAGES += \
 # Graphics
 PRODUCT_PACKAGES += \
 	libUMP
-	
+
+# engmodel
+PRODUCT_PACKAGES += \
+        libengclient \
+        engservice \
+        engsetmacaddr \
+        engpcclient \
+        engmodemclient
+
 # Camera
 PRODUCT_PACKAGES += \
 	camera.sc8810
