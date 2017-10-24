@@ -1,7 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "eut_opt.h"
 #include <fcntl.h>
+
 
 #ifndef NUM_ELEMS(x)
 #define NUM_ELEMS(x) (sizeof(x)/sizeof(x[0]))
