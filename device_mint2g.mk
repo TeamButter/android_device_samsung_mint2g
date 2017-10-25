@@ -107,6 +107,10 @@ PRODUCT_PACKAGES += \
         engpcclient \
         engmodemclient
 
+# Phoneserver ext_symlink
+PRODUCT_PACKAGES += \
+        ext_symlink \
+
 # Camera
 PRODUCT_PACKAGES += \
 	camera.sc8810
